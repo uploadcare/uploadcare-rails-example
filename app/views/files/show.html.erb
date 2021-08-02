@@ -1,0 +1,19 @@
+<span class="h1 text-truncate d-block mb-2">File <%= @file.original_filename %> info</span>
+  <%= link_to 'Back to files', files_path %>
+  <hr>
+  <h4 class="d-flex justify-content-between align-items-center">
+    Remote file
+    <%= link_to 'Store', store_file_path(@file.uuid), class: "btn btn-secondary" %>
+  </h4>
+  <div class="table-responsive">
+    <%= render 'files/file_info', file: @file, date_format: '%B %d, %Y %H:%M' %>
+  </div>
+
+  <% if @file[:image_info].present? %>
+    <%= render 'files/image_info', image_info: @file.image_info %>
+  <% end %>
+
+  <% if @file[:video_info].present? %>
+    <%= render 'files/video_info', image_info: @file.image_info %>
+  <% end %>
+  <%= link_to 'Delete file', file_path(@file.uuid), method: :delete, class: "btn btn-danger" %>

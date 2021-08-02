@@ -1,0 +1,77 @@
+<table class="table table-condensed table-bordered table-hover mt-2">
+  <tr>
+    <th>UUID</th>
+    <td><%= file.uuid %></td>
+  </tr>
+  <tr>
+    <th>Original name</th>
+    <td><%= file.original_filename %></td>
+  </tr>
+  <tr>
+    <th>Stored date</th>
+    <td><%= file.datetime_stored.present? ? Time.zone.parse(file.datetime_stored).strftime(date_format) : '-' %></td>
+  </tr>
+  <tr>
+    <th>Uploaded date</th>
+    <td><%= file.datetime_uploaded.present? ? Time.zone.parse(file.datetime_uploaded).strftime(date_format) : '-' %></td>
+  </tr>
+  <tr>
+    <th>Removed date</th>
+    <td><%= file.datetime_removed.present? ? Time.zone.parse(file.datetime_removed).strftime(date_format) : '-' %></td>
+  </tr>
+  <tr>
+    <th>If file an image</th>
+    <td><%= file.is_image ? 'Yes' : 'No' %></td>
+  </tr>
+  <tr>
+    <th>If file ready</th>
+    <td><%= file.is_ready ? 'Yes' : 'No' %></td>
+  </tr>
+  <tr>
+    <th>Mime type</th>
+    <td>
+      <%= file.mime_type %>
+      <% if file.mime_type.starts_with?('video') %>
+        <%= link_to 'Request video conversion', '#' %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>Original file URL</th>
+    <td><%= file.original_file_url %></td>
+  </tr>
+  <tr>
+    <th>File variations</th>
+    <td>
+      <% if file[:variations].present? %>
+        <table>
+          <% file[:variations].each do |key, value| %>
+            <tr>
+              <td><%= key %></td>
+              <td><%= value %></td>
+            </tr>
+            <% end %>
+        </table>
+      <% else %>
+        File variations are empty
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>Recognition info</th>
+    <td>
+      <% if file[:rekognition_info].present? %>
+        <table>
+          <% file[:rekognition_info].each do |key, value| %>
+            <tr>
+              <td><%= key %></td>
+              <td><%= value %></td>
+            </tr>
+            <% end %>
+        </table>
+      <% else %>
+        Recognition info is empty
+      <% end %>
+    </td>
+  </tr>
+</table>
