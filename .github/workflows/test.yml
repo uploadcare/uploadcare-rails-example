@@ -1,0 +1,53 @@
+name: CI
+on: [push]
+jobs:
+  linters:
+    name: Linters
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2
+          bundler: 2.2.24
+          bundler-cache: true
+
+      - name: Install gems
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Run linters
+        run: bundle exec rubocop --parallel
+
+      - name: Run code metric tools
+        run: bundle exec rails_best_practices
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2
+          bundler: 2.2.24
+          bundler-cache: true
+
+      - name: Install gems
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Run tests
+        run: bundle exec rspec
+        env:
+          UPLOADCARE_PUBLIC_KEY: demopublickey
+          UPLOADCARE_SECRET_KEY: demoprivatekey
