@@ -1,4 +1,8 @@
 <h1>List files</h1>
 
+<p>
+  <%= link_to 'Batch store files', new_store_file_batch_path, class: 'small' %> |
+  <%= link_to 'Batch delete files', new_delete_file_batch_path, class: 'small' %>
+</p>
 
 <%= render 'files/file_list_table', files_count: @files_data[:total], files: @files %>

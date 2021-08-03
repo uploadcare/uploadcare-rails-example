@@ -1,11 +1,13 @@
-require "rails_helper"
+# frozen_string_literal: true
+
+require 'rails_helper'
 
 RSpec.describe FilesController, type: :request do
-  describe "GET index" do
+  describe 'GET index' do
     context 'when a response status is 200' do
       before { allow(Uploadcare::FileApi).to receive(:get_files).and_return(results: []) }
 
-      it "returns a 200" do
+      it 'returns a 200' do
         get '/files'
         expect(response).to have_http_status(:ok)
       end
@@ -14,24 +16,24 @@ RSpec.describe FilesController, type: :request do
     context 'when a response status is 4xx' do
       before { allow(Uploadcare::FileApi).to receive(:get_files).and_raise(Uploadcare::Exception::RequestError, '') }
 
-      it "returns an error" do
+      it 'returns an error' do
         get '/files'
         expect(flash[:alert]).to match('Something went wrong')
       end
     end
   end
 
-  describe "GET show" do
+  describe 'GET show' do
     let(:uuid) { SecureRandom.uuid }
     let(:file) do
       Uploadcare::File.new(
         "datetime_removed": nil,
-        "datetime_stored": "2018-11-26T12:49:10.477888Z",
-        "datetime_uploaded": "2018-11-26T12:49:09.945335Z",
+        "datetime_stored": '2018-11-26T12:49:10.477888Z',
+        "datetime_uploaded": '2018-11-26T12:49:09.945335Z',
         "image_info": {
-          "color_mode": "RGB",
+          "color_mode": 'RGB',
           "orientation": nil,
-          "format": "JPEG",
+          "format": 'JPEG',
           "sequence": false,
           "height": 500,
           "width": 500,
@@ -44,12 +46,12 @@ RSpec.describe FilesController, type: :request do
         },
         "is_image": true,
         "is_ready": true,
-        "mime_type": "application/octet-stream",
-        "original_file_url": "https://ucarecdn.com/3c269810-c17b-4e2c-92b6-25622464d866/papaya.jpg",
-        "original_filename": "papaya.jpg",
+        "mime_type": 'application/octet-stream',
+        "original_file_url": 'https://ucarecdn.com/3c269810-c17b-4e2c-92b6-25622464d866/papaya.jpg',
+        "original_filename": 'papaya.jpg',
         "size": 642,
-        "url": "https://api.uploadcare.com/files/3c269810-c17b-4e2c-92b6-25622464d866/",
-        "uuid": "3c269810-c17b-4e2c-92b6-25622464d866",
+        "url": 'https://api.uploadcare.com/files/3c269810-c17b-4e2c-92b6-25622464d866/',
+        "uuid": '3c269810-c17b-4e2c-92b6-25622464d866',
         "variations": nil,
         "video_info": nil,
         "source": nil,
@@ -71,7 +73,7 @@ RSpec.describe FilesController, type: :request do
     context 'when a response status is 200' do
       before { allow(Uploadcare::FileApi).to receive(:get_file).and_return(file) }
 
-      it "returns a 200" do
+      it 'returns a 200' do
         get "/files/#{uuid}"
         expect(response).to have_http_status(:ok)
       end
@@ -80,20 +82,20 @@ RSpec.describe FilesController, type: :request do
     context 'when a response status is 4xx' do
       before { allow(Uploadcare::FileApi).to receive(:get_file).and_raise(Uploadcare::Exception::RequestError, '') }
 
-      it "returns an error" do
+      it 'returns an error' do
         get "/files/#{uuid}"
         expect(flash[:alert]).to match('Something went wrong')
       end
     end
   end
 
-  describe "GET store" do
+  describe 'GET store' do
     let(:uuid) { SecureRandom.uuid }
 
     context 'when a response status is 200' do
       before { allow(Uploadcare::FileApi).to receive(:store_file) }
 
-      it "returns a 200" do
+      it 'returns a 200' do
         get "/store_file/#{uuid}"
         expect(flash[:success]).to match('File has been successfully stored!')
       end
@@ -102,20 +104,42 @@ RSpec.describe FilesController, type: :request do
     context 'when a response status is 4xx' do
       before { allow(Uploadcare::FileApi).to receive(:store_file).and_raise(Uploadcare::Exception::RequestError, '') }
 
-      it "returns an error" do
+      it 'returns an error' do
         get "/store_file/#{uuid}"
         expect(flash[:alert]).to match('Something went wrong')
       end
     end
   end
 
-  describe "GET delete" do
+  describe 'POST batch store' do
+    let(:uuid) { SecureRandom.uuid }
+
+    context 'when a response status is 200' do
+      before { allow(Uploadcare::FileApi).to receive(:store_files) }
+
+      it 'returns a 200' do
+        post '/store_file_batch', params: { files: { filename: uuid } }
+        expect(flash[:success]).to match('has been successfully stored!')
+      end
+    end
+
+    context 'when a response status is 4xx' do
+      before { allow(Uploadcare::FileApi).to receive(:store_files).and_raise(Uploadcare::Exception::RequestError, '') }
+
+      it 'returns an error' do
+        post '/store_file_batch', params: { files: { filename: uuid } }
+        expect(flash[:alert]).to match('Something went wrong')
+      end
+    end
+  end
+
+  describe 'GET delete' do
     let(:uuid) { SecureRandom.uuid }
 
     context 'when a response status is 200' do
       before { allow(Uploadcare::FileApi).to receive(:delete_file) }
 
-      it "returns a 200" do
+      it 'returns a 200' do
         delete "/files/#{uuid}"
         expect(flash[:success]).to match('File has been successfully deleted!')
       end
@@ -124,8 +148,30 @@ RSpec.describe FilesController, type: :request do
     context 'when a response status is 4xx' do
       before { allow(Uploadcare::FileApi).to receive(:delete_file).and_raise(Uploadcare::Exception::RequestError, '') }
 
-      it "returns an error" do
+      it 'returns an error' do
         delete "/files/#{uuid}"
+        expect(flash[:alert]).to match('Something went wrong')
+      end
+    end
+  end
+
+  describe 'DELETE batch store' do
+    let(:uuid) { SecureRandom.uuid }
+
+    context 'when a response status is 200' do
+      before { allow(Uploadcare::FileApi).to receive(:delete_files) }
+
+      it 'returns a 200' do
+        delete '/delete_file_batch', params: { files: { filename: uuid } }
+        expect(flash[:success]).to match('has been successfully deleted!')
+      end
+    end
+
+    context 'when a response status is 4xx' do
+      before { allow(Uploadcare::FileApi).to receive(:delete_files).and_raise(Uploadcare::Exception::RequestError, '') }
+
+      it 'returns an error' do
+        delete '/delete_file_batch', params: { files: { filename: uuid } }
         expect(flash[:alert]).to match('Something went wrong')
       end
     end

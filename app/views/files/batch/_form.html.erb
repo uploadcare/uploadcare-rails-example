@@ -1,0 +1,13 @@
+<%= form_tag(path, method: method, class: 'border p-4') do %>
+  <p>Files</p>
+  <% files.each do |file| %>
+    <div>
+      <label for="<%= file.uuid %>">
+        <%= check_box_tag file.uuid, file.uuid, false, name: "files[#{file.original_filename}]" %>
+        <%= file.original_filename %>
+      </label>
+    </div>
+  <% end %>
+
+  <%= submit_tag submit_label, class: submit_class %>
+<% end %>

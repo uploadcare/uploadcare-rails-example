@@ -5,3 +5,7 @@ AllCops:
   Excludes:
     - 'bin/bundle'
     - 'bin/ci'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'

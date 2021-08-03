@@ -1,0 +1,5 @@
+<h1>Batch store file</h1>
+
+<%= link_to 'Back to files', files_path %>
+
+<%= render 'files/batch/form', files: @files, path: store_file_batch_path, method: :post, submit_label: 'Store files', submit_class: 'btn btn-primary mt-2' %>

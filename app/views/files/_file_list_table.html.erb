@@ -16,7 +16,7 @@
           <%= link_to file.original_filename, file_path(file.uuid) %>
           <br>
           <div class="badge badge-secondary"><%= file.uuid %></div>
-          <div class="badge badge-secondary"><%= file.mimeType %></div>
+          <div class="badge badge-secondary"><%= file.mime_type %></div>
         </div>
         <div class="btn-group" role="group" aria-label="Actions">
           <%= link_to 'Store', store_file_path(file.uuid), class: "btn btn-secondary btn-sm" %>
