@@ -1,0 +1,31 @@
+<h1>Upload a local file</h1>
+
+<%= form_tag(upload_local_file_path, method: :post, class: 'border p-4', multipart: true) do %>
+  <div>
+    <div class="upload-file">
+      <label class="mb-0">File to upload</label>
+      <div class="input-group mb-3">
+        <input type="file" class="custom-file-input" id="uploadFileInput" name="file[file]">
+        <label class="custom-file-label" for="uploadFileInput"></label>
+      </div>
+
+      <div class="mb-3">
+        <label class="mb-0" for="fileMimeType">Mime type</label>
+        <input type="text" class="form-control" id="fileMimeType" name="file[mime_type]">
+      </div>
+
+      <div class="mb-3">
+        <label class="mb-0" for="filename">Filename</label>
+        <input type="text" class="form-control" id="filename" name="file[filename]">
+      </div>
+    </div>
+
+    <div>
+      <%= check_box_tag 'file[store]', true, false %>
+      <label class="mb-0" for="file_store">Store file</label>
+    </div>
+
+  <%= submit_tag 'Upload file', class: 'btn btn-primary mt-4' %>
+<% end %>
+
+<%= render 'uploads/scripts' %>

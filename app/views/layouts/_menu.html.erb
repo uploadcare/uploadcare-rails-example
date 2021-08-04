@@ -1,5 +1,14 @@
 <ul class="nav nav-pills flex-column">
   <li class="nav-item">
-    <%= link_to 'Files', files_path, class: "nav-link #{controller_name == 'files' && action_name == 'index' ? 'active' : ''}" %>
+    <%= link_to 'Files', files_path, class: "nav-link #{controller_name == 'files' ? 'active' : ''}" %>
+  </li>
+
+  <li class="dropdown-divider"></li>
+
+  <li class="nav-item">
+    <%= link_to 'Upload local file', upload_new_local_file_path, class: "nav-link #{controller_name == 'uploads' && action_name == 'new_local' ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Upload file from URL', upload_new_file_from_url_path, class: "nav-link #{controller_name == 'uploads' && action_name == 'new_from_url' ? 'active' : ''}" %>
   </li>
 </ul>

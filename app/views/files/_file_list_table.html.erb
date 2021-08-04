@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Total files: <%= files_count %></h5>
+  </div>
+  <% if files.blank? %>
+    <div class="card-body">
+      <h5 class="card-title">
+        You have no files in your project. <%= link_to 'Upload a file', upload_new_local_file_path %>.
+      </h5>
+    </div>
+  <% end %>
+  <ul class="list-group list-group-flush">
+    <% files.each do |file| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="text-place flex-grow-1 text-truncate">
+          <%= link_to file.original_filename, file_path(file.uuid) %>
+          <br>
+          <div class="badge badge-secondary"><%= file.uuid %></div>
+          <div class="badge badge-secondary"><%= file.mime_type %></div>
+        </div>
+        <div class="btn-group" role="group" aria-label="Actions">
+          <%= link_to 'Store', store_file_path(file.uuid), class: "btn btn-secondary btn-sm" %>
+          <%= link_to 'Delete', file_path(file.uuid), method: :delete, class: "btn btn-danger btn-sm" %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

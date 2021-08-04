@@ -1,0 +1,46 @@
+<h4>Image info</h4>
+
+<div class="table-responsive">
+  <table class="table image table-condensed table-bordered table-hover mt-2">
+    <tr>
+      <th>Color Mode</th>
+      <td><%= image_info.color_mode %></td>
+    </tr>
+    <tr>
+      <th>Orientation</th>
+      <td><%= image_info.orientation %></td>
+    </tr>
+    <tr>
+      <th>Format</th>
+      <td><%= image_info.format %></td>
+    </tr>
+    <tr>
+      <th>Is image a sequence</th>
+      <td><%= image_info.sequence.present? ? 'Yes' : 'No' %></td>
+    </tr>
+    <tr>
+      <th>Dimensions</th>
+      <td><%= "#{image_info.width} × #{image_info.height}" %></td>
+    </tr>
+    <tr>
+      <th>Geo location</th>
+      <td>
+        <% if image_info.geo_location.present? %>
+          <%= "#{image_info.geoLocation.latitude}, #{image_info.geoLocation.longitude}" %>
+        <% else %>
+          No data
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>DPI</th>
+      <td>
+        <% if image_info.dpi.present? && image_info.dpi.is_a?(Array) %>
+          <%= "#{image_info.dpi[0]}, #{image_info.dpi[1]}" %>
+        <% else %>
+          No data
+        <% end %>
+      </td>
+    </tr>
+  </table>
+</div>

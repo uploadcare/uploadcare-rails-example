@@ -35,7 +35,10 @@ group :development, :test do
   gem 'brakeman'
   gem 'bundler-audit'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'pry-byebug'
+  gem 'pry-rails'
   gem 'rails_best_practices'
+  gem 'rails-controller-testing'
   gem 'rubocop-rails', require: false
 end
 
