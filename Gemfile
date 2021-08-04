@@ -38,6 +38,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rails_best_practices'
+  gem 'rails-controller-testing'
   gem 'rubocop-rails', require: false
 end
 

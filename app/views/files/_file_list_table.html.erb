@@ -5,7 +5,7 @@
   <% if files.blank? %>
     <div class="card-body">
       <h5 class="card-title">
-        You have no files in your project. <a href="#">Upload a file</a>.
+        You have no files in your project. <%= link_to 'Upload a file', upload_new_local_file_path %>.
       </h5>
     </div>
   <% end %>

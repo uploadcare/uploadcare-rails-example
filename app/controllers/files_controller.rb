@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class FilesController < ApplicationController
-  rescue_from Uploadcare::Exception::RequestError, with: :handle_error
-
   def index
     obtain_remote_files
   end
@@ -54,14 +52,5 @@ class FilesController < ApplicationController
   def obtain_remote_files
     @files_data = Uploadcare::FileApi.get_files
     @files = @files_data[:results]
-  end
-
-  def redirect_to_prev_location
-    redirect_to request.referer || files_path
-  end
-
-  def handle_error(exception)
-    flash[:alert] = exception.message.presence || 'Something went wrong'
-    redirect_to_prev_location
   end
 end

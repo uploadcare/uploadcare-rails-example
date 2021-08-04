@@ -1,0 +1,23 @@
+<h1>Upload a file from URL</h1>
+
+<%= form_tag(upload_file_from_url_path, method: :post, class: 'border p-4', multipart: true) do %>
+  <div>
+    <div class="upload-file">
+      <div class="mb-3">
+        <label class="mb-0" for="">File URL</label>
+        <input type="text" class="form-control" id="file_url" name="file[url]">
+      </div>
+
+      <div class="mb-3">
+        <label class="mb-0" for="filename">Filename</label>
+        <input type="text" class="form-control" id="filename" name="file[filename]">
+      </div>
+    </div>
+
+    <div>
+      <%= check_box_tag 'file[store]', true, false %>
+      <label class="mb-0" for="file_store">Store file</label>
+    </div>
+
+  <%= submit_tag 'Upload file', class: 'btn btn-primary mt-4' %>
+<% end %>
