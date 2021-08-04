@@ -11,4 +11,8 @@ module ApplicationHelper
   def flash_class(level)
     FLASH.with_indifferent_access[level]
   end
+
+  def format_date(date, format: '%B %d, %Y %H:%M')
+    Time.zone.parse(date).strftime(format)
+  end
 end

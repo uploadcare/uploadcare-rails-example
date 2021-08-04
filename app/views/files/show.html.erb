@@ -3,7 +3,7 @@
   <hr>
   <h4 class="d-flex justify-content-between align-items-center">
     Remote file
-    <%= link_to 'Store', store_file_path(@file.uuid), class: "btn btn-secondary" %>
+    <%= link_to 'Store', store_file_path(@file.uuid), method: :post, class: "btn btn-secondary" %>
   </h4>
   <div class="table-responsive">
     <%= render 'files/file_info', file: @file, date_format: '%B %d, %Y %H:%M' %>

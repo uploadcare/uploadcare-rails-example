@@ -96,7 +96,7 @@ RSpec.describe FilesController, type: :request do
       before { allow(Uploadcare::FileApi).to receive(:store_file) }
 
       it 'returns a 200' do
-        get "/store_file/#{uuid}"
+        post "/store_file/#{uuid}"
         expect(flash[:success]).to match('File has been successfully stored!')
       end
     end
@@ -105,7 +105,7 @@ RSpec.describe FilesController, type: :request do
       before { allow(Uploadcare::FileApi).to receive(:store_file).and_raise(Uploadcare::Exception::RequestError, '') }
 
       it 'returns an error' do
-        get "/store_file/#{uuid}"
+        post "/store_file/#{uuid}"
         expect(flash[:alert]).to match('Something went wrong')
       end
     end

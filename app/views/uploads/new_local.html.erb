@@ -28,4 +28,23 @@
   <%= submit_tag 'Upload file', class: 'btn btn-primary mt-4' %>
 <% end %>
 
-<%= render 'uploads/scripts' %>
+<script>
+  (function() {
+    const fileInput = document.querySelector('.custom-file-input');
+
+    fileInput.addEventListener('change', evt => {
+      let file = evt.currentTarget.files[0];
+
+      let formElement = document.querySelector('form');
+
+      let uploadLabelElement = document.getElementsByClassName('custom-file-label')[0];
+      uploadLabelElement.innerText = file.name;
+
+      let filenameInput = document.getElementById('filename');
+      filenameInput.value = file.name;
+
+      let mimeTypeInput = document.getElementById('fileMimeType');
+      mimeTypeInput.value = file.type;
+    })
+  })()
+</script>

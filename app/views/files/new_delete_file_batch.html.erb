@@ -2,4 +2,8 @@
 
 <%= link_to 'Back to files', files_path %>
 
-<%= render 'files/batch/form', files: @files, path: delete_file_batch_path, method: :delete, submit_label: 'Delete files', submit_class: 'btn btn-danger mt-2' %>
+<%= render 'files/batch/form', files: @files,
+                               path: delete_file_batch_path,
+                               method: :delete,
+                               submit_label: 'Delete files',
+                               submit_class: 'btn btn-danger mt-2' %>
