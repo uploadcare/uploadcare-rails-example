@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'pathname'
+require 'fileutils'
+include FileUtils
+
+# path to your application root.
+APP_ROOT = Pathname.new File.expand_path('..', __dir__)
+
+def system!(*args)
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+chdir APP_ROOT do
+  system! 'bundle exec rubocop'
+  system! 'bundle exec rails_best_practices'
+  system! 'brakeman'
+  system! 'bundle exec rspec --require spec_helper spec --format progress'
+end
+
+puts "\e[32m+----------------------------------------------------------------+\e[0m"
+puts "\e[32m|                    All checks passed!                          |\e[0m"
+puts "\e[32m+----------------------------------------------------------------+\e[0m"

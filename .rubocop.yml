@@ -1,0 +1,7 @@
+Documentation:
+  Enabled: false
+
+AllCops:
+  Excludes:
+    - 'bin/bundle'
+    - 'bin/ci'
