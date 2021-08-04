@@ -1,0 +1,8 @@
+<h1>Create group of files</h1>
+
+
+<%= render 'files/batch/form', files: @files,
+                               path: file_groups_path,
+                               method: :post,
+                               submit_label: 'Create group',
+                               submit_class: 'btn btn-primary mt-2' %>

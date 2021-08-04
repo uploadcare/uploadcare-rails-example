@@ -17,5 +17,9 @@ Rails.application.routes.draw do
   post '/upload_local_file', to: 'uploads#upload_local', as: 'upload_local_file'
   post '/upload_file_from_url', to: 'uploads#upload_from_url', as: 'upload_file_from_url'
 
+  # File Groups
+  resources :file_groups, only: %i[index new show create]
+  post '/store_file_group/:id', to: 'file_groups#store', as: 'store_file_group'
+
   root 'files#index'
 end

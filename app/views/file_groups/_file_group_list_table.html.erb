@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Total groups: <%= file_groups_count %></h5>
+  </div>
+  <% if file_groups.blank? %>
+    <div class="card-body">
+      <h5 class="card-title">
+        You have no groups in your project. Create a new one <%= link_to 'here', new_file_group_path %>!
+      </h5>
+    </div>
+  <% else %>
+    <ul class="list-group list-group-flush">
+      <% file_groups.each do |file_group| %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="text-place flex-grow-1 text-truncate">
+            <%= link_to file_group.id, file_group_path(file_group.id) %>
+          </div>
+          <div class="badge badge-secondary"><%= file_group.files_count %> files</div>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
