@@ -35,7 +35,7 @@
       <div class="badge badge-secondary"><%= file.mime_type %></div>
     </div>
     <div class="btn-group" role="group" aria-label="Actions">
-      <%= link_to 'Store', store_file_path(file.uuid), class: 'btn btn-secondary btn-sm' %>
+      <%= link_to 'Store', store_file_path(file.uuid), method: :post, class: 'btn btn-secondary btn-sm' %>
       <%= link_to 'Delete', file_path(file.uuid), method: :delete, class: 'btn btn-danger btn-sm' %>
     </div>
   </li>
