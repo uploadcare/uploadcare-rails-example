@@ -7,9 +7,10 @@
           <label class="mb-0" for="file">File</label>
           <%= select_tag(:file, options_from_collection_for_select(@files, :uuid, :original_filename), class: 'form-control') %>
         </div>
+
         <div class="mb-3">
           <label class="mb-0" for="target_format">Target format</label>
-          <%= select_tag(:target_format, options_for_select(target_formats), class: 'form-control') %>
+          <%= select_tag(:target_format, options_for_select(document_arget_formats), class: 'form-control') %>
         </div>
 
         <div class="mb-3">

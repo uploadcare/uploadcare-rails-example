@@ -21,9 +21,15 @@ Rails.application.routes.draw do
   resources :file_groups, only: %i[index new show create]
   post '/store_file_group/:id', to: 'file_groups#store', as: 'store_file_group'
 
-  # Document Conversion
-  resources :document_conversions, only: %i[new create]
-  get '/document_conversion', to: 'document_conversions#show', as: 'document_conversion'
+  scope module: 'conversions', shallow: true do
+    # Document Conversion
+    resources :document_conversions, only: %i[new create]
+    get '/document_conversion', to: 'document_conversions#show', as: 'document_conversion'
+
+    # Video Conversion
+    resources :video_conversions, only: %i[new create]
+    get '/video_conversion', to: 'video_conversions#show', as: 'video_conversion'
+  end
 
   root 'files#index'
 end

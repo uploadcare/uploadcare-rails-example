@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe DocumentConversionsController, type: :request do
+RSpec.describe Conversions::DocumentConversionsController, type: :request do
   let(:conversion_result_body) do
     {
       result: [
@@ -63,7 +63,7 @@ RSpec.describe DocumentConversionsController, type: :request do
 
       it 'returns a 200' do
         post '/document_conversions', params: params
-        expect(flash[:success]).to match('File has been successfully converted!')
+        expect(flash[:notice]).to match('File conversion has been successfully started!')
       end
     end
 
