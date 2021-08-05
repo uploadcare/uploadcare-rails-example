@@ -20,4 +20,10 @@
   <li class="nav-item">
     <%= link_to 'Upload file from URL', upload_new_file_from_url_path, class: "nav-link #{controller_name == 'uploads' && action_name == 'new_from_url' ? 'active' : ''}" %>
   </li>
+
+  <li class="dropdown-divider"></li>
+
+  <li class="nav-item">
+    <%= link_to 'Convert document', new_document_conversion_path, class: "nav-link #{controller_name == 'document_conversions' ? 'active' : ''}" %>
+  </li>
 </ul>

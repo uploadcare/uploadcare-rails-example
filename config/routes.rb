@@ -21,5 +21,9 @@ Rails.application.routes.draw do
   resources :file_groups, only: %i[index new show create]
   post '/store_file_group/:id', to: 'file_groups#store', as: 'store_file_group'
 
+  # Document Conversion
+  resources :document_conversions, only: %i[new create]
+  get '/document_conversion', to: 'document_conversions#show', as: 'document_conversion'
+
   root 'files#index'
 end
