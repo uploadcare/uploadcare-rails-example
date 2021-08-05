@@ -31,5 +31,8 @@ Rails.application.routes.draw do
     get '/video_conversion', to: 'video_conversions#show', as: 'video_conversion'
   end
 
+  # Projects
+  get '/project', to: 'projects#show', as: 'project'
+
   root 'files#index'
 end
