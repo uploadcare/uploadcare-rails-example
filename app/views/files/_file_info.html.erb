@@ -32,7 +32,7 @@
     <td>
       <%= file.mime_type %>
       <% if file.mime_type.starts_with?('video') %>
-        <%= link_to 'Request video conversion', '#' %>
+        <%= link_to 'Request video conversion', new_video_conversion_path %>
       <% end %>
     </td>
   </tr>

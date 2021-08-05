@@ -1,0 +1,82 @@
+<h1>Video conversion</h1>
+
+  <div class="card">
+    <div class="card-body">
+      <%= form_tag(video_conversions_path, method: :post, class: 'p-1') do %>
+        <div class="mb-3">
+          <label class="mb-0" for="file">File</label>
+          <%= select_tag(:file, options_from_collection_for_select(@files, :uuid, :original_filename), class: 'form-control') %>
+        </div>
+
+        <div class="mb-3">
+          <label class="mb-0" for="target_format">Target format</label>
+          <%= select_tag(:target_format, options_for_select(video_arget_formats), class: 'form-control', include_blank: true) %>
+        </div>
+
+        <div class="mb-3">
+          <label class="mb-0" for="target_format">Quality</label>
+          <%= select_tag(:quality, options_for_select(video_qualities), class: 'form-control', include_blank: true) %>
+        </div>
+
+        <div class="mb-3">
+          <label class="mb-0" for="page">Size</label>
+          <div class="row">
+            <div class="col-4">
+              <label class="mb-0" for="resize_mode">Resize mode</label>
+              <%= select_tag(:resize_mode, options_for_select(video_resize_modes), name: 'size[resize_mode]', class: 'form-control', include_blank: true) %>
+            </div>
+            <div class="col-4">
+              <label class="mb-0" for="width">Width</label>
+              <%= number_field_tag :width, nil, name: 'size[width]', class: 'form-control' %>
+              <hint class="text-muted font-size">must be divisible by 4</hint>
+            </div>
+            <div class="col-4">
+              <label class="mb-0" for="height">Height</label>
+              <%= number_field_tag :height, nil, name: 'size[height]', class: 'form-control' %>
+              <hint class="text-muted font-size">must be divisible by 4</hint>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="mb-0" for="page">Cut</label>
+          <div class="row">
+            <div class="col-4">
+              <label class="mb-0" for="width">Start time</label>
+              <%= text_field_tag :start_time, nil, name: 'cut[start_time]', class: 'form-control', placeholder: '0:0:0.0' %>
+            </div>
+            <div class="col-4">
+              <label class="mb-0" for="height">Length</label>
+              <%= text_field_tag :length, nil, name: 'cut[length]', class: 'form-control', placeholder: '0:0:1.0 OR end' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="mb-0" for="page">Thumbs</label>
+          <div class="row">
+            <div class="col-4">
+              <label class="mb-0" for="width">N</label>
+              <%= number_field_tag :N, nil, name: 'thumbs[n]', class: 'form-control' %>
+            </div>
+            <div class="col-4">
+              <label class="mb-0" for="height">Number</label>
+              <%= number_field_tag :length, nil, name: 'thumbs[number]', class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <%= check_box_tag 'throw_error', true, false %>
+          <label class="mb-0" for="throw_error">Throw error</label>
+        </div>
+
+        <div class="mb-4">
+          <%= check_box_tag 'store', true, false %>
+          <label class="mb-0" for="store">Store</label>
+        </div>
+
+        <%= submit_tag 'Convert', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>

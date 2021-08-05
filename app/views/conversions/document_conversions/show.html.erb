@@ -1,0 +1,36 @@
+<h1>Document conversion result</h1>
+
+<div class="card">
+  <% if @result.present? %>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <strong>Status:</strong> <%= "#{@status_result[:status]} #{'(Please, update the page to refresh the status)' if @status_result[:status] != 'finished'}" %>
+      </li>
+      <li class="list-group-item">
+        <strong>Error:</strong> <%= @status_result[:error] || '--' %>
+      </li>
+      <li class="list-group-item">
+        <strong>Result uuid:</strong>
+        <% if @status_result.dig(:result, :uuid) %>
+          <%= link_to @status_result.dig(:result, :uuid), file_path(@status_result.dig(:result, :uuid)) %>
+        <% else %>
+          --
+        <% end %>
+      </li>
+    </ul>
+  <% else %>
+    <div class="card">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>Status:</strong> <%= 'failed' %>
+        </li>
+        <li class="list-group-item">
+          <strong>ID:</strong> <%= @problem[:original_source] || '--' %>
+        </li>
+        <li class="list-group-item">
+          <strong>Error:</strong> <%= @problem[:reason] %>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+</div>
