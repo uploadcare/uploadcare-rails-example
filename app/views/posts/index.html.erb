@@ -1,0 +1,17 @@
+<h1>Posts</h1>
+
+  <% if @posts.present? %>
+    <% @posts.each do |post| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="text-place flex-grow-1 text-truncate">
+          <%= link_to short_title(post), post_path(post) %>
+        </div>
+        <div class="btn-group" role="group" aria-label="Actions">
+          <%= link_to 'Edit', edit_post_path(post), class: "btn btn-secondary btn-sm" %>
+          <%= link_to 'Delete', post_path(post), method: :delete, class: "btn btn-danger btn-sm" %>
+        </div>
+      </li>
+    <% end %>
+  <% else %>
+    <span>No posts found. Please, create a one <%= link_to 'here', new_post_path, class: 'd-inline' %>!</span>
+  <% end %>

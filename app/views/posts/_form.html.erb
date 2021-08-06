@@ -1,0 +1,21 @@
+<%= form_tag(path, method: method) do %>
+
+  <div class="mb-3">
+    <label class="mb-0">Title</label>
+    <%= text_field_tag :title, local_assigns[:post_title], name: 'post[title]', class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <label class="mb-0">File logo</label><br>
+    <%= uploadcare_uploader_field :post, :logo, class: 'mb-3' %>
+  </div>
+
+  <div class="mb-4">
+    <label class="mb-0">File attachments</label><br>
+    <%= uploadcare_uploader_field :post, :attachments %>
+  </div>
+
+  <div>
+    <%= submit_tag 'Save', class: 'btn btn-primary' %>
+  </div>
+<% end %>

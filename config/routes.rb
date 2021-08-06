@@ -39,5 +39,8 @@ Rails.application.routes.draw do
   resources :webhooks, except: %i[destroy]
   delete '/webhook', to: 'webhooks#destroy', as: 'delete_webhook'
 
+  # Posts
+  resources :posts
+
   root 'files#index'
 end
