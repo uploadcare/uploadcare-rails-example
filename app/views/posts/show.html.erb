@@ -1,0 +1,51 @@
+<h1>
+  Post "<%= short_title(@post) %>"
+  <div class="d-inline mr-0">
+    <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-secondary" %>
+    <%= link_to 'Delete', post_path(@post), method: :delete, class: "btn btn-danger" %>
+  </div>
+</h1>
+
+<h4 class="d-flex justify-content-between align-items-center mt-5">
+  Logo
+</h4>
+<% if @post.logo? %>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <div class="text-place flex-grow-1 text-truncate">
+      <%= link_to @post.logo.load.original_filename, file_path(@post.logo.uuid) %>
+      <br>
+      <div class="badge badge-secondary"><%= @post.logo.uuid %></div>
+      <div class="badge badge-secondary"><%= @post.logo.mime_type %></div>
+    </div>
+    <div class="btn-group" role="group" aria-label="Actions">
+      <%= link_to 'Copy', copy_file_path(@post.logo.uuid), method: :post, class: "btn btn-secondary btn-sm" %>
+      <%= link_to 'Store', store_file_path(@post.logo.uuid), method: :post, class: "btn btn-secondary btn-sm" %>
+      <%= link_to 'Delete', file_path(@post.logo.uuid), method: :delete, class: "btn btn-danger btn-sm" %>
+    </div>
+  </li>
+<% else %>
+  --
+<% end %>
+
+<h4 class="d-flex justify-content-between align-items-center mt-4">
+  Attachments
+</h4>
+<% if @attachments.present? %>
+  <% @attachments.each do |file| %>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div class="text-place flex-grow-1 text-truncate">
+        <%= link_to file.original_filename, file_path(file.uuid) %>
+        <br>
+        <div class="badge badge-secondary"><%= file.uuid %></div>
+        <div class="badge badge-secondary"><%= file.mime_type %></div>
+      </div>
+      <div class="btn-group" role="group" aria-label="Actions">
+        <%= link_to 'Copy', copy_file_path(file.uuid), method: :post, class: "btn btn-secondary btn-sm" %>
+        <%= link_to 'Store', store_file_path(file.uuid), method: :post, class: "btn btn-secondary btn-sm" %>
+        <%= link_to 'Delete', file_path(file.uuid), method: :delete, class: "btn btn-danger btn-sm" %>
+      </div>
+    </li>
+  <% end %>
+<% else %>
+  --
+<% end %>

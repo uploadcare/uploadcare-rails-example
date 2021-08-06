@@ -1,0 +1,7 @@
+<h1>Edit post</h1>
+
+<div class="card">
+  <div class="card-body border">
+    <%= render 'posts/form', path: post_path(@post), method: :patch, post_title: @post.title %>
+  </div>
+</div>
