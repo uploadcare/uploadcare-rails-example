@@ -38,8 +38,9 @@ class FilesController < ApplicationController
 
   def delete_file_batch
     files = params[:files]
-    Uploadcare::FileApi.delete_files(files.values)
-    flash[:success] = "File(s) #{files.keys.join(', ')} has been successfully deleted!"
+    keys, values = files.is_a?(Hash) ? [files.keys, files.values] : [[], files]
+    Uploadcare::FileApi.delete_files(values)
+    flash[:success] = "File(s) #{keys.join(', ')} has been successfully deleted!"
     redirect_to_prev_location
   end
 

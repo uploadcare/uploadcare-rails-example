@@ -1,0 +1,19 @@
+<h1>Edit webhook</h1
+
+<div class="card">
+  <div class="card-body border">
+  <%= form_tag(webhook_path(@webhook.id), method: :patch, class: 'p-1') do %>
+    <div class="mb-3">
+      <label class="mb-0" for="file">Target URL</label>
+      <%= text_field_tag :target_url, @webhook.target_url, name: 'webhook[target_url]', class: 'form-control' %>
+    </div>
+
+    <div class="mb-3">
+      <%= check_box_tag 'is_active', true, @webhook.is_active, name: 'webhook[is_active]' %>
+      <label class="mb-0" for="is_active">Enabled</label>
+    </div>
+
+    <%= submit_tag 'Update', class: 'btn btn-primary' %>
+  <% end %>
+  </div>
+</div>

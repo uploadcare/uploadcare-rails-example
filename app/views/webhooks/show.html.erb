@@ -1,0 +1,34 @@
+<h1>Webhook ID <%= @webhook.id %> info
+  <%= link_to 'Edit', edit_webhook_path(@webhook.id), class: 'btn btn-sm btn-secondary' %>
+  <%= link_to 'Delete', delete_webhook_path(target_url: @webhook.target_url), method: :delete, class: 'btn btn-sm btn-danger' %>
+</h1>
+
+<div class="card">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <strong>ID</strong>: <%= @webhook.id %>
+    </li>
+    <li class="list-group-item">
+      <strong>Created at</strong>: <%= format_date(@webhook.created) %>
+    </li>
+    <li class="list-group-item">
+      <strong>Updated at</strong>: <%= format_date(@webhook.updated) %>
+    </li>
+    <li class="list-group-item">
+      <strong>Event</strong>: <%= @webhook.event %>
+    </li>
+    <li class="list-group-item">
+      <strong>Target Url</strong>: <%= @webhook.target_url %>
+    </li>
+    <li class="list-group-item">
+      <strong>Project</strong>: <%= @webhook.project %>
+    </li>
+    <li class="list-group-item">
+      <% if @webhook.is_active? %>
+        <div class="badge badge-info">Active</div>
+      <% else %>
+        <div class="badge badge-secondary">Not active</div>
+      <% end %>
+    </li>
+  </ul>
+</div>

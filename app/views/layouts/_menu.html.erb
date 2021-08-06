@@ -10,10 +10,10 @@
   <li class="dropdown-divider"></li>
 
   <li class="nav-item">
-    <%= link_to 'File Groups', file_groups_path, class: "nav-link #{controller_name == 'file_groups' && action_name == 'index' ? 'active' : ''}" %>
+    <%= link_to 'File groups', file_groups_path, class: "nav-link #{controller_name == 'file_groups' && action_name == 'index' ? 'active' : ''}" %>
   </li>
   <li class="nav-item">
-    <%= link_to 'Create File Group', new_file_group_path, class: "nav-link #{controller_name == 'file_groups' && action_name == 'new' ? 'active' : ''}" %>
+    <%= link_to 'Create file group', new_file_group_path, class: "nav-link #{controller_name == 'file_groups' && action_name == 'new' ? 'active' : ''}" %>
   </li>
 
   <li class="dropdown-divider"></li>
@@ -32,5 +32,14 @@
   </li>
   <li class="nav-item">
     <%= link_to 'Convert video', new_video_conversion_path, class: "nav-link #{controller_name == 'video_conversions' ? 'active' : ''}" %>
+  </li>
+
+  <li class="dropdown-divider"></li>
+
+  <li class="nav-item">
+    <%= link_to 'Webhooks', webhooks_path, class: "nav-link #{controller_name == 'webhooks' && action_name == 'index' ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Create a webhook', new_webhook_path, class: "nav-link #{controller_name == 'webhooks' && action_name == 'new' ? 'active' : ''}" %>
   </li>
 </ul>

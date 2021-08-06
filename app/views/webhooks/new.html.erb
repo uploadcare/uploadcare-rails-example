@@ -1,0 +1,19 @@
+<h1>Create a new webhook</h1
+
+<div class="card">
+  <div class="card-body border">
+  <%= form_tag(webhooks_path, method: :post, class: 'p-1') do %>
+    <div class="mb-3">
+      <label class="mb-0" for="file">Target URL</label>
+      <%= text_field_tag :target_url, nil, name: 'webhook[target_url]', class: 'form-control' %>
+    </div>
+
+    <div class="mb-3">
+      <%= check_box_tag 'is_active', true, false, name: 'webhook[is_active]' %>
+      <label class="mb-0" for="is_active">Enabled</label>
+    </div>
+
+    <%= submit_tag 'Create', class: 'btn btn-primary' %>
+  <% end %>
+  </div>
+</div>

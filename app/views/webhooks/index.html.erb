@@ -1,0 +1,16 @@
+<h1>Webhooks list</h1>
+
+<ul class="list-group">
+  <% @webhooks.each do |webhook| %>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div class="flex-grow-1">
+        <%= link_to webhook.id, webhook_path(webhook.id), class: 'badge badge-info' %>
+        <code><%= webhook.target_url %></code> from <%= format_date(webhook.created, format: '%B, %e, %Y %H:%M') %> (<%= webhook.is_active ? 'Acitve' : 'Not active' %>)
+      </div>
+      <div class="btn-group" role="group" aria-label="Actions">
+        <%= link_to 'Edit', edit_webhook_path(webhook.id), class: 'btn btn-sm btn-secondary' %>
+        <%= link_to 'Delete', delete_webhook_path(target_url: webhook.target_url), class: 'btn btn-sm btn-danger' %>
+      </div>
+    </li>
+  <% end %>
+</ul>

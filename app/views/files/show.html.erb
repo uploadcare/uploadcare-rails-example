@@ -14,6 +14,6 @@
   <% end %>
 
   <% if @file[:video_info].present? %>
-    <%= render 'files/video_info', image_info: @file.image_info %>
+    <%= render 'files/video_info', video_info: @file.video_info %>
   <% end %>
   <%= link_to 'Delete file', file_path(@file.uuid), method: :delete, class: "btn btn-danger" %>
