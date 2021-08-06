@@ -1,0 +1,27 @@
+<h1>Project Info</h1>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><a
+      href="https://uploadcare.com/accounts/settings/projects/<%= ENV.fetch('UPLOADCARE_PUBLIC_KEY') %>/usage/"><%= @project.name %></a>
+    </h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Public key: <code><%= @project.pub_key %></code></li>
+    <li class="list-group-item">Is auto-store enabled: <code><%= @project.autostore_enabled.to_s.titleize %></code></li>
+    <li class="list-group-item">
+      <div class="d-flex">
+        <div class="flex-shrink-0 mr-2">Collaborators:</div>
+        <div class="flex-grow-1">
+          <% if @project.collaborators.present? %>
+            <% @project.collaborators.each do |name| %>
+              <%= name %><br>
+            <% end %>
+          <% else %>
+            <code>Empty</code>
+          <% end %>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

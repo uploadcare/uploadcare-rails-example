@@ -133,7 +133,7 @@ RSpec.describe FilesController, type: :request do
     end
   end
 
-  describe 'GET delete' do
+  describe 'DELETE delete' do
     let(:uuid) { SecureRandom.uuid }
 
     context 'when a response status is 200' do
@@ -155,7 +155,7 @@ RSpec.describe FilesController, type: :request do
     end
   end
 
-  describe 'DELETE batch store' do
+  describe 'POST batch store' do
     let(:uuid) { SecureRandom.uuid }
 
     context 'when a response status is 200' do

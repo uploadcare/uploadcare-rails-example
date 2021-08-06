@@ -31,5 +31,12 @@ Rails.application.routes.draw do
     get '/video_conversion', to: 'video_conversions#show', as: 'video_conversion'
   end
 
+  # Projects
+  get '/project', to: 'projects#show', as: 'project'
+
+  # Webhooks
+  resources :webhooks, except: %i[destroy]
+  delete '/webhook', to: 'webhooks#destroy', as: 'delete_webhook'
+
   root 'files#index'
 end

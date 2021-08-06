@@ -12,7 +12,7 @@ module ApplicationHelper
     FLASH.with_indifferent_access[level]
   end
 
-  def format_date(date, format: '%B %d, %Y %H:%M')
+  def format_date(date, format: '%B %e, %Y %H:%M')
     Time.zone.parse(date).strftime(format)
   end
 end
