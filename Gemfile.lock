@@ -1,12 +1,16 @@
-PATH
-  remote: /home/bb/Documents/uploadcare-rails
+GIT
+  remote: https://github.com/uploadcare/uploadcare-rails.git
+  revision: 6faa77869a418b0844b818d78d4280dfd368fd2f
+  branch: feature/5-update-readme
   specs:
     uploadcare-rails (0.1.0)
       rails (>= 4)
       uploadcare-ruby
 
-PATH
-  remote: /home/bb/Documents/uploadcare-ruby
+GIT
+  remote: https://github.com/uploadcare/uploadcare-ruby.git
+  revision: 9381047546992092cea5a94d0fcd16a79c3107ec
+  branch: feature/1-new-entity-attrs
   specs:
     uploadcare-ruby (3.0.5)
       api_struct (~> 1.0.1)
@@ -86,7 +90,7 @@ GEM
       http
     ast (2.4.2)
     bindex (0.8.1)
-    bootsnap (1.7.6)
+    bootsnap (1.7.7)
       msgpack (~> 1.0)
     brakeman (5.1.1)
     builder (3.2.4)
@@ -135,7 +139,7 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
-    globalid (0.5.1)
+    globalid (0.5.2)
       activesupport (>= 5.0)
     hashie (4.1.0)
     http (5.0.1)
@@ -167,8 +171,8 @@ GEM
     mini_mime (1.1.0)
     minitest (5.14.4)
     msgpack (1.4.2)
-    nio4r (2.5.7)
-    nokogiri (1.11.7-x86_64-linux)
+    nio4r (2.5.8)
+    nokogiri (1.12.2-x86_64-linux)
       racc (~> 1.4)
     parallel (1.20.1)
     parser (3.0.2.0)
@@ -364,7 +368,7 @@ DEPENDENCIES
   webpacker (~> 5.0)
 
 RUBY VERSION
-   ruby 3.0.0p0
+   ruby 3.0.2p107
 
 BUNDLED WITH
-   2.2.24
+   2.2.22

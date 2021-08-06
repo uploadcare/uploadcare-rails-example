@@ -44,15 +44,34 @@ module Conversions
       hashed_params = video_conversion_params.to_h
       filter_blank(
         uuid: hashed_params[:file],
-        size: hashed_params[:size],
+        size: size_params(hashed_params),
         format: hashed_params[:target_format],
         quality: hashed_params[:quality],
-        cut: hashed_params[:cut],
-        thumbs: {
-          N: hashed_params.dig(:thumbs, :n),
-          number: hashed_params.dig(:thumbs, :number)
-        }
+        cut: cut_params(hashed_params),
+        thumbs: thumbs_params(hashed_params)
       )
+    end
+
+    def thumbs_params(hashed_params)
+      {
+        N: hashed_params.dig(:thumbs, :n),
+        number: hashed_params.dig(:thumbs, :number)
+      }
+    end
+
+    def cut_params(hashed_params)
+      {
+        start_time: hashed_params.dig(:cut, :start_time),
+        length: hashed_params.dig(:cut, :length)
+      }
+    end
+
+    def size_params(hashed_params)
+      {
+        resize_mode: hashed_params.dig(:size, :resize_mode),
+        width: hashed_params.dig(:size, :width),
+        height: hashed_params.dig(:size, :height)
+      }
     end
 
     def filter_blank(element)

@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.0'
+ruby '3.0.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4'
@@ -70,5 +70,5 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Uploadcare-rails provides unified API interface to Uploadcare API
-gem 'uploadcare-rails', path: '/home/bb/Documents/uploadcare-rails'
-gem 'uploadcare-ruby', path: '/home/bb/Documents/uploadcare-ruby'
+gem 'uploadcare-rails', github: 'uploadcare/uploadcare-rails', branch: 'feature/5-update-readme'
+gem 'uploadcare-ruby', github: 'uploadcare/uploadcare-ruby', branch: 'feature/1-new-entity-attrs'

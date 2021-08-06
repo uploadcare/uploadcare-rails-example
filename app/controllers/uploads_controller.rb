@@ -16,7 +16,7 @@ class UploadsController < ApplicationController
     url = file_params[:url]
     files = Uploadcare::UploadApi.upload_file(
       url,
-      {
+      **{
         filename: file_params[:filename].presence,
         store: file_params[:store].present?
       }.compact
