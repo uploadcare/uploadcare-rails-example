@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # Files
   resources :files, only: %i[index show destroy]
   post '/store_file/:id', to: 'files#store', as: 'store_file'
+  post '/copy_file/:id', to: 'files#copy', as: 'copy_file'
   get '/new_store_file_batch', to: 'files#new_store_file_batch', as: 'new_store_file_batch'
   get '/new_delete_file_batch', to: 'files#new_delete_file_batch', as: 'new_delete_file_batch'
   post '/store_file_batch', to: 'files#store_file_batch', as: 'store_file_batch'
