@@ -53,7 +53,10 @@ jobs:
           bundle install --jobs 4 --retry 3
 
       - name: Run tests
-        run: bundle exec rspec
+        run: |
+          bundle exec rails webpacker:install
+          NODE_ENV=test bundle exec rails webpacker:compile
+          bundle exec rspec
         env:
           UPLOADCARE_PUBLIC_KEY: demopublickey
           UPLOADCARE_SECRET_KEY: demoprivatekey

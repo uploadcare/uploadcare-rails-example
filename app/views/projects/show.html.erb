@@ -14,8 +14,11 @@
         <div class="flex-shrink-0 mr-2">Collaborators:</div>
         <div class="flex-grow-1">
           <% if @project.collaborators.present? %>
-            <% @project.collaborators.each do |name| %>
-              <%= name %><br>
+            <% @project.collaborators.each do |collaborator| %>
+            <p>
+              Name: <%= collaborator.name %><br>
+              Email: <%= collaborator.email %>
+            </p>
             <% end %>
           <% else %>
             <code>Empty</code>
