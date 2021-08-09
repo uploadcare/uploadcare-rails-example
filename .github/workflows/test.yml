@@ -4,9 +4,6 @@ jobs:
   linters:
     name: Linters
     runs-on: ubuntu-latest
-    env:
-      UPLOADCARE_PUBLIC_KEY: demopublickey
-      UPLOADCARE_SECRET_KEY: demoprivatekey
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -22,6 +19,9 @@ jobs:
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
+        env:
+          UPLOADCARE_PUBLIC_KEY: demopublickey
+          UPLOADCARE_SECRET_KEY: demoprivatekey
 
       - name: Run linters
         run: bundle exec rubocop --parallel
