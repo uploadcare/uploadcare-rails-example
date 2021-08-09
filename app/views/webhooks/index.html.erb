@@ -9,7 +9,7 @@
       </div>
       <div class="btn-group" role="group" aria-label="Actions">
         <%= link_to 'Edit', edit_webhook_path(webhook.id), class: 'btn btn-sm btn-secondary' %>
-        <%= link_to 'Delete', delete_webhook_path(target_url: webhook.target_url), class: 'btn btn-sm btn-danger' %>
+        <%= link_to 'Delete', delete_webhook_path(target_url: webhook.target_url), method: :delete, class: 'btn btn-sm btn-danger' %>
       </div>
     </li>
   <% end %>

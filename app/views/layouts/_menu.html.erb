@@ -10,7 +10,7 @@
   <li class="dropdown-divider"></li>
 
   <li class="nav-item">
-    <%= link_to 'File groups', file_groups_path, class: "nav-link #{controller_name == 'file_groups' && action_name == 'index' ? 'active' : ''}" %>
+    <%= link_to 'File groups', file_groups_path, class: "nav-link #{controller_name == 'file_groups' && %w[index show].include?(action_name) ? 'active' : ''}" %>
   </li>
   <li class="nav-item">
     <%= link_to 'Create file group', new_file_group_path, class: "nav-link #{controller_name == 'file_groups' && action_name == 'new' ? 'active' : ''}" %>
@@ -37,7 +37,7 @@
   <li class="dropdown-divider"></li>
 
   <li class="nav-item">
-    <%= link_to 'Webhooks', webhooks_path, class: "nav-link #{controller_name == 'webhooks' && action_name == 'index' ? 'active' : ''}" %>
+    <%= link_to 'Webhooks', webhooks_path, class: "nav-link #{controller_name == 'webhooks' && %w[index show].include?(action_name) ? 'active' : ''}" %>
   </li>
   <li class="nav-item">
     <%= link_to 'Create a webhook', new_webhook_path, class: "nav-link #{controller_name == 'webhooks' && action_name == 'new' ? 'active' : ''}" %>
@@ -46,7 +46,7 @@
   <li class="dropdown-divider"></li>
 
   <li class="nav-item">
-    <%= link_to 'Posts', posts_path, class: "nav-link #{controller_name == 'posts' && action_name == 'index' ? 'active' : ''}" %>
+    <%= link_to 'Posts', posts_path, class: "nav-link #{controller_name == 'posts' && %w[index show].include?(action_name) ? 'active' : ''}" %>
   </li>
   <li class="nav-item">
     <%= link_to 'Create a post', new_post_path, class: "nav-link #{controller_name == 'posts' && action_name == 'new' ? 'active' : ''}" %>

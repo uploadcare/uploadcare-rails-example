@@ -36,15 +36,18 @@ class FilesController < ApplicationController
   end
 
   def store_file_batch
-    files = params[:files]
-    Uploadcare::FileApi.store_files(files.values)
-    flash[:success] = "File(s) #{files.keys.join(', ')} has been successfully stored!"
+    files = file_params[:files].to_h.symbolize_keys
+    keys = files.keys
+    values = files.values
+    Uploadcare::FileApi.store_files(values)
+    flash[:success] = "File(s) #{keys.join(', ')} has been successfully stored!"
     redirect_to_prev_location
   end
 
   def delete_file_batch
-    files = params[:files]
-    keys, values = files.is_a?(Hash) ? [files.keys, files.values] : [[], files]
+    files = file_params[:files].to_h.symbolize_keys
+    keys = files.keys
+    values = files.values
     Uploadcare::FileApi.delete_files(values)
     flash[:success] = "File(s) #{keys.join(', ')} has been successfully deleted!"
     redirect_to_prev_location
@@ -53,7 +56,7 @@ class FilesController < ApplicationController
   private
 
   def file_params
-    params.permit(:id)
+    params.permit(:id, files: {})
   end
 
   def obtain_remote_files

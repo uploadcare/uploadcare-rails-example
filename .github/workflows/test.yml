@@ -11,7 +11,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.2
+          ruby-version: 3.0.2
           bundler: 2.2.24
           bundler-cache: true
 
@@ -26,6 +26,12 @@ jobs:
       - name: Run code metric tools
         run: bundle exec rails_best_practices
 
+      - name: Run brakeman metric tools
+        run: bundle exec brakeman
+
+      - name: Run bundle-audit metric tools
+        run: bundle exec bundle-audit update && bundle exec bundle-audit check
+
   tests:
     name: Tests
     runs-on: ubuntu-18.04
@@ -37,7 +43,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.2
+          ruby-version: 3.0.2
           bundler: 2.2.24
           bundler-cache: true
 

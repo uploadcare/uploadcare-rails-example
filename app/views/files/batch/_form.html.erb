@@ -3,8 +3,8 @@
   <% files.each do |file| %>
     <div>
       <label for="<%= file.uuid %>">
-        <%= check_box_tag file.uuid, file.uuid, false, name: "files[#{file.original_filename}]" %>
-        <%= file.original_filename %>
+        <%= check_box_tag file.uuid, file.uuid, false, name: "files[#{file.original_filename.presence || file.url}]" %>
+        <%= file.original_filename.presence || file.url %>
       </label>
     </div>
   <% end %>

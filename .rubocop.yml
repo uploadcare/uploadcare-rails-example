@@ -5,6 +5,8 @@ AllCops:
   Excludes:
     - 'bin/bundle'
     - 'bin/ci'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
 
 Metrics/BlockLength:
   Exclude:
