@@ -30,7 +30,7 @@ jobs:
         run: bundle exec brakeman
 
       - name: Run bundle-audit metric tools
-        run: bundle exec bundle-audit update && bundle-audit check
+        run: bundle exec bundle-audit update && bundle exec bundle-audit check
 
   tests:
     name: Tests
