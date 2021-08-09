@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/uploadcare/uploadcare-rails.git
-  revision: 6faa77869a418b0844b818d78d4280dfd368fd2f
+  revision: 753ccacbe65f773908b05a01de4dc1024c98fd0f
   branch: feature/5-update-readme
   specs:
     uploadcare-rails (0.1.0)
