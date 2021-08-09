@@ -54,6 +54,7 @@ jobs:
 
       - name: Run tests
         run: |
+          bundle exec rails webpacker:install
           NODE_ENV=test bundle exec rails webpacker:compile
           bundle exec rspec
         env:
