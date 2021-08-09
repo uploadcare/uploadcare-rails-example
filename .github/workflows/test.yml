@@ -4,6 +4,9 @@ jobs:
   linters:
     name: Linters
     runs-on: ubuntu-latest
+    env:
+      UPLOADCARE_PUBLIC_KEY: demopublickey
+      UPLOADCARE_SECRET_KEY: demoprivatekey
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
