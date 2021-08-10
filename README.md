@@ -41,6 +41,12 @@ When the image is ready — up the containers with the following command.
 $ docker-compose up
 ```
 
+Then, create a new database with command:
+
+```console
+$ docker-compose exec web rails db:create db:migrate
+```
+
 Now, the application must be available in your web-browser, on `http://localhost:3000`
 
 ![Application is available](./references/application-up-in-browser.png)
@@ -73,7 +79,7 @@ Then install gems:
 $ bundle install
 ```
 
-After gems are installed, create a new local database:
+After gems are installed, set your PostgreSQL credentials(env vars POSTGRES_USERNAME, POSTGRES_PASSWORD) and create a new local database:
 
 ```console
 $ rake db:create

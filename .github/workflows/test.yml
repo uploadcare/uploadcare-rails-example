@@ -36,6 +36,16 @@ jobs:
     name: Tests
     runs-on: ubuntu-18.04
 
+    services:
+      postgres:
+        image: postgres:11
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        ports:
+          - 5432:5432
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -46,6 +56,20 @@ jobs:
           ruby-version: 3.0.2
           bundler: 2.2.24
           bundler-cache: true
+
+      - name: Install library for postgres
+        run: sudo apt-get install libpq-dev
+
+      - name: Setup Database
+        run: |
+          bundle exec rails db:setup
+        env:
+          POSTGRES_USERNAME: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_PORT: 5432
+          UPLOADCARE_PUBLIC_KEY: demopublickey
+          UPLOADCARE_SECRET_KEY: demoprivatekey
+          RAILS_ENV: test
 
       - name: Install gems
         run: |
@@ -58,5 +82,9 @@ jobs:
           NODE_ENV=test bundle exec rails webpacker:compile
           bundle exec rspec
         env:
+          POSTGRES_USERNAME: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_PORT: 5432
           UPLOADCARE_PUBLIC_KEY: demopublickey
           UPLOADCARE_SECRET_KEY: demoprivatekey
+          RAILS_ENV: test
