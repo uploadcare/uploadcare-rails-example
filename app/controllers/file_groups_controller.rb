@@ -6,7 +6,7 @@ class FileGroupsController < ApplicationController
   end
 
   def new
-    @files_data = Uploadcare::FileApi.get_files
+    @files_data = Uploadcare::FileApi.get_files(ordering: '-datetime_uploaded')
     @files = @files_data[:results]
   end
 
