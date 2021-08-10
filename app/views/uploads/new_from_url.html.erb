@@ -15,8 +15,8 @@
     </div>
 
     <div>
-      <%= check_box_tag 'file[store]', true, false %>
-      <label class="mb-0" for="file_store">Store file</label>
+      <label class="mb-0" for="store">Store</label>
+      <%= select_tag(:store, options_for_select(store_options), class: 'form-control', name: 'file[store]') %>
     </div>
 
   <%= submit_tag 'Upload file', class: 'btn btn-primary mt-4' %>
