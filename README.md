@@ -218,7 +218,7 @@ All you need is input file's URL and filename, check (or not) the `Store` check-
 ### Conversion
 
 The application can manage documents and video conversions sending request to [Uploadcare REST API Conversion endpoints](https://uploadcare.com/api-refs/rest-api/v0.5.0/#tag/Conversion).
-Remember, to convert files, your account must have this feature enabled.
+Remember, to convert files, your account must have this feature enabled. It means that your UPLOADCARE_PUBLIC_KEY and UPLOADCARE_SECRET_KEY (not demo keys) must be specified in `config/initializers/uploadcare.rb`. This feature is only available for paid accounts.
 
 #### Documents conversion
 
@@ -245,6 +245,7 @@ Conversion result page also includes information about how conversion is going.
 ### Webhooks
 
 The `webhooks` section represents CRUD(create, read, update, delete) operations for Uploadcare webhooks.
+Remember, to manage webhooks, your account must have this feature enabled. It means that your UPLOADCARE_PUBLIC_KEY and UPLOADCARE_SECRET_KEY (not demo keys) must be specified in `config/initializers/uploadcare.rb`. This feature is only available for paid accounts.
 
 The menu button `Webhooks` points to the webhooks list page. Each list item has `edit/delete` actions and minimal info about a webhook.
 
