@@ -49,12 +49,11 @@ jobs:
 
       - name: Setup Database
         run: |
-          cp config/database.yml.github-actions config/database.yml
           bundle exec rake db:create
           bundle exec rake db:schema:load
         env:
           RAILS_ENV: test
-          POSTGRES_USER: postgres
+          POSTGRES_USERNAME: postgres
           POSTGRES_PASSWORD: postgres
 
       - name: Install gems
