@@ -10,7 +10,7 @@
 
         <div class="mb-3">
           <label class="mb-0" for="target_format">Target format</label>
-          <%= select_tag(:target_format, options_for_select(document_arget_formats), class: 'form-control') %>
+          <%= select_tag(:target_format, options_for_select(document_target_formats), class: 'form-control') %>
         </div>
 
         <div class="mb-3">
@@ -24,8 +24,8 @@
         </div>
 
         <div class="mb-4">
-          <%= check_box_tag 'store', true, false %>
           <label class="mb-0" for="store">Store</label>
+          <%= select_tag(:store, options_for_select(store_options), class: 'form-control') %>
         </div>
 
         <%= submit_tag 'Convert', class: 'btn btn-primary' %>

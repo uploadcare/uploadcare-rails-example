@@ -20,7 +20,7 @@ module Conversions
     end
 
     def obtain_remote_files
-      @files_data = Uploadcare::FileApi.get_files
+      @files_data = Uploadcare::FileApi.get_files(ordering: '-datetime_uploaded')
       @files = @files_data[:results]
     end
   end
