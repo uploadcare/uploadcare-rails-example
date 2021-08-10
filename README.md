@@ -152,14 +152,14 @@ Full list of available options is listed in the file itself. Just uncomment an o
 
 You can get the project information by your public key.
 
-![Project info](.references/project-info.png)
+![Project info](./references/project-info.png)
 
 ### Files section
 
 This section contains operations with files. Such as uploading, copying, storing, deleting.
 The page shows all the files you have on Uploadcare servers. Each file has actions, so it is possible to manage files on this page as well as on the `show` page.
 
-![Files index](.references/files-index.png)
+![Files index](./references/files-index.png)
 
 To go to the `show` page, simply click on a filename:
 
@@ -168,7 +168,7 @@ To go to the `show` page, simply click on a filename:
 The `index` page also has links to files batch operations pages — batch store and batch delete.
 Pages for batch operations look similar and allow to select several files to store them or delete at once.
 
-![Batch store files](.references/batch-store-files.png)
+![Batch store files](./references/batch-store-files.png)
 
 ### File Groups section
 
@@ -176,17 +176,17 @@ File Groups section provides user interface to manage file groups on Uploadcare.
 
 The `index` page shows a minimal info about each group including ID and files count.
 
-![Index groups](.references/index-groups.png)
+![Index groups](./references/index-groups.png)
 
 Click on a group ID, you go to the `show` group page:
 
-![Show groups](.references/show-group.png)
+![Show groups](./references/show-group.png)
 
 This page also provides actions to manage group files and a group itself (`store` operation only unless a group is already stored).
 
 To create a new group, click on the `Create file group` button in the menu. The form will be opened:
 
-![Create a new file group](.references/create-group.png)
+![Create a new file group](./references/create-group.png)
 
 
 ### Files uploading
@@ -199,14 +199,14 @@ To upload local file from your machine, click on `Upload local file` button in t
 All the fields in the form will be filled automatically depending on file's mime-type and filename. You can input your custom mime-type and filename, though.
 There is also `Store` option indicating if Uploadcare will store your file permanently (if enabled) or remove it after 24 hours.
 
-![Upload local file](.references/upload_local.png)
+![Upload local file](./references/upload-local.png)
 
 #### Upload a file from URL
 
 To upload a file from URL, click on the appropriate button in the menu. This form has one text input for an URL and one for a filename. `Store` option is present as well.
 All you need is input file's URL and filename, check (or not) the `Store` check-box and a file will be uploaded.
 
-![Upload file from URL](.references/upload-from-url.png)
+![Upload file from URL](./references/upload-from-url.png)
 
 
 ### Conversion
@@ -218,22 +218,22 @@ Remember, to convert files, your account must have this feature enabled.
 
 To convert a document, go to the `Convert document` section, choose a file to convert, target format and page (if the chosen target format is `jpg` or `png` and you want to convert a single page of a multi-paged document). There are two check-boxes. `Store` is responsible for storing files as mentioned above. And the `Throw error` option detects if the app should raise an error instead of rescuing this within a simple flash message.
 
-![Convert document](.references/convert-doc.png)
+![Convert document](./references/convert-doc.png)
 
 After the form is submitted, you'll see a `Conversion result page`, which shows some info about conversion: `Status`, `Error` and output file's UUID.
 Updating the page will refresh the status as said on the page.
 
-![Convert document result](.references/convert-doc-result.png)
+![Convert document result](./references/convert-doc-result.png)
 
 #### Video conversion
 
 Video conversion works the same way but the form has some additional parameters to set. As the document form it has `File`, `Target format` and check-boxes — `Throw error` and `Store`. But you can also specify `quality`, `resize`, `cut` and `thumbs` options.
 
-![Convert video](.references/convert-video.png)
+![Convert video](./references/convert-video.png)
 
 Conversion result page also includes information about how conversion is going.
 
-![Convert video result](.references/convert-video-result.png)
+![Convert video result](./references/convert-video-result.png)
 
 
 ### Webhooks
@@ -242,15 +242,15 @@ The `webhooks` section represents CRUD(create, read, update, delete) operations 
 
 The menu button `Webhooks` points to the webhooks list page. Each list item has `edit/delete` actions and minimal info about a webhook.
 
-![Webhooks list](.references/webhooks-list.png)
+![Webhooks list](./references/webhooks-list.png)
 
 Clicking on an ID of a list item redirects you to the `show` page of a webhook. Here you can find additional info and actions.
 
-![Webhook's info](.references/show-webhook.png)
+![Webhook's info](./references/show-webhook.png)
 
 To create a new webhook, click the `Create a webhook` button in the menu. On the form, you should specify an URL for your webhook and check if it should be enabled immediately.
 
-![Create a webhook](.references/create-webhook.png)
+![Create a webhook](./references/create-webhook.png)
 
 ### Posts section
 
@@ -259,15 +259,15 @@ The app has a model called Post and having fields `title:String`, `logo:String` 
 
 Index page for posts shows a list of posts. Each list item has `edit/delete` actions.
 
-![Posts list](.references/posts-list.png)
+![Posts list](./references/posts-list.png)
 
 Clicking on title will direct you to the `show` page of a post.
 
-![Show post](.references/show-post.png)
+![Show post](./references/show-post.png)
 
 To create a new post, click on the `Create a post` button. The post form will be opened. The form contains a text field for post title, one File Uploaders — for post's logo and one — for post's attachments. These File Uploaders differ from each other by the `multiple` option. For logo it is `false`, and for attachments — `true`.
 
-![Create a post](.references/create-post.png)
+![Create a post](./references/create-post.png)
 
 ## Useful links
 * [Uploadcare documentation](https://uploadcare.com/docs/?utm_source=github&utm_medium=referral&utm_campaign=uploadcare-rails)  
