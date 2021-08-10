@@ -222,7 +222,7 @@ The application can manage documents and video conversions sending request to [U
 ---
 **NOTE**
 
-Remember, to convert files, your account must have this feature enabled. It means that your UPLOADCARE_PUBLIC_KEY and UPLOADCARE_SECRET_KEY (not demo keys) must be specified in `config/initializers/uploadcare.rb`. This feature is only available for paid accounts.
+Remember, to convert files, your account must have this feature enabled. It means that your UPLOADCARE_PUBLIC_KEY and UPLOADCARE_SECRET_KEY (not demo keys) must be specified in `config/initializers/uploadcare.rb`. This feature is only available for paid plans.
 
 ---
 
@@ -255,7 +255,7 @@ The `webhooks` section represents CRUD(create, read, update, delete) operations 
 ---
 **NOTE**
 
-Remember, to manage webhooks, your account must have this feature enabled. It means that your UPLOADCARE_PUBLIC_KEY and UPLOADCARE_SECRET_KEY (not demo keys) must be specified in `config/initializers/uploadcare.rb`. This feature is only available for paid accounts.
+Remember, to manage webhooks, your account must have this feature enabled. It means that your UPLOADCARE_PUBLIC_KEY and UPLOADCARE_SECRET_KEY (not demo keys) must be specified in `config/initializers/uploadcare.rb`. This feature is only available for paid plans.
 
 ---
 
