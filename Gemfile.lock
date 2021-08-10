@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/uploadcare/uploadcare-rails.git
-  revision: 6faa77869a418b0844b818d78d4280dfd368fd2f
+  revision: 753ccacbe65f773908b05a01de4dc1024c98fd0f
   branch: feature/5-update-readme
   specs:
     uploadcare-rails (0.1.0)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/uploadcare/uploadcare-ruby.git
-  revision: 9381047546992092cea5a94d0fcd16a79c3107ec
+  revision: 53c7703d3393e40c9e3d68de59f0341c0c5331bb
   branch: feature/1-new-entity-attrs
   specs:
     uploadcare-ruby (3.0.5)
@@ -270,7 +270,7 @@ GEM
       rubocop-ast (>= 1.8.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.8.0)
+    rubocop-ast (1.9.0)
       parser (>= 3.0.1.1)
     rubocop-rails (2.11.3)
       activesupport (>= 4.2.0)
