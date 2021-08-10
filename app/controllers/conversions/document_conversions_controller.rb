@@ -39,7 +39,7 @@ module Conversions
           format: document_conversion_params[:target_format].presence,
           page: document_conversion_params[:page].presence
         }.compact,
-        store: document_conversion_params[:store].present?
+        store: document_conversion_params[:store]
       )
     end
 

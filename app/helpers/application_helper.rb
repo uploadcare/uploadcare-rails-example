@@ -15,4 +15,12 @@ module ApplicationHelper
   def format_date(date, format: '%B %e, %Y %H:%M')
     Time.zone.parse(date).strftime(format)
   end
+
+  def store_options
+    [
+      %w[Yes 1],
+      %w[No 0],
+      %w[Auto auto]
+    ]
+  end
 end

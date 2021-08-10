@@ -36,7 +36,7 @@ module Conversions
     def request_conversion
       Uploadcare::ConversionApi.convert_video(
         conversion_params,
-        store: video_conversion_params[:store].present?
+        store: video_conversion_params[:store]
       )
     end
 

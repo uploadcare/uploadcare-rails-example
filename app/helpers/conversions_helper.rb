@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ConversionsHelper
-  def document_arget_formats
+  def document_target_formats
     %w[doc docx xls xlsx odt ods rtf txt pdf jpg png enhanced.jpg].map do |format|
       [format.upcase, format]
     end

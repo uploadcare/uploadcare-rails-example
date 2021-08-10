@@ -72,8 +72,8 @@
         </div>
 
         <div class="mb-4">
-          <%= check_box_tag 'store', true, false %>
           <label class="mb-0" for="store">Store</label>
+          <%= select_tag(:store, options_for_select(store_options), class: 'form-control') %>
         </div>
 
         <%= submit_tag 'Convert', class: 'btn btn-primary' %>
