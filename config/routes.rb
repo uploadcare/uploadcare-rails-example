@@ -42,5 +42,5 @@ Rails.application.routes.draw do
   # Posts
   resources :posts
 
-  root 'files#index'
+  root 'projects#show'
 end
