@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1
-FROM ruby:3.0
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs postgresql-client
+FROM ruby:3.0.2
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs postgresql-client && \
+    apt-get install -y npm && npm install --global yarn
 WORKDIR /uploadcare-rails-example
 COPY Gemfile /uploadcare-rails-example/Gemfile
 COPY Gemfile.lock /uploadcare-rails-example/Gemfile.lock

@@ -70,5 +70,5 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Uploadcare-rails provides unified API interface to Uploadcare API
-gem 'uploadcare-rails', github: 'uploadcare/uploadcare-rails', branch: 'feature/5-update-readme'
-gem 'uploadcare-ruby', github: 'uploadcare/uploadcare-ruby', branch: 'feature/1-new-entity-attrs'
+gem 'uploadcare-rails', git: 'https://github.com/uploadcare/uploadcare-rails.git'
+gem 'uploadcare-ruby', git: 'https://github.com/uploadcare/uploadcare-ruby.git'
