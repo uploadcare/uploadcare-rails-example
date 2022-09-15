@@ -25,19 +25,19 @@ The project is based on Ruby 3.0.2, Rails 6.1.4 and sqlite3 1.4.
 
 ### Using Docker
 
-At first clone repository.
+First, clone the repository:
 ```console
 $ git clone git@github.com:uploadcare/uploadcare-rails-example.git
 ```
 
-Then need generate `GITHUB_TOKEN` here https://github.com/settings/tokens
-with selected checkbox `write:packages`.
+Then generate a `GITHUB_TOKEN` [here](https://github.com/settings/tokens)
+with a selected checkbox `write:packages`.
 
-After that, create `docker-compose.yml` file, and copy the content from `docker-compose.yml.sample` file there.
-Then replace `YOUR_GITHUB_TOKEN` to generated `GITHUB_TOKEN` into `docker-compose.yml` file.
+After that, create the `docker-compose.yml` file, and copy the content from the `docker-compose.yml.sample` file there.
+Then replace `YOUR_GITHUB_TOKEN` with generated `GITHUB_TOKEN` in the `docker-compose.yml` file.
 
 To install the example application you need to [install Docker Compose package](https://docs.docker.com/compose/install/).
-When Docker Compose is installed, build a Docker image by using the `build` directive:
+When Docker Compose is installed, build a Docker image by using the `build` command:
 
 ```console
 $ docker-compose build

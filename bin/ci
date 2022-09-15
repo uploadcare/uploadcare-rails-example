@@ -15,7 +15,6 @@ chdir APP_ROOT do
   system! 'bundle exec rubocop'
   system! 'bundle exec rails_best_practices'
   system! 'brakeman'
-  system! 'bundle-audit update && bundle-audit check'
   system! 'bundle exec rspec --require spec_helper spec --format progress'
 end
 
