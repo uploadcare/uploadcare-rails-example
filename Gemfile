@@ -34,7 +34,6 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'brakeman'
-  gem 'bundler-audit'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'pry-byebug'
@@ -70,5 +69,5 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Uploadcare-rails provides unified API interface to Uploadcare API
-gem 'uploadcare-rails', github: 'uploadcare/uploadcare-rails', branch: 'feature/5-update-readme'
-gem 'uploadcare-ruby', github: 'uploadcare/uploadcare-ruby', branch: 'feature/1-new-entity-attrs'
+gem 'uploadcare-rails', git: 'https://github.com/uploadcare/uploadcare-rails.git'
+gem 'uploadcare-ruby', git: 'https://github.com/uploadcare/uploadcare-ruby.git'

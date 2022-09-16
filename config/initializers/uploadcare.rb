@@ -115,6 +115,7 @@ Uploadcare::Rails.configure do |config|
   # Defines your schema and CDN domain.
   # Can be changed to one of the predefined values (https://uploadcare.com/docs/delivery/cdn/) or your custom CNAME.
   # config.cdn_base = 'https://ucarecdn.com/'
+  config.cdn_hostname = 'ucarecdn.com'
 
   # Forces files uploaded with a file uploader not to be stored.
   # See https://uploadcare.com/docs/uploads/storage/#storing-uploaded-files.

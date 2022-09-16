@@ -36,7 +36,14 @@ RSpec.describe PostsController, type: :request do
     )
   end
 
-  before { allow(Uploadcare::GroupApi).to receive(:get_group).and_return(results: file_group) }
+  before do
+    %i[get_group store_group].each do |stub_method|
+      allow(Uploadcare::GroupApi).to receive(stub_method).and_return(results: file_group)
+    end
+    %i[store_file delete_file].each do |stub_method|
+      allow(Uploadcare::FileApi).to receive(stub_method).and_return(results: file_group)
+    end
+  end
 
   describe 'GET index' do
     context 'when a response status is 200' do

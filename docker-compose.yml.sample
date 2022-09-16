@@ -12,7 +12,7 @@ services:
       POSTGRES_PASSWORD: postgres
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle install && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/uploadcare-rails-example
     ports:
@@ -24,6 +24,5 @@ services:
       DATABASE_URL: postgres://db:5432
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: postgres
+      BUNDLE_GITHUB__COM: x-access-token:YOUR_GITHUB_TOKEN
 
-volumes:
-  bundle:
