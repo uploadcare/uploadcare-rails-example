@@ -54,21 +54,21 @@ Rails.application.routes.draw do
   end
 
   # Add-Ons:
-  resources :virus_scan do
+  resources :virus_scan, only: %i[new create index] do
     collection do
       get :check_status
       get :show_status
     end
   end
 
-  resources :rekognition_labels do
+  resources :rekognition_labels, only: %i[new create index] do
     collection do
       get :check_status
       get :show_status
     end
   end
 
-  resources :remove_bg do
+  resources :remove_bg, only: %i[new create index] do
     collection do
       get :check_status
       get :show_status
