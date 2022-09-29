@@ -42,5 +42,37 @@ Rails.application.routes.draw do
   # Posts
   resources :posts
 
+  # FileMetadata
+  resources :file_metadata, only: :index do
+    collection do
+      get :all_metadata_show
+      get :metadata_show
+      patch :metadata_update
+      delete :metadata_delete
+    end
+  end
+
+  # Add-Ons:
+  resources :virus_scan do
+    collection do
+      get :check_status
+      get :show_status
+    end
+  end
+  
+  resources :rekognition_labels do
+    collection do
+      get :check_status
+      get :show_status
+    end
+  end
+  
+  resources :remove_bg do
+    collection do
+      get :check_status
+      get :show_status
+    end
+  end
+
   root 'projects#show'
 end

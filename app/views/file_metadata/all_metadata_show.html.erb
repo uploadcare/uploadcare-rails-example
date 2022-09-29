@@ -1,0 +1,60 @@
+<h3>uuid: <%= @uuid %></h3>
+
+<div class="card">
+  <div class="card-body border">
+    <%= @metadata %>
+  </div>
+
+  <div class="border">
+    <%= form_tag(metadata_show_file_metadata_path, method: :get, class: 'border p-4') do %>
+      <%= hidden_field_tag :uuid, @uuid %>
+      <div class="mb-2">
+        <label class="mb-0" for="key">select key</label>
+        <%= select_tag(:key, options_for_select(@metadata.keys), class: 'form-control') %>
+      </div>
+      <%= hidden_field_tag :keys, @metadata.values %>
+      <%= submit_tag 'Show metadata by key', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+
+  <div class="border">
+    <%= form_tag(metadata_update_file_metadata_path, method: :patch, class: 'border p-4') do %>
+      <%= hidden_field_tag :uuid, @uuid %>
+      <div class="mb-2">
+        <label class="mb-0" for="key">select key</label>
+        <%= select_tag(:key, options_for_select(@metadata.keys), class: 'form-control') %>
+      </div>
+      <div class="mb-2">
+        <label class="mb-0" for="value">set value</label>
+        <%= text_field_tag :value, nil, class: 'form-control' %>
+      </div>
+      <%= submit_tag 'Update metadata by key', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+
+  <div class="border">
+    <%= form_tag(metadata_update_file_metadata_path, method: :patch, class: 'border p-4') do %>
+      <%= hidden_field_tag :uuid, @uuid %>
+      <div class="mb-2">
+        <label class="mb-0" for="key">select key</label>
+        <%= text_field_tag :key, nil, class: 'form-control' %>
+      </div>
+      <div class="mb-2">
+        <label class="mb-0" for="value">set value</label>
+        <%= text_field_tag :value, nil, class: 'form-control' %>
+      </div>
+      <%= submit_tag 'Create metadata', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+
+  <div class="border">
+    <%= form_tag(metadata_delete_file_metadata_path, method: :delete, class: 'border p-4') do %>
+      <%= hidden_field_tag :uuid, @uuid %>
+      <div class="mb-2">
+        <label class="mb-0" for="key">select key</label>
+        <%= select_tag(:key, options_for_select(@metadata.keys), class: 'form-control') %>
+      </div>
+      <%= submit_tag 'Delete metadata by key', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

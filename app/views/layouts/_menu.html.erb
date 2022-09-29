@@ -46,6 +46,24 @@
   <li class="dropdown-divider"></li>
 
   <li class="nav-item">
+    <%= link_to 'Metadata', file_metadata_path, class: "nav-link #{controller_name == 'file_metadata' ? 'active' : ''}" %>
+  </li>
+
+  <li class="dropdown-divider"></li>
+
+  <li class="nav-item">
+    <%= link_to 'Virus scan', new_virus_scan_path, class: "nav-link #{controller_name == 'virus_scan' ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Rekognition labels', new_rekognition_label_path, class: "nav-link #{controller_name == 'rekognition_labels' ? 'active' : ''}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Remove bg', new_remove_bg_path, class: "nav-link #{controller_name == 'remove_bg' ? 'active' : ''}" %>
+  </li>
+
+  <li class="dropdown-divider"></li>
+
+  <li class="nav-item">
     <%= link_to 'Posts', posts_path, class: "nav-link #{controller_name == 'posts' && %w[index show].include?(action_name) ? 'active' : ''}" %>
   </li>
   <li class="nav-item">
