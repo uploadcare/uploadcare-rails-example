@@ -8,7 +8,7 @@ class FileMetadataController < ApplicationController
     @files_data = Uploadcare::FileApi.get_files(ordering: '-datetime_uploaded')
     @files = @files_data[:results]
   end
-  
+
   def all_metadata_show
     @metadata = Uploadcare::FileMetadata.index(@uuid)
   rescue JSON::ParserError
@@ -25,7 +25,7 @@ class FileMetadataController < ApplicationController
 
     redirect_to all_metadata_show_file_metadata_path(uuid: @uuid)
   end
-  
+
   def metadata_delete
     key = params[:key]
     Uploadcare::FileMetadata.delete(@uuid, key)
@@ -38,7 +38,7 @@ class FileMetadataController < ApplicationController
   def set_uuid
     @uuid = params[:uuid]
   end
-  
+
   def set_key_and_value
     @key = params[:key]
     @value = params[:value]

@@ -4,12 +4,12 @@ class VirusScanController < ApplicationController
   def index
     @uuid = params[:uuid]
   end
-  
+
   def new
     @files_data = Uploadcare::FileApi.get_files(ordering: '-datetime_uploaded')
     @files = @files_data[:results]
   end
-  
+
   def create
     result = Uploadcare::Addons.uc_clamav_virus_scan(params[:file], purge_infected: params[:purge_infected])
     redirect_to virus_scan_index_path(uuid: result['request_id'])

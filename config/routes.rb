@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
@@ -59,14 +60,14 @@ Rails.application.routes.draw do
       get :show_status
     end
   end
-  
+
   resources :rekognition_labels do
     collection do
       get :check_status
       get :show_status
     end
   end
-  
+
   resources :remove_bg do
     collection do
       get :check_status
@@ -76,3 +77,4 @@ Rails.application.routes.draw do
 
   root 'projects#show'
 end
+# rubocop:enable Metrics/BlockLength
