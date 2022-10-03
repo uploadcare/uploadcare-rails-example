@@ -11,7 +11,7 @@ class VirusScanController < ApplicationController
   end
 
   def create
-    result = Uploadcare::Addons.uc_clamav_virus_scan(params[:file], purge_infected: params[:purge_infected])
+    result = Uploadcare::AddonsApi.virus_scan(params[:file], purge_infected: params[:purge_infected])
     redirect_to virus_scan_index_path(uuid: result['request_id'])
   end
 
@@ -20,7 +20,7 @@ class VirusScanController < ApplicationController
   end
 
   def check_status
-    result = Uploadcare::Addons.uc_clamav_virus_scan_status(params[:uuid])
+    result = Uploadcare::AddonsApi.virus_scan_status(params[:uuid])
     redirect_to show_status_virus_scan_index_path(result: result)
   end
 end

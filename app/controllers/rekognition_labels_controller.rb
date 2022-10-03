@@ -11,7 +11,7 @@ class RekognitionLabelsController < ApplicationController
   end
 
   def create
-    result = Uploadcare::Addons.ws_rekognition_detect_labels(params[:file])
+    result = Uploadcare::AddonsApi.rekognition_detect_labels(params[:file])
     redirect_to rekognition_labels_path(uuid: result['request_id'])
   end
 
@@ -20,7 +20,7 @@ class RekognitionLabelsController < ApplicationController
   end
 
   def check_status
-    result = Uploadcare::Addons.ws_rekognition_detect_labels_status(params[:uuid])
+    result = Uploadcare::AddonsApi.rekognition_detect_labels_status(params[:uuid])
     redirect_to show_status_rekognition_labels_path(result: result)
   end
 end

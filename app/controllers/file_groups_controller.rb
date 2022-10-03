@@ -27,6 +27,11 @@ class FileGroupsController < ApplicationController
     redirect_to file_group_path(new_group.id)
   end
 
+  def destroy
+    Uploadcare::GroupApi.delete_group(file_group_params[:id])
+    redirect_to file_groups_path
+  end
+
   private
 
   def file_group_params

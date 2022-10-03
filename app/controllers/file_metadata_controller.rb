@@ -10,25 +10,25 @@ class FileMetadataController < ApplicationController
   end
 
   def all_metadata_show
-    @metadata = Uploadcare::FileMetadata.index(@uuid)
+    @metadata = Uploadcare::FileMetadataApi.file_metadata(@uuid)
   rescue JSON::ParserError
-    Uploadcare::FileMetadata.update(@uuid, 'test-key', 'test-value')
-    @metadata = Uploadcare::FileMetadata.index(@uuid)
+    Uploadcare::FileMetadataApi.update_file_metadata(@uuid, 'test-key', 'test-value')
+    @metadata = Uploadcare::FileMetadataApi.file_metadata(@uuid)
   end
 
   def metadata_show
-    @value = Uploadcare::FileMetadata.show(@uuid, @key)
+    @value = Uploadcare::FileMetadataApi.file_metadata_value(@uuid, @key)
   end
 
   def metadata_update
-    Uploadcare::FileMetadata.update(@uuid, @key, @value)
+    Uploadcare::FileMetadataApi.update_file_metadata(@uuid, @key, @value)
 
     redirect_to all_metadata_show_file_metadata_path(uuid: @uuid)
   end
 
   def metadata_delete
     key = params[:key]
-    Uploadcare::FileMetadata.delete(@uuid, key)
+    Uploadcare::FileMetadataApi.delete_file_metadata(@uuid, key)
 
     redirect_to all_metadata_show_file_metadata_path(uuid: @uuid)
   end

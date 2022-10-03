@@ -11,7 +11,7 @@ class RemoveBgController < ApplicationController
   end
 
   def create
-    result = Uploadcare::Addons.remove_bg(params[:file], **options_params.reject { |_k, v| v.nil? })
+    result = Uploadcare::AddonsApi.remove_bg(params[:file], **options_params.reject { |_k, v| v.nil? })
     redirect_to remove_bg_index_path(uuid: result['request_id'])
   end
 
@@ -20,7 +20,7 @@ class RemoveBgController < ApplicationController
   end
 
   def check_status
-    result = Uploadcare::Addons.remove_bg_status(params[:uuid])
+    result = Uploadcare::AddonsApi.remove_bg_status(params[:uuid])
     redirect_to show_status_remove_bg_index_path(result: result)
   end
 
