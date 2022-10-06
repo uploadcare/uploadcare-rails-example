@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FileMetadataController < ApplicationController
-  before_action :set_uuid, expect: :index
+  before_action :set_uuid, except: :index
   before_action :set_key_and_value, only: %i[metadata_show metadata_update]
 
   def index
@@ -27,9 +27,7 @@ class FileMetadataController < ApplicationController
   end
 
   def metadata_delete
-    key = params[:key]
-    Uploadcare::FileMetadataApi.delete_file_metadata(@uuid, key)
-
+    Uploadcare::FileMetadataApi.delete_file_metadata(@uuid, @key)
     redirect_to all_metadata_show_file_metadata_path(uuid: @uuid)
   end
 
