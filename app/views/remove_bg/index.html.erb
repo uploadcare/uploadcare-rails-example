@@ -1,0 +1,10 @@
+<h3>uuid: <%= @uuid %></h3>
+
+<div class="card">
+  <div class="card-body border">
+    <%= form_tag(check_status_remove_bg_index_path, method: :get, class: 'border p-4') do %>
+      <%= hidden_field_tag :uuid, @uuid %>
+      <%= submit_tag 'Check status', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

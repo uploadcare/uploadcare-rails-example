@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
   post '/upload_file_from_url', to: 'uploads#upload_from_url', as: 'upload_file_from_url'
 
   # File Groups
-  resources :file_groups, only: %i[index new show create]
+  resources :file_groups, only: %i[index new show create destroy]
   post '/store_file_group/:id', to: 'file_groups#store', as: 'store_file_group'
 
   scope module: 'conversions', shallow: true do
@@ -42,5 +43,38 @@ Rails.application.routes.draw do
   # Posts
   resources :posts
 
+  # FileMetadata
+  resources :file_metadata, only: :index do
+    collection do
+      get :all_metadata_show
+      get :metadata_show
+      patch :metadata_update
+      delete :metadata_delete
+    end
+  end
+
+  # Add-Ons:
+  resources :virus_scan, only: %i[new create index] do
+    collection do
+      get :check_status
+      get :show_status
+    end
+  end
+
+  resources :rekognition_labels, only: %i[new create index] do
+    collection do
+      get :check_status
+      get :show_status
+    end
+  end
+
+  resources :remove_bg, only: %i[new create index] do
+    collection do
+      get :check_status
+      get :show_status
+    end
+  end
+
   root 'projects#show'
 end
+# rubocop:enable Metrics/BlockLength
