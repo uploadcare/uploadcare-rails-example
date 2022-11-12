@@ -281,6 +281,44 @@ To create a new webhook, click the `Create a webhook` button in the menu. On the
 
 ![Create a webhook](./references/create-webhook.png)
 
+### Metadata section
+
+File metadata is additional, arbitrary data, associated with uploaded file.
+
+Show file metadata:
+1. select file and run showing metadata 
+![Virus scan](./references/virus-scan.png)
+2. show/create/update/delete metadata by key
+![Virus scan check status](./references/metadata-operations.png)
+
+### Add-Ons section
+
+An Add-On is an application implemented by Uploadcare that accepts uploaded files as an input and can produce other files and/or appdata as an output.
+
+#### Virus scan
+
+Execute file virus checking:
+1. select file and run checking
+![Virus scan](./references/show-metadata.png) 
+2. check operation status
+![Virus scan check status](./references/virus-scan-check-status.png)
+
+#### Rekognition Labels
+
+Execute file rekognition labels:
+1. select file and run checking
+![Virus scan](./references/rekognition-labels.png)
+2. check operation status
+![Virus scan check status](./references/rekognition-labels-check-status.png)
+
+#### Remove BG
+
+Execute file removing background:
+1. select file and run checking
+![Virus scan](./references/remove-bg.png)
+2. check operation status
+![Virus scan check status](./references/remove-bg-check-status.png)
+
 ### Posts section
 
 This section of the application made to demonstrate view helpers that allow to place Uploadcare File Uploader widget to a Rails view.
