@@ -18,6 +18,11 @@ The project is based on Ruby 3.0.2, Rails 6.1.4 and sqlite3 1.4.
     * [Documents conversion](#documents-conversion)
     * [Video conversion](#video-conversion)
   * [Webhooks](#webhooks)
+  * [Metadata section](#metadata-section)
+  * [Add-Ons section](#add-ons-section)
+    * [Virus scan](#virus-scan)
+    * [Rekognition Labels](#rekognition-labels)
+    * [Remove BG](#remove-bg)
   * [Posts section](#posts-section)
 * [Useful links](#useful-links)
 
