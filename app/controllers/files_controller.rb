@@ -11,12 +11,6 @@ class FilesController < ApplicationController
     redirect_to_prev_location
   end
 
-  def copy
-    Uploadcare::FileApi.copy_file(file_params[:id])
-    flash[:success] = 'File has been successfully copied!'
-    redirect_to_prev_location
-  end
-
   def show
     @file = Uploadcare::FileApi.get_file(file_params[:id])
   end

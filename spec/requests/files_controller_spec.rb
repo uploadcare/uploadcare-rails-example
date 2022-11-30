@@ -111,28 +111,6 @@ RSpec.describe FilesController, type: :request do
     end
   end
 
-  describe 'POST store' do
-    let(:uuid) { SecureRandom.uuid }
-
-    context 'when a response status is 200' do
-      before { allow(Uploadcare::FileApi).to receive(:copy_file) }
-
-      it 'returns a 200' do
-        post "/copy_file/#{uuid}"
-        expect(flash[:success]).to match('File has been successfully copied!')
-      end
-    end
-
-    context 'when a response status is 4xx' do
-      before { allow(Uploadcare::FileApi).to receive(:copy_file).and_raise(Uploadcare::Exception::RequestError, '') }
-
-      it 'returns an error' do
-        post "/copy_file/#{uuid}"
-        expect(flash[:alert]).to match('Something went wrong')
-      end
-    end
-  end
-
   describe 'POST batch store' do
     let(:uuid) { SecureRandom.uuid }
 

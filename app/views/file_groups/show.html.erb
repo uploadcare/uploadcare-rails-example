@@ -8,14 +8,6 @@
     <strong>Datetime created</strong>: <%= format_date(@file_group.datetime_created) %>
   </li>
   <li class="list-group-item">
-    <strong>Datetime stored</strong>:
-    <% if @file_group.datetime_stored.present? %>
-      <%= format_date(@file_group.datetime_stored) %>
-    <% else %>
-      <%= link_to 'Store', store_file_group_path(@file_group.id), method: :post, class: 'btn btn-sm btn-secondary' %>
-    <% end %>
-  </li>
-  <li class="list-group-item">
     <strong>Files count</strong>: <%= @file_group.files_count %>
   </li>
   <li class="list-group-item">
@@ -26,6 +18,7 @@
   </li>
   <li class="list-group-item">
     <%= link_to 'Delete', file_group_path(@file_group.id), method: :delete, class: 'btn btn-sm btn-danger' %>
+    <%= link_to 'Store', store_file_group_path(@file_group.id), method: :post, class: 'btn btn-sm btn-secondary' %>
   </li>
 </ul>
 <h5 class="mt-3">Files</h5>
