@@ -16,14 +16,14 @@ class WebhooksController < ApplicationController
   end
 
   def create
-    webhook = Uploadcare::WebhookApi.create_webhook(**webhook_params)
+    webhook = Uploadcare::WebhookApi.create_webhook(webhook_params)
     flash[:success] = "Webhook with id #{webhook.id} has been successfully created!"
     redirect_to webhook_path(webhook.id)
   end
 
   def update
     webhook_id = params[:id]&.to_i
-    Uploadcare::WebhookApi.update_webhook(webhook_id, **webhook_params)
+    Uploadcare::WebhookApi.update_webhook(webhook_id, webhook_params)
     flash[:success] = "Webhook with id #{webhook_id} has been successfully updated!"
     redirect_to webhook_path(webhook_id)
   end
