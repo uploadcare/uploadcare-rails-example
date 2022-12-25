@@ -1,4 +1,4 @@
-<h1>Check file on virus</h1>
+<h1>Remove file background</h1>
 
 <div class="card">
   <div class="card-body border">
@@ -27,8 +27,8 @@
           </div>
           <div class="col-3">
             <label class="mb-0" for="height">type level</label>
-            <%= number_field_tag :type_level, nil, name: 'options[type_level]', class: 'form-control' %>
-            <hint class="text-muted font-size">allowed values: 0, 1, 2</hint>
+            <%= text_field_tag :type_level, nil, name: 'options[type_level]', class: 'form-control' %>
+            <hint class="text-muted font-size">allowed values: none, 1, 2, latest</hint>
           </div>
         </div>
       </div>

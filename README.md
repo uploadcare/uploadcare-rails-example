@@ -292,9 +292,9 @@ File metadata is additional, arbitrary data, associated with uploaded file.
 
 Show file metadata:
 1. select file and run showing metadata 
-![Virus scan](./references/virus-scan.png)
+![Metadata section](./references/show-metadata.png)
 2. show/create/update/delete metadata by key
-![Virus scan check status](./references/metadata-operations.png)
+![Actions with Metadata](./references/metadata-operations.png)
 
 ### Add-Ons section
 
@@ -304,7 +304,7 @@ An Add-On is an application implemented by Uploadcare that accepts uploaded file
 
 Execute file virus checking:
 1. select file and run checking
-![Virus scan](./references/show-metadata.png) 
+![Virus scan](./references/virus-scan.png)
 2. check operation status
 ![Virus scan check status](./references/virus-scan-check-status.png)
 
@@ -312,17 +312,17 @@ Execute file virus checking:
 
 Execute file rekognition labels:
 1. select file and run checking
-![Virus scan](./references/rekognition-labels.png)
+![Rekognition Labels](./references/rekognition-labels.png)
 2. check operation status
-![Virus scan check status](./references/rekognition-labels-check-status.png)
+![Rekognition labels check status](./references/rekognition-labels-check-status.png)
 
 #### Remove BG
 
 Execute file removing background:
 1. select file and run checking
-![Virus scan](./references/remove-bg.png)
+![Remove BG](./references/remove-bg.png)
 2. check operation status
-![Virus scan check status](./references/remove-bg-check-status.png)
+![Remove BG check status](./references/remove-bg-check-status.png)
 
 ### Posts section
 
