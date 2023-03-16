@@ -1,7 +1,7 @@
 # Uploadcare Rails Example app
 
 This example project demonstrates the uploadcare-rails capabilities.
-The project is based on Ruby 3.0.2, Rails 6.1.4 and sqlite3 1.4.
+The project is based on Ruby 3.0.5, Rails 6.1.7 and PostgreSQL.
 
 * [Installation](#installation)
   * [Using docker](#using-docker)
@@ -79,14 +79,14 @@ Make sure Ruby and Rails are installed on your system. Fire command prompt and r
 
 ```console
 $ ruby -v
-# => ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [x86_64-linux]
+# => ruby 3.0.5p211 (2022-11-24 revision ba5cf0f7c5) [x86_64-linux]
 $ rails -v
-# => Rails 6.1.4
+# => Rails 6.1.7.3
 ```
 
 If Ruby or(and) Rails are not installed, check out following links with instructions, how to install those:
 * [Install ruby](https://www.ruby-lang.org/en/documentation/installation/)
-* [Getting started with Rails](https://guides.rubyonrails.org/v5.0/getting_started.html)
+* [Getting started with Rails](https://guides.rubyonrails.org/v6.1/getting_started.html)
 
 Then install gems:
 
