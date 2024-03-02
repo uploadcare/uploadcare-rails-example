@@ -7,7 +7,7 @@ RSpec.describe ProjectsController, type: :request do
     let(:uuid) { SecureRandom.uuid }
     let(:project) do
       Uploadcare::Project.new(
-        "collaborators": [{ name: 'Mike', email: 'mike@mail.com' }],
+        "collaborators": [ { name: 'Mike', email: 'mike@mail.com' } ],
         "name": 'Hello, World!',
         "pub_key": 'demopublickey',
         "autostore_enabled": true

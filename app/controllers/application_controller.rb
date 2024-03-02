@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_error(exception)
-    redirect_to_prev_location(exception.message.presence || 'Something went wrong')
+    redirect_to_prev_location(exception.message.presence || "Something went wrong")
   end
 end

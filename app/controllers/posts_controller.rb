@@ -2,7 +2,7 @@
 
 class PostsController < ApplicationController
   def index
-    @posts = Post.order('created_at DESC')
+    @posts = Post.order("created_at DESC")
   end
 
   def new
@@ -15,16 +15,16 @@ class PostsController < ApplicationController
 
   def show
     find_post
-    @attachments = Uploadcare::GroupApi.get_group(@post.attachments.load.id)['files'] if @post.attachments
+    @attachments = Uploadcare::GroupApi.get_group(@post.attachments.load.id)["files"] if @post.attachments
   end
 
   def create
     @post = Post.new(post_params)
     if @post.save
-      flash[:success] = 'Post has been successfully created!'
+      flash[:success] = "Post has been successfully created!"
       redirect_to post_path(@post)
     else
-      flash.now[:alert] = @post.errors.full_messages.join('; ')
+      flash.now[:alert] = @post.errors.full_messages.join("; ")
       render :new
     end
   end
@@ -32,10 +32,10 @@ class PostsController < ApplicationController
   def update
     find_post
     if @post.update(post_params)
-      flash[:success] = 'Post has been successfully updated!'
+      flash[:success] = "Post has been successfully updated!"
       redirect_to post_path(@post)
     else
-      flash.now[:alert] = @post.errors.full_messages.join('; ')
+      flash.now[:alert] = @post.errors.full_messages.join("; ")
       render :edit
     end
   end
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
   def destroy
     find_post
     @post.destroy
-    flash[:success] = 'Post has been successfully deleted!'
+    flash[:success] = "Post has been successfully deleted!"
     redirect_to posts_path
   end
 

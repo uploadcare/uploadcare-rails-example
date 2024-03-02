@@ -8,7 +8,7 @@ module Conversions
 
     def create
       result = request_conversion
-      flash[:notice] = 'File conversion has been successfully started!'
+      flash[:notice] = "File conversion has been successfully started!"
       redirect_to document_conversion_path(result: result.success)
     rescue Uploadcare::Exception::ConversionError => e
       raise e if throw_error?

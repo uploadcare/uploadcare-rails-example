@@ -6,13 +6,13 @@ class VirusScanController < ApplicationController
   end
 
   def new
-    @files_data = Uploadcare::FileApi.get_files(ordering: '-datetime_uploaded')
+    @files_data = Uploadcare::FileApi.get_files(ordering: "-datetime_uploaded")
     @files = @files_data[:results]
   end
 
   def create
     result = Uploadcare::AddonsApi.virus_scan(params[:file], purge_infected: params[:purge_infected])
-    redirect_to virus_scan_index_path(uuid: result['request_id'])
+    redirect_to virus_scan_index_path(uuid: result["request_id"])
   end
 
   def show_status

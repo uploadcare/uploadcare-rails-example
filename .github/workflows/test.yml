@@ -11,7 +11,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0.5
+          ruby-version: 3.3.0
           bundler: 2.4
           bundler-cache: true
 
@@ -21,7 +21,7 @@ jobs:
           bundle install --jobs 4 --retry 3
 
       - name: Run linters
-        run: bundle exec rubocop --parallel
+        run: bin/rubocop --parallel
 
       - name: Run code metric tools
         run: bundle exec rails_best_practices
@@ -50,7 +50,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0.5
+          ruby-version: 3.3.0
           bundler: 2.4
           bundler-cache: true
 
@@ -75,8 +75,6 @@ jobs:
 
       - name: Run tests
         run: |
-          bundle exec rails webpacker:install
-          NODE_ENV=test bundle exec rails webpacker:compile
           bundle exec rspec
         env:
           POSTGRES_USERNAME: postgres

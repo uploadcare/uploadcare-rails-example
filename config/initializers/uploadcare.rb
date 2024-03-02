@@ -5,7 +5,7 @@
 
 Uploadcare::Rails.configure do |config|
   # Sets your Uploadcare public key.
-  config.public_key = ENV.fetch('UPLOADCARE_PUBLIC_KEY', 'demopublickey')
+  config.public_key = ENV.fetch("UPLOADCARE_PUBLIC_KEY", "demopublickey")
 
   # Deletes files from Uploadcare servers after object destroy.
   config.delete_files_after_destroy = true
@@ -76,7 +76,7 @@ Uploadcare::Rails.configure do |config|
 
   # Available locales currently are:
   # ar az ca cs da de el en es et fr he it ja ko lv nb nl pl pt ro ru sk sr sv tr uk vi zhTW zh
-  config.locale = 'en'
+  config.locale = "en"
 
   # Sets custom localization options. See https://uploadcare.com/docs/uploads/file-uploader/#localization
   # config.locale_translations = {}
@@ -115,7 +115,7 @@ Uploadcare::Rails.configure do |config|
   # Defines your schema and CDN domain.
   # Can be changed to one of the predefined values (https://uploadcare.com/docs/delivery/cdn/) or your custom CNAME.
   # config.cdn_base = 'https://ucarecdn.com/'
-  config.cdn_hostname = 'ucarecdn.com'
+  config.cdn_hostname = "ucarecdn.com"
 
   # Forces files uploaded with a file uploader not to be stored.
   # See https://uploadcare.com/docs/uploads/storage/#storing-uploaded-files.
