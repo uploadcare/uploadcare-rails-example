@@ -54,7 +54,7 @@ RSpec.describe UploadsController, type: :request do
 
     context 'when a response status is 200' do
       before do
-        allow(Uploadcare::UploadApi).to receive(:upload_file).and_return([OpenStruct.new(original_filename: 'name')])
+        allow(Uploadcare::UploadApi).to receive(:upload_file).and_return([ OpenStruct.new(original_filename: 'name') ])
       end
 
       it 'returns a 200', :aggregate_failures do

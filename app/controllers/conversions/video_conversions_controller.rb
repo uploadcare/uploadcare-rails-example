@@ -8,7 +8,7 @@ module Conversions
 
     def create
       result = request_conversion
-      flash[:notice] = 'File conversion has been successfully started!'
+      flash[:notice] = "File conversion has been successfully started!"
       redirect_to video_conversion_path(result: result.success)
     rescue Uploadcare::Exception::ConversionError => e
       raise e if throw_error?
@@ -81,7 +81,7 @@ module Conversions
           new_value = filter_blank(value)
           next unless new_value
 
-          [key, new_value]
+          [ key, new_value ]
         end.compact.to_h.presence
       when Array
         element.reject(&:blank?).presence

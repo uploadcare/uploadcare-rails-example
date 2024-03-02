@@ -49,7 +49,7 @@ RSpec.describe Conversions::DocumentConversionsController, type: :request do
     it_behaves_like 'renders the :show template'
 
     it_behaves_like 'renders the :show template' do
-      let(:problems) { ['problem'] }
+      let(:problems) { [ 'problem' ] }
     end
   end
 

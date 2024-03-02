@@ -12,7 +12,7 @@ RSpec.describe FileGroupsController, type: :request do
         'files_count' => 20,
         'cdn_url' => 'https://ucarecdn.com/d476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20/',
         'url' => 'https://api.uploadcare.com/groups/d476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20/',
-        'files' => [{
+        'files' => [ {
           'size' => 21_813,
           'total' => 21_813,
           'done' => 21_813,
@@ -30,7 +30,7 @@ RSpec.describe FileGroupsController, type: :request do
           'filename' => 'thumbnail_0.jpg',
           'mime_type' => 'image/jpeg',
           'default_effects' => ''
-        }]
+        } ]
       }
     )
   end

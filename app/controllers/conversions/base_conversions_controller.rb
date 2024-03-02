@@ -5,7 +5,7 @@ module Conversions
     private
 
     def parse_problem
-      parsed_problem = JSON.parse(params[:problem].tr(':', '').gsub('=>', ':')).to_a.flatten
+      parsed_problem = JSON.parse(params[:problem].tr(":", "").gsub("=>", ":")).to_a.flatten
       form_problem_result(parsed_problem[0], parsed_problem[1])
     rescue JSON::ParserError, TypeError, NoMethodError
       form_problem_result(nil, params[:problem])
@@ -20,7 +20,7 @@ module Conversions
     end
 
     def obtain_remote_files
-      @files_data = Uploadcare::FileApi.get_files(ordering: '-datetime_uploaded')
+      @files_data = Uploadcare::FileApi.get_files(ordering: "-datetime_uploaded")
       @files = @files_data[:results]
     end
   end

@@ -7,7 +7,7 @@ class FilesController < ApplicationController
 
   def store
     Uploadcare::FileApi.store_file(file_params[:id])
-    flash[:success] = 'File has been successfully stored!'
+    flash[:success] = "File has been successfully stored!"
     redirect_to_prev_location
   end
 
@@ -17,7 +17,7 @@ class FilesController < ApplicationController
 
   def destroy
     Uploadcare::FileApi.delete_file(file_params[:id])
-    flash[:success] = 'File has been successfully deleted!'
+    flash[:success] = "File has been successfully deleted!"
     redirect_to_prev_location
   end
 
@@ -54,7 +54,7 @@ class FilesController < ApplicationController
   end
 
   def obtain_remote_files
-    @files_data = Uploadcare::FileApi.get_files(ordering: '-datetime_uploaded')
+    @files_data = Uploadcare::FileApi.get_files(ordering: "-datetime_uploaded")
     @files = @files_data[:results]
   end
 end

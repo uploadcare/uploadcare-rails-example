@@ -45,7 +45,7 @@ RSpec.describe WebhooksController, type: :request do
   end
 
   describe 'GET edit' do
-    before { allow(Uploadcare::WebhookApi).to receive(:get_webhooks).and_return([webhook]) }
+    before { allow(Uploadcare::WebhookApi).to receive(:get_webhooks).and_return([ webhook ]) }
 
     it 'renders a template' do
       get "/webhooks/#{webhook.id}/edit"
@@ -55,7 +55,7 @@ RSpec.describe WebhooksController, type: :request do
 
   describe 'GET show' do
     context 'when a response status is 200' do
-      before { allow(Uploadcare::WebhookApi).to receive(:get_webhooks).and_return([webhook]) }
+      before { allow(Uploadcare::WebhookApi).to receive(:get_webhooks).and_return([ webhook ]) }
 
       it 'returns a 200' do
         get "/webhooks/#{webhook.id}"

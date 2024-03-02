@@ -6,24 +6,24 @@ class FileGroupsController < ApplicationController
   end
 
   def new
-    @files_data = Uploadcare::FileApi.get_files(ordering: '-datetime_uploaded')
+    @files_data = Uploadcare::FileApi.get_files(ordering: "-datetime_uploaded")
     @files = @files_data[:results]
   end
 
   def show
     @file_group = Uploadcare::GroupApi.get_group(file_group_params[:id])
-    @date_format = '%B %d, %Y %H:%M'
+    @date_format = "%B %d, %Y %H:%M"
   end
 
   def store
     Uploadcare::GroupApi.store_group(file_group_params[:id])
-    flash[:success] = 'File group has been successfully stored!'
+    flash[:success] = "File group has been successfully stored!"
     redirect_to_prev_location
   end
 
   def create
     new_group = Uploadcare::GroupApi.create_group(file_group_params[:files].values)
-    flash[:success] = 'File group has been successfully created!'
+    flash[:success] = "File group has been successfully created!"
     redirect_to file_group_path(new_group.id)
   end
 

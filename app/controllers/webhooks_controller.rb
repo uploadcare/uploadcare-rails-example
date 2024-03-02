@@ -31,7 +31,7 @@ class WebhooksController < ApplicationController
   def destroy
     target_url = params[:target_url]
     Uploadcare::WebhookApi.delete_webhook(target_url)
-    flash[:success] = 'Webhook has been successfully deleted!'
+    flash[:success] = "Webhook has been successfully deleted!"
     redirect_to webhooks_path
   end
 
@@ -46,7 +46,7 @@ class WebhooksController < ApplicationController
     params
       .require(:webhook)
       .permit(:target_url, :is_active)
-      .merge(event: 'file.uploaded', is_active: params.dig(:webhook, :is_active).present?)
+      .merge(event: "file.uploaded", is_active: params.dig(:webhook, :is_active).present?)
       .to_h
       .symbolize_keys
   end
