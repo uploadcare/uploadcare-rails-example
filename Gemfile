@@ -74,4 +74,4 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 # gem 'uploadcare-rails', git: 'https://github.com/uploadcare/uploadcare-rails.git', branch: 'version_3.0.0'
 # gem 'uploadcare-ruby', git: 'https://github.com/uploadcare/uploadcare-ruby.git', branch: 'version_4.0.0'
 
-gem "uploadcare-rails", "3.3.0"
+gem "uploadcare-rails", ">=3.3.0"
