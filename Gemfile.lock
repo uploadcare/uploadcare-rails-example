@@ -343,7 +343,7 @@ GEM
       dry-monads (~> 1.6)
       hashie (~> 5.0)
       http (~> 5.1)
-    uploadcare-rails (3.4.0)
+    uploadcare-rails (3.4.1)
       rails (>= 6)
       uploadcare-ruby (>= 4.3)
     uploadcare-ruby (4.4.0)
