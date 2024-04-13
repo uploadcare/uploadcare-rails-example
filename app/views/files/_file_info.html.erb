@@ -8,10 +8,6 @@
     <td><%= file.original_filename %></td>
   </tr>
   <tr>
-    <th>Stored date</th>
-    <td><%= file.datetime_stored.present? ? Time.zone.parse(file.datetime_stored).strftime(date_format) : '-' %></td>
-  </tr>
-  <tr>
     <th>Uploaded date</th>
     <td><%= file.datetime_uploaded.present? ? Time.zone.parse(file.datetime_uploaded).strftime(date_format) : '-' %></td>
   </tr>

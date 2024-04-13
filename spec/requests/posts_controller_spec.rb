@@ -9,7 +9,6 @@ RSpec.describe PostsController, type: :request do
       {
         'id' => 'd476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20',
         'datetime_created' => '2021-07-16T11:03:01.182939Z',
-        'datetime_stored' => '2021-07-30T10:26:47.294442Z',
         'files_count' => 20,
         'cdn_url' => 'https://ucarecdn.com/d476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20/',
         'url' => 'https://api.uploadcare.com/groups/d476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20/',
