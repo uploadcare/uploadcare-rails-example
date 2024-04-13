@@ -28,7 +28,6 @@ RSpec.describe FilesController, type: :request do
     let(:file) do
       Uploadcare::File.new(
         "datetime_removed": nil,
-        "datetime_stored": '2018-11-26T12:49:10.477888Z',
         "datetime_uploaded": '2018-11-26T12:49:09.945335Z',
         "image_info": {
           "color_mode": 'RGB',
