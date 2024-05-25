@@ -188,6 +188,8 @@ GEM
     net-smtp (0.4.0.1)
       net-protocol
     nio4r (2.7.1)
+    nokogiri (1.16.3-aarch64-linux)
+      racc (~> 1.4)
     nokogiri (1.16.3-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.3-x86_64-darwin)
@@ -343,10 +345,10 @@ GEM
       dry-monads (~> 1.6)
       hashie (~> 5.0)
       http (~> 5.1)
-    uploadcare-rails (3.4.1)
+    uploadcare-rails (3.4.2)
       rails (>= 6)
-      uploadcare-ruby (>= 4.3)
-    uploadcare-ruby (4.4.0)
+      uploadcare-ruby (>= 4.4.1)
+    uploadcare-ruby (4.4.1)
       mimemagic (~> 0.4)
       parallel (~> 1.22)
       retries (~> 0.0)
@@ -370,6 +372,8 @@ GEM
     zeitwerk (2.6.13)
 
 PLATFORMS
+  aarch64-linux
+  arm64-darwin-22
   arm64-darwin-23
   x86_64-darwin-23
   x86_64-linux
@@ -396,7 +400,7 @@ DEPENDENCIES
   spring
   turbo-rails
   tzinfo-data
-  uploadcare-rails (>= 3.3.0)
+  uploadcare-rails (>= 3.4.2)
   web-console (>= 4.1.0)
   webdrivers
 
