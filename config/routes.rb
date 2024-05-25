@@ -75,6 +75,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :rekognition_moderation_labels, only: %i[new create index] do
+    collection do
+      get :check_status
+      get :show_status
+    end
+  end
+
   root "projects#show"
 end
 # rubocop:enable Metrics/BlockLength
