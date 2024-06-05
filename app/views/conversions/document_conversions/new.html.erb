@@ -5,12 +5,16 @@
       <%= form_tag(document_conversions_path, method: :post, class: 'p-1') do %>
         <div class="mb-3">
           <label class="mb-0" for="file">File</label>
-          <%= select_tag(:file, options_from_collection_for_select(@files, :uuid, :original_filename), class: 'form-control') %>
+          <%= select_tag(:file, options_from_collection_for_select(@files, :uuid, :original_filename, params[:file]), class: 'form-control') %>
         </div>
 
         <div class="mb-3">
           <label class="mb-0" for="target_format">Target format</label>
-          <%= select_tag(:target_format, options_for_select(document_target_formats), class: 'form-control') %>
+          <% if params[:target_format].present? %>
+            <%= select_tag(:target_format, options_for_select([params[:target_format]], params[:target_format]), class: 'form-control') %>
+          <% else %>
+            <%= select_tag(:target_format, options_for_select(document_target_formats), class: 'form-control') %>
+          <% end %>
         </div>
 
         <div class="mb-3">
