@@ -1,0 +1,20 @@
+<h1>Conversion formats info</h1>
+
+<div class="card">
+  <div class="card-body">
+    <%= form_tag(new_document_conversion_path, action: '', method: :get, class: 'p-1') do %>
+      <div class="mb-3">
+        <label class="mb-0" for="file">UUID: <%= params[:file] %></label>
+      </div>
+      <div class="mb-3">
+        <label class="mb-0" for="file">Current Document Format: <%= @document_format %></label>
+      </div>
+      <%= hidden_field_tag(:file, params[:file]) %>
+      <div class="mb-3">
+        <label class="mb-0" for="file">Possible Conversion Formats</label>
+        <%= select_tag(:target_format, options_for_select(@document_conversion_formats), class: "form-control") %>
+      </div>
+      <%= submit_tag "Add options and convert", class: "btn btn-primary", name: "" %>
+    <% end %>
+  </div>
+</div>

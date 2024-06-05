@@ -27,6 +27,8 @@ Rails.application.routes.draw do
     # Document Conversion
     resources :document_conversions, only: %i[new create]
     get "/document_conversion", to: "document_conversions#show", as: "document_conversion"
+    resources :document_conversion_information, only: %i[new]
+    get "/document_conversion_information", to: "document_conversion_information#show", as: "document_conversion_information"
 
     # Video Conversion
     resources :video_conversions, only: %i[new create]
