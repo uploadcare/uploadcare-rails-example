@@ -9,6 +9,11 @@
     </div>
 
     <div class="mb-3">
+      <label class="mb-0" for="event">Event</label>
+      <%= select_tag(:event, options_for_select(webhook_events, @webhook.event), class: 'form-control') %>
+    </div>
+
+    <div class="mb-3">
       <%= check_box_tag 'is_active', true, @webhook.is_active, name: 'webhook[is_active]' %>
       <label class="mb-0" for="is_active">Enabled</label>
     </div>

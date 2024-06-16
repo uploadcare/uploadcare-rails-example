@@ -45,8 +45,8 @@ class WebhooksController < ApplicationController
   def webhook_params
     params
       .require(:webhook)
-      .permit(:target_url, :is_active)
-      .merge(event: "file.uploaded", is_active: params.dig(:webhook, :is_active).present?)
+      .permit(:target_url, :is_active, :event)
+      .merge(is_active: params.dig(:webhook, :is_active).present?)
       .to_h
       .symbolize_keys
   end
