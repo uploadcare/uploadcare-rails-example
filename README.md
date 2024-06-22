@@ -214,6 +214,15 @@ To create a new group, click on the `Create file group` button in the menu. The 
 
 Example up can upload files in three ways: it uploads local files via API interface (along with a view form), local files via Widget (see [Posts section](#posts-section)) and uploading remote files from URL.
 
+---
+**NOTE**
+
+The locales from the widget can be customized by the `config.locale_translations` option in the [initializer](./config/initializers/uploadcare.rb). The widget localizations can be found [here](https://github.com/uploadcare/uploadcare-widget/tree/master/src/locales). The default locale is `en`.
+Here's an example of how to override some translations: [config/initializers/uploadcare.rb](./config/initializers/uploadcare.rb#L82).
+Don't forget to specify the path to translation files in the initializer here: [config/initializers/uploadcare.rb](./config/initializers/uploadcare.rb#L4).
+
+---
+
 #### Upload a local file
 
 To upload local file from your machine, click on `Upload local file` button in the menu. Then click `Browse` on the form and check a file to upload.
@@ -291,7 +300,7 @@ To create a new webhook, click the `Create a webhook` button in the menu. On the
 File metadata is additional, arbitrary data, associated with uploaded file.
 
 Show file metadata:
-1. select file and run showing metadata 
+1. select file and run showing metadata
 ![Metadata section](./references/show-metadata.png)
 2. show/create/update/delete metadata by key
 ![Actions with Metadata](./references/metadata-operations.png)
@@ -342,11 +351,11 @@ To create a new post, click on the `Create a post` button. The post form will be
 ![Create a post](./references/create-post.png)
 
 ## Useful links
-* [Uploadcare documentation](https://uploadcare.com/docs/?utm_source=github&utm_medium=referral&utm_campaign=uploadcare-rails)  
-* [Upload API reference](https://uploadcare.com/api-refs/upload-api/?utm_source=github&utm_medium=referral&utm_campaign=uploadcare-rails)  
-* [REST API reference](https://uploadcare.com/api-refs/rest-api/?utm_source=github&utm_medium=referral&utm_campaign=uploadcare-rails)  
-* [Contributing guide](https://github.com/uploadcare/.github/blob/master/CONTRIBUTING.md)  
-* [Security policy](https://github.com/uploadcare/uploadcare-rails/security/policy)  
+* [Uploadcare documentation](https://uploadcare.com/docs/?utm_source=github&utm_medium=referral&utm_campaign=uploadcare-rails)
+* [Upload API reference](https://uploadcare.com/api-refs/upload-api/?utm_source=github&utm_medium=referral&utm_campaign=uploadcare-rails)
+* [REST API reference](https://uploadcare.com/api-refs/rest-api/?utm_source=github&utm_medium=referral&utm_campaign=uploadcare-rails)
+* [Contributing guide](https://github.com/uploadcare/.github/blob/master/CONTRIBUTING.md)
+* [Security policy](https://github.com/uploadcare/uploadcare-rails/security/policy)
 * [Support](https://github.com/uploadcare/.github/blob/master/SUPPORT.md)
 * [A Ruby plugin for Uploadcare service](https://github.com/uploadcare/uploadcare-ruby)
 * [A Ruby on Rails plugin for Uploadcare service](https://github.com/uploadcare/uploadcare-rails)

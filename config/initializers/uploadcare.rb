@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Uncomment this string in case of using locales for locale_translations parameter
-# I18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
+I18n.load_path += Dir[Rails.root.join("config", "locales", "*.{rb,yml}").to_s]
 
 Uploadcare::Rails.configure do |config|
   # Sets your Uploadcare public key.
@@ -79,7 +79,7 @@ Uploadcare::Rails.configure do |config|
   config.locale = "en"
 
   # Sets custom localization options. See https://uploadcare.com/docs/uploads/file-uploader/#localization
-  # config.locale_translations = {}
+  config.locale_translations = I18n.t("uploadcare_widget_translations")
 
   # Defines pluralization options. See https://uploadcare.com/docs/uploads/file-uploader/#pluralization
   # config.locale_pluralize = {}

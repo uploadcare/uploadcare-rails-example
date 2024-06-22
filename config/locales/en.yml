@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+  uploadcare_widget_translations:
+    dialog:
+      tabs:
+        file:
+          drag: "Drag and drop files here"
