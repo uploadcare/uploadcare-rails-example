@@ -63,7 +63,7 @@ RSpec.describe Conversions::DocumentConversionsController, type: :request do
 
       it 'returns a 200' do
         post '/document_conversions', params: params
-        expect(flash[:notice]).to match('File conversion has been successfully started!')
+        expect(flash[:notice]).to match('File conversion has successfully started!')
       end
     end
 
