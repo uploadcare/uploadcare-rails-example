@@ -1,3 +1,23 @@
+GIT
+  remote: https://github.com/uploadcare/uploadcare-rails.git
+  revision: eb273134e95d9bfafc8953b63db41639b934bbf1
+  branch: main
+  specs:
+    uploadcare-rails (3.4.3)
+      rails (>= 6)
+      uploadcare-ruby (>= 4.4.2)
+
+GIT
+  remote: https://github.com/uploadcare/uploadcare-ruby.git
+  revision: e0db13dde90f41dfbd082875d8185bf9c5f8945a
+  branch: main
+  specs:
+    uploadcare-ruby (4.4.2)
+      mimemagic (~> 0.4)
+      parallel (~> 1.22)
+      retries (~> 0.0)
+      uploadcare-api_struct (>= 1.1, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -350,14 +370,6 @@ GEM
       dry-monads (~> 1.6)
       hashie (~> 5.0)
       http (~> 5.1)
-    uploadcare-rails (3.4.3)
-      rails (>= 6)
-      uploadcare-ruby (>= 4.4.2)
-    uploadcare-ruby (4.4.2)
-      mimemagic (~> 0.4)
-      parallel (~> 1.22)
-      retries (~> 0.0)
-      uploadcare-api_struct (>= 1.1, < 2)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -405,7 +417,8 @@ DEPENDENCIES
   spring
   turbo-rails
   tzinfo-data
-  uploadcare-rails (>= 3.4.3)
+  uploadcare-rails!
+  uploadcare-ruby!
   web-console (>= 4.1.0)
   webdrivers
 
@@ -413,4 +426,4 @@ RUBY VERSION
    ruby 3.3.0p0
 
 BUNDLED WITH
-   2.5.4
+   2.5.10

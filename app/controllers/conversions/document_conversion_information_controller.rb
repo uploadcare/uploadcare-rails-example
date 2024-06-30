@@ -7,9 +7,10 @@ module Conversions
     end
 
     def show
-      result = conversion_formats_from_file
-      @document_format = result.dig(:format, :name)
-      @document_conversion_formats = result.dig(:format, :conversion_formats).map { |format| format[:name] }
+      @result = conversion_formats_from_file
+      @document_format = @result.dig(:format, :name)
+      @document_conversion_formats = @result.dig(:format, :conversion_formats).map { |format| format[:name] }
+      @document_converted_groups = @result.dig(:format, :converted_groups)
     end
 
     private

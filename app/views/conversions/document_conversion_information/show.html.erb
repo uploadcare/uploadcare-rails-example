@@ -9,6 +9,16 @@
       <div class="mb-3">
         <label class="mb-0" for="file">Current Document Format: <%= @document_format %></label>
       </div>
+      <% if @document_converted_groups.present? %>
+        <div class="mb-3">
+          <label class="mb-0" for="file">Converted Groups</label>
+          <ul>
+            <% @document_converted_groups.each do |group_format, group_uuid| %>
+              <li><i><%= group_format %></i> - <%= link_to group_uuid, file_group_path(group_uuid) %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <%= hidden_field_tag(:file, params[:file]) %>
       <div class="mb-3">
         <label class="mb-0" for="file">Possible Conversion Formats</label>
