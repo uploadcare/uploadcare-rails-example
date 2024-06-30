@@ -39,7 +39,7 @@ class FileGroupsController < ApplicationController
   end
 
   def obtain_remote_files
-    @file_groups_data = Uploadcare::GroupApi.get_groups
+    @file_groups_data = Uploadcare::GroupApi.get_groups(ordering: "-datetime_created")
     @file_groups = @file_groups_data[:results]
   end
 end

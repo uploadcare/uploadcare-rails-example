@@ -8,8 +8,13 @@ module Conversions
 
     def create
       result = request_conversion
-      flash[:notice] = "File conversion has been successfully started!"
-      redirect_to document_conversion_path(result: result.success)
+      if document_conversion_params[:save_in_group] == "1"
+        flash[:notice] = "File conversion has successfully started! The group shall be available in the Converted Groups section for selected format. Please refresh the page in some time to see the converted group."
+        redirect_to document_conversion_information_path(file: document_conversion_params[:file])
+      else
+        flash[:notice] = "File conversion has successfully started!"
+        redirect_to document_conversion_path(result: result.success)
+      end
     rescue Uploadcare::Exception::ConversionError => e
       raise e if throw_error?
 
@@ -39,12 +44,15 @@ module Conversions
           format: document_conversion_params[:target_format].presence,
           page: document_conversion_params[:page].presence
         }.compact,
-        store: document_conversion_params[:store]
+        {
+          store: document_conversion_params[:store],
+          save_in_group: document_conversion_params[:save_in_group]
+        }.compact
       )
     end
 
     def document_conversion_params
-      params.permit(:file, :page, :target_format, :throw_error, :store)
+      params.permit(:file, :page, :target_format, :throw_error, :store, :save_in_group)
     end
   end
 end

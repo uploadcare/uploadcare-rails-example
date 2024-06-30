@@ -23,6 +23,11 @@
         </div>
 
         <div class="mb-3">
+          <%= check_box_tag 'save_in_group', 1, false %>
+          <label class="mb-0" for="throw_error">Save in group</label>
+        </div>
+
+        <div class="mb-3">
           <%= check_box_tag 'throw_error', true, false %>
           <label class="mb-0" for="throw_error">Throw error</label>
         </div>

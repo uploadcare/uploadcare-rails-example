@@ -3,6 +3,12 @@
 This example project demonstrates the uploadcare-rails capabilities.
 The project is based on Ruby 3.3.0, Rails 7.1 and PostgreSQL.
 
+---
+**NOTE**
+The project points to the `main` branch of the `uploadcare-rails` and `uploadcare-ruby` gems. If you want to use the latest release, please specify the version in the `Gemfile` file.
+
+---
+
 * [Installation](#installation)
   * [Using docker](#using-docker)
   * [Without docker](#without-docker)
@@ -252,14 +258,18 @@ Remember, to convert files, your account must have this feature enabled. It mean
 
 #### Documents conversion
 
-To convert a document, go to the `Convert document` section, choose a file to convert, target format and page (if the chosen target format is `jpg` or `png` and you want to convert a single page of a multi-paged document). There are two check-boxes. `Store` is responsible for storing files as mentioned above. And the `Throw error` option detects if the app should raise an error instead of rescuing this within a simple flash message.
+To convert a document, go to the `Convert document` section, choose a file to convert, target format and page (if the chosen target format is `jpg` or `png` and you want to convert a single page of a multi-paged document). There are three check-boxes. `Store` is responsible for storing files as mentioned above. The `Save in group` option allows conversion of a multi-page document into a file group. And, the `Throw error` option detects if the app should raise an error instead of rescuing this within a simple flash message.
 
-![Convert document](./references/convert-doc.png)
+![Convert document](./references/convert-doc-new.png)
 
-After the form is submitted, you'll see a `Conversion result page`, which shows some info about conversion: `Status`, `Error` and output file's UUID.
+After the form is submitted, if you have not selected the `Save in group` option, you'll see a `Conversion result page`, which shows some info about conversion: `Status`, `Error` and output file's UUID.
 Updating the page will refresh the status as said on the page.
 
 ![Convert document result](./references/convert-doc-result.png)
+
+If you have selected the `Save in group` option, you'll be redirected to the `Document conversion formats info` page. Here you can see the group UUID for the converted format in the `Converted Groups` section. It may take some time to convert a document, so you can refresh the page to see the `Converted Groups`.
+
+![Convert document group result](./references/convert-doc-group.png)
 
 #### Video conversion
 
