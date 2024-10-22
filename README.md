@@ -1,7 +1,7 @@
 # Uploadcare Rails Example app
 
 This example project demonstrates the uploadcare-rails capabilities.
-The project is based on Ruby 3.3.0, Rails 7.1 and PostgreSQL.
+The project is based on Ruby 3.3.0, Rails 7.1, PostgreSQL and MongoDB.
 
 ---
 **NOTE**
@@ -100,11 +100,11 @@ Then install gems:
 $ bundle install
 ```
 
-After gems are installed, set your PostgreSQL credentials(env vars POSTGRES_USERNAME, POSTGRES_PASSWORD) and create a new local database:
+After gems are installed, set your PostgreSQL credentials(env vars POSTGRES_USERNAME, POSTGRES_PASSWORD), setup MongoDB and create a new local database:
 
 ```console
-$ rake db:create
-$ rake db:migrate
+$ rails db:create
+$ rails db:migrate
 ```
 
 Now, you can run the rails server:
@@ -359,6 +359,22 @@ Clicking on title will direct you to the `show` page of a post.
 To create a new post, click on the `Create a post` button. The post form will be opened. The form contains a text field for post title, one File Uploaders — for post's logo and one — for post's attachments. These File Uploaders differ from each other by the `multiple` option. For logo it is `false`, and for attachments — `true`.
 
 ![Create a post](./references/create-post.png)
+
+### Comments section (Mongoid ORM)
+
+This section of the application made to demonstrate view helpers that allow to place Uploadcare File Uploader widget to a Rails view. The app has a model called Comment and having fields `title:String`, `logo:String` and `attachments:String`. Logo and attachments represent `Uploadcare::File` and `Uploadcare::Group` respectively. The model uses Mongoid ORM.
+
+Index page for comments shows a list of comments. Each list item has `edit/delete` actions.
+![Comments list](./references/comments-list.png)
+
+Clicking on title will direct you to the `show` page of a comment.
+![Show comment](./references/show-comment.png)
+
+To create a new comment, click on the `Create a comment` button. The comment form will be opened. The form contains a text field for comment title, one File Uploaders — for comment's logo and one — for comment's attachments. These File Uploaders differ from each other by the `multiple` option. For logo it is `false`, and for attachments — `true`.
+![Create a comment](./references/create-comment.png)
+
+Edit a comment: click on the `Edit` button on the `show` page of a comment. The form will be opened. You can change the title, logo and attachments of the comment.
+![Edit a comment](./references/edit-comment.png)
 
 ## Useful links
 * [Uploadcare documentation](https://uploadcare.com/docs/?utm_source=github&utm_medium=referral&utm_campaign=uploadcare-rails)

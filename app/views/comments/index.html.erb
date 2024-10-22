@@ -1,0 +1,17 @@
+<h1>Comments</h1>
+
+  <% if @comments.present? %>
+    <% @comments.each do |comment| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="text-place flex-grow-1 text-truncate">
+          <%= link_to comment.content, comment_path(comment) %>
+        </div>
+        <div class="btn-group" role="group" aria-label="Actions">
+          <%= link_to 'Edit', edit_comment_path(comment), class: "btn btn-secondary btn-sm" %>
+          <%= link_to 'Delete', comment_path(comment), method: :delete, class: "btn btn-danger btn-sm" %>
+        </div>
+      </li>
+    <% end %>
+  <% else %>
+    <span>No comments found. Please, create a one <%= link_to 'here', new_comment_path, class: 'd-inline' %>!</span>
+  <% end %>
