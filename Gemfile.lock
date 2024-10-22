@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/uploadcare/uploadcare-rails.git
-  revision: eb273134e95d9bfafc8953b63db41639b934bbf1
+  revision: cbf92458e21539b3fcbd8b3b09fc68d27a72c221
   branch: main
   specs:
     uploadcare-rails (3.4.3)
@@ -105,6 +105,7 @@ GEM
       msgpack (~> 1.2)
     brakeman (6.1.2)
       racc
+    bson (5.0.1)
     builder (3.2.4)
     byebug (11.1.3)
     capybara (3.40.0)
@@ -147,6 +148,11 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
+    faraday (2.11.0)
+      faraday-net_http (>= 2.0, < 3.4)
+      logger
+    faraday-net_http (3.3.0)
+      net-http
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-darwin)
@@ -184,6 +190,7 @@ GEM
     llhttp-ffi (0.5.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
+    logger (1.6.1)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -198,9 +205,18 @@ GEM
       nokogiri (~> 1)
       rake
     mini_mime (1.1.5)
+    minitar (0.12.1)
     minitest (5.23.1)
+    mongo (2.20.1)
+      bson (>= 4.14.1, < 6.0.0)
+    mongoid (9.0.1)
+      activemodel (>= 5.1, < 7.2, != 7.0.0)
+      concurrent-ruby (>= 1.0.5, < 2.0)
+      mongo (>= 2.18.0, < 3.0.0)
     msgpack (1.7.2)
     mutex_m (0.2.0)
+    net-http (0.4.1)
+      uri
     net-imap (0.4.11)
       date
       net-protocol
@@ -219,6 +235,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.5-x86_64-linux)
       racc (~> 1.4)
+    os (1.1.4)
     parallel (1.24.0)
     parser (3.3.1.0)
       ast (~> 2.4.1)
@@ -276,6 +293,13 @@ GEM
       json
       require_all (~> 3.0)
       ruby-progressbar
+    railsmdb (1.0.0.alpha3)
+      faraday (~> 2.7)
+      minitar (~> 0.9)
+      mongoid (>= 8.0)
+      os (~> 1.1)
+      rails (~> 7.0)
+      rubyzip (~> 2.3)
     railties (7.1.3.3)
       actionpack (= 7.1.3.3)
       activesupport (= 7.1.3.3)
@@ -370,6 +394,7 @@ GEM
       dry-monads (~> 1.6)
       hashie (~> 5.0)
       http (~> 5.1)
+    uri (0.13.1)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -404,12 +429,14 @@ DEPENDENCIES
   factory_bot_rails
   importmap-rails
   jbuilder
+  mongoid (= 9.0.1)
   pg (~> 1.5, >= 1.5.6)
   propshaft
   puma (>= 5.0)
   rails (~> 7.1)
   rails-controller-testing
   rails_best_practices
+  railsmdb (= 1.0.0.alpha3)
   redis (>= 4.0.1)
   rspec-rails
   rubocop-rails-omakase

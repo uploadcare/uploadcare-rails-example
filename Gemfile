@@ -73,3 +73,9 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 # Uploadcare-rails provides unified API interface to Uploadcare API
 gem "uploadcare-rails", git: "https://github.com/uploadcare/uploadcare-rails.git", branch: "main"
 gem "uploadcare-ruby", git: "https://github.com/uploadcare/uploadcare-ruby.git", branch: "main"
+
+# Use MongoDB for the database, with Mongoid as the ODM
+gem "mongoid", "9.0.1"
+
+# The Rails CLI tool for MongoDB
+gem "railsmdb", "1.0.0.alpha3"

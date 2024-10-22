@@ -45,6 +45,9 @@ Rails.application.routes.draw do
   # Posts
   resources :posts
 
+  # Comments
+  resources :comments
+
   # FileMetadata
   resources :file_metadata, only: :index do
     collection do
