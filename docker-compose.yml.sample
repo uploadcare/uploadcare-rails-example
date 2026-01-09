@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   db:
-    image: postgres:15
+    image: postgres:17
     env_file: .env
     ports:
       - "5432"
@@ -11,7 +11,7 @@ services:
     environment: &env
       POSTGRES_PASSWORD: postgres
   mongo:
-    image: mongo:5
+    image: mongo:7
     ports:
       - "27017"
     volumes:
@@ -24,13 +24,15 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       <<: *env
-      DATABASE_URL: postgres://db:5432
+      POSTGRES_HOST: db
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: postgres
-      BUNDLE_GITHUB__COM: x-access-token:YOUR_GITHUB_TOKEN
+      UPLOADCARE_PUBLIC_KEY: demopublickey
+      UPLOADCARE_SECRET_KEY: demosecretkey
       MONGODB_HOST: mongo:27017
       MONGODB_URL: mongodb://mongo:27017/uploadcare_rails_example_development
 volumes:

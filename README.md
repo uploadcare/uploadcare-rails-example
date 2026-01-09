@@ -1,7 +1,7 @@
 # Uploadcare Rails Example app
 
 This example project demonstrates the uploadcare-rails capabilities.
-The project is based on Ruby 3.3.0, Rails 7.1, PostgreSQL and MongoDB.
+The project is based on Ruby 3.4.8, Rails, PostgreSQL and MongoDB.
 
 ---
 **NOTE**
@@ -34,18 +34,12 @@ The project points to the `main` branch of the `uploadcare-rails` and `uploadcar
 
 ## Installation
 
-### Using Docker
-
 First, clone the repository:
 ```console
 $ git clone git@github.com:uploadcare/uploadcare-rails-example.git
 ```
 
-Then generate a `GITHUB_TOKEN` [here](https://github.com/settings/tokens)
-with a selected checkbox `write:packages`.
-
 After that, create the `docker-compose.yml` file, and copy the content from the `docker-compose.yml.sample` file there.
-Then replace `YOUR_GITHUB_TOKEN` with generated `GITHUB_TOKEN` in the `docker-compose.yml` file.
 
 To install the example application you need to [install Docker Compose package](https://docs.docker.com/compose/install/).
 When Docker Compose is installed, build a Docker image by using the `build` command:
@@ -62,58 +56,10 @@ When the image is ready — up the containers with the following command.
 $ docker-compose up
 ```
 
-Then, create a new database with command:
-
-```console
-$ docker-compose exec web rails db:create db:migrate
-```
-
 Now, the application must be available in your web-browser, on `http://localhost:3000`
 
 ![Application is available](./references/application-up-in-browser.png)
 
-
-### Without docker
-
-First of all, clone this repository:
-
-```console
-$ git clone git@github.com:uploadcare/uploadcare-rails-example.git
-```
-
-Make sure Ruby and Rails are installed on your system. Fire command prompt and run command:
-
-```console
-$ ruby -v
-# => ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [arm64-darwin23]
-$ rails -v
-# => Rails 7.1.3.2
-```
-
-If Ruby or(and) Rails are not installed, check out following links with instructions, how to install those:
-* [Install ruby](https://www.ruby-lang.org/en/documentation/installation/)
-* [Getting started with Rails](https://guides.rubyonrails.org/v7.1/getting_started.html)
-
-Then install gems:
-
-```console
-$ bundle install
-```
-
-After gems are installed, set your PostgreSQL credentials(env vars POSTGRES_USERNAME, POSTGRES_PASSWORD), setup MongoDB and create a new local database:
-
-```console
-$ rails db:create
-$ rails db:migrate
-```
-
-Now, you can run the rails server:
-
-```console
-$ rails s
-```
-
-and see the application available in your web-browser, on `http://localhost:3000`
 
 ## Usage
 

@@ -3,14 +3,14 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.3.0"
+ruby "3.4.8"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem "rails", "~> 7.1"
+gem "rails", "~> 8.1"
 # Use pg as the database for Active Record
-gem "pg", "~> 1.5", ">= 1.5.6"
+gem "pg"
 # Use Puma as the app server
-gem "puma", ">= 5.0"
+gem "puma"
 
 # The asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
@@ -25,7 +25,7 @@ gem "turbo-rails"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", ">= 4.0.1"
+gem "redis"
 
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -34,12 +34,12 @@ gem "redis", ">= 4.0.1"
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", ">= 1.4.4", require: false
+gem "bootsnap", require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "brakeman"
-  gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem "byebug", platforms: %i[mri windows]
   gem "factory_bot_rails"
   gem "rails_best_practices"
   gem "rails-controller-testing"
@@ -50,7 +50,7 @@ group :development do
   # Env variables setter
   gem "dotenv-rails", require: "dotenv/load"
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem "web-console", ">= 4.1.0"
+  gem "web-console"
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   # gem 'rack-mini-profiler', '~> 2.0'
@@ -60,7 +60,7 @@ end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem "capybara", ">= 3.26"
+  gem "capybara"
   gem "selenium-webdriver"
   # Easy installation and use of web drivers to run system tests with browsers
   gem "rspec-rails"
@@ -68,14 +68,11 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
+gem "tzinfo-data", platforms: %i[windows mswin jruby]
 
 # Uploadcare-rails provides unified API interface to Uploadcare API
 gem "uploadcare-rails", git: "https://github.com/uploadcare/uploadcare-rails.git", branch: "main"
 gem "uploadcare-ruby", git: "https://github.com/uploadcare/uploadcare-ruby.git", branch: "main"
 
 # Use MongoDB for the database, with Mongoid as the ODM
-gem "mongoid", "9.0.1"
-
-# The Rails CLI tool for MongoDB
-gem "railsmdb", "1.0.0.alpha3"
+gem "mongoid", "< 10"
