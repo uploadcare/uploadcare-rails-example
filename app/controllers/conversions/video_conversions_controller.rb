@@ -28,9 +28,9 @@ module Conversions
 
     private
 
-    def redirect_to_prev_location(message)
-      flash[:alert] = message
-      redirect_to video_conversion_path(problem: message)
+    def handle_error(exception)
+      flash[:alert] = exception.message.presence || "Something went wrong"
+      redirect_to video_conversion_path(problem: exception.message)
     end
 
     def request_conversion

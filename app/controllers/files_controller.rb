@@ -8,7 +8,7 @@ class FilesController < ApplicationController
   def store
     Uploadcare::FileApi.store_file(file_params[:id])
     flash[:success] = "File has been successfully stored!"
-    redirect_to_prev_location
+    redirect_back_or_to files_path
   end
 
   def show
@@ -18,7 +18,7 @@ class FilesController < ApplicationController
   def destroy
     Uploadcare::FileApi.delete_file(file_params[:id])
     flash[:success] = "File has been successfully deleted!"
-    redirect_to_prev_location
+    redirect_back_or_to files_path
   end
 
   def new_store_file_batch
@@ -35,7 +35,7 @@ class FilesController < ApplicationController
     values = files.values
     Uploadcare::FileApi.store_files(values)
     flash[:success] = "File(s) #{keys.join(', ')} has been successfully stored!"
-    redirect_to_prev_location
+    redirect_back_or_to files_path
   end
 
   def delete_file_batch
@@ -44,7 +44,7 @@ class FilesController < ApplicationController
     values = files.values
     Uploadcare::FileApi.delete_files(values)
     flash[:success] = "File(s) #{keys.join(', ')} has been successfully deleted!"
-    redirect_to_prev_location
+    redirect_back_or_to files_path
   end
 
   private

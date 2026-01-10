@@ -18,7 +18,7 @@ class FileGroupsController < ApplicationController
   def store
     Uploadcare::GroupApi.store_group(file_group_params[:id])
     flash[:success] = "File group has been successfully stored!"
-    redirect_to_prev_location
+    redirect_back_or_to file_groups_path
   end
 
   def create
