@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/uploadcare/uploadcare-rails.git
-  revision: 664c46893a6e399200c820aecb1920ad1c223ff3
+  revision: aa09e3ef9ef021247ec5f44b14445081ae2d2eb5
   branch: gem-rewrite
   specs:
     uploadcare-rails (5.0.0)
@@ -196,7 +196,7 @@ GEM
     multipart-post (2.4.1)
     net-http (0.9.1)
       uri (>= 0.11.1)
-    net-imap (0.6.2)
+    net-imap (0.6.3)
       date
       net-protocol
     net-pop (0.1.2)
