@@ -43,6 +43,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_21_195000) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "attachments"
     t.datetime "created_at", null: false
@@ -52,4 +58,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_21_195000) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
 end
