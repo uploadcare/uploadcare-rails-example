@@ -1,0 +1,1 @@
+uploadcare-rails-example fixture

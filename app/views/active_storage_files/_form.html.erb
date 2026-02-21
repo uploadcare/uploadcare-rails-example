@@ -1,0 +1,19 @@
+<%= form_with model: active_storage_file, local: true, class: 'border p-4' do |form| %>
+  <div class="mb-3">
+    <%= form.label :title, class: 'mb-0' %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, class: 'mb-0' %>
+    <%= form.text_area :description, class: 'form-control', rows: 4 %>
+  </div>
+
+  <div class="mb-3">
+    <label class="mb-0" for="active_storage_file_files">Files</label>
+    <%= form.file_field :files, multiple: true, class: 'form-control' %>
+    <small class="text-muted">You can upload multiple files and they will be stored via ActiveStorage.</small>
+  </div>
+
+  <%= form.submit submit_label, class: 'btn btn-primary' %>
+<% end %>

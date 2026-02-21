@@ -1,6 +1,6 @@
 <h1>Webhook ID <%= @webhook.id %> info
   <%= link_to 'Edit', edit_webhook_path(@webhook.id), class: 'btn btn-sm btn-secondary' %>
-  <%= link_to 'Delete', delete_webhook_path(target_url: @webhook.target_url), method: :delete, class: 'btn btn-sm btn-danger' %>
+  <%= link_to 'Delete', delete_webhook_path(target_url: @webhook.target_url), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
 </h1>
 
 <div class="card">
@@ -24,7 +24,7 @@
       <strong>Project</strong>: <%= @webhook.project %>
     </li>
     <li class="list-group-item">
-      <% if @webhook.is_active? %>
+      <% if @webhook.is_active %>
         <div class="badge badge-info">Active</div>
       <% else %>
         <div class="badge badge-secondary">Not active</div>

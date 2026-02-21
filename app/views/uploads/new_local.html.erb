@@ -1,22 +1,22 @@
 <h1>Upload a local file</h1>
 
-<%= form_tag(upload_local_file_path, method: :post, class: 'border p-4', multipart: true) do %>
+<%= form_tag(upload_local_file_path, method: :post, class: 'border p-4', multipart: true, data: { controller: 'upload-form' }) do %>
   <div>
     <div class="upload-file">
       <label class="mb-0">File to upload</label>
       <div class="input-group mb-3">
-        <input type="file" class="custom-file-input" id="uploadFileInput" name="file[file]">
-        <label class="custom-file-label" for="uploadFileInput"></label>
+        <input type="file" class="custom-file-input" id="uploadFileInput" name="file[file]" data-upload-form-target="input" data-action="change->upload-form#syncFileMetadata">
+        <label class="custom-file-label" for="uploadFileInput" data-upload-form-target="label"></label>
       </div>
 
       <div class="mb-3">
         <label class="mb-0" for="fileMimeType">Mime type</label>
-        <input type="text" class="form-control" id="fileMimeType" name="file[mime_type]">
+        <input type="text" class="form-control" id="fileMimeType" name="file[mime_type]" data-upload-form-target="mimeType">
       </div>
 
       <div class="mb-3">
         <label class="mb-0" for="filename">Filename</label>
-        <input type="text" class="form-control" id="filename" name="file[filename]">
+        <input type="text" class="form-control" id="filename" name="file[filename]" data-upload-form-target="filename">
       </div>
     </div>
 
@@ -27,24 +27,3 @@
 
   <%= submit_tag 'Upload file', class: 'btn btn-primary mt-4' %>
 <% end %>
-
-<script>
-  (function() {
-    const fileInput = document.querySelector('.custom-file-input');
-
-    fileInput.addEventListener('change', evt => {
-      let file = evt.currentTarget.files[0];
-
-      let formElement = document.querySelector('form');
-
-      let uploadLabelElement = document.getElementsByClassName('custom-file-label')[0];
-      uploadLabelElement.innerText = file.name;
-
-      let filenameInput = document.getElementById('filename');
-      filenameInput.value = file.name;
-
-      let mimeTypeInput = document.getElementById('fileMimeType');
-      mimeTypeInput.value = file.type;
-    })
-  })()
-</script>

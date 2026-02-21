@@ -15,7 +15,10 @@ class PostsController < ApplicationController
 
   def show
     find_post
-    @attachments = Uploadcare::GroupApi.get_group(@post.attachments.load.id)["files"] if @post.attachments
+    return unless @post.attachments
+
+    group = Uploadcare::GroupApi.get_group(@post.attachments.id)
+    @attachments = group.respond_to?(:[]) ? group["files"] : group.files
   end
 
   def create
@@ -50,7 +53,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :logo, :attachments)
+    params.require(:post).permit(:title, :logo, :attachments, :asset)
   end
 
   def find_post

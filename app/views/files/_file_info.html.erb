@@ -1,4 +1,6 @@
 <table class="table table-condensed table-bordered table-hover mt-2">
+  <% variations = file.respond_to?(:variations) ? file.variations : nil %>
+  <% rekognition_info = file.respond_to?(:rekognition_info) ? file.rekognition_info : nil %>
   <tr>
     <th>UUID</th>
     <td><%= file.uuid %></td>
@@ -39,9 +41,9 @@
   <tr>
     <th>File variations</th>
     <td>
-      <% if file[:variations].present? %>
+      <% if variations.present? %>
         <table>
-          <% file[:variations].each do |key, value| %>
+          <% variations.each do |key, value| %>
             <tr>
               <td><%= key %></td>
               <td><%= value %></td>
@@ -56,9 +58,9 @@
   <tr>
     <th>Recognition info</th>
     <td>
-      <% if file[:rekognition_info].present? %>
+      <% if rekognition_info.present? %>
         <table>
-          <% file[:rekognition_info].each do |key, value| %>
+          <% rekognition_info.each do |key, value| %>
             <tr>
               <td><%= key %></td>
               <td><%= value %></td>

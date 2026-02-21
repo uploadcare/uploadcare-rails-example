@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <% if Rails.env.development? %>
+      <script>
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.getRegistrations().then((registrations) => {
+            registrations.forEach((registration) => registration.unregister())
+          })
+        }
+        if ("caches" in window) {
+          caches.keys().then((names) => {
+            names.forEach((name) => {
+              if (name.includes("workbox")) caches.delete(name)
+            })
+          })
+        }
+      </script>
+    <% end %>
 
     <%= javascript_importmap_tags %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>

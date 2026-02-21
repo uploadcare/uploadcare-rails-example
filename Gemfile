@@ -3,10 +3,10 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.4.8"
+ruby "4.0.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem "rails", "~> 8.1"
+gem "rails", "~> 8.1.2"
 # Use pg as the database for Active Record
 gem "pg"
 # Use Puma as the app server
@@ -26,12 +26,13 @@ gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
 gem "redis"
+gem "ostruct"
 
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem "image_processing", "~> 1.14"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -61,18 +62,18 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem "capybara"
-  gem "selenium-webdriver"
+  gem "selenium-webdriver", ">= 4.10", "< 5"
   # Easy installation and use of web drivers to run system tests with browsers
   gem "rspec-rails"
   gem "webdrivers"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[windows mswin jruby]
+gem "tzinfo-data", platforms: %i[windows jruby]
 
 # Uploadcare-rails provides unified API interface to Uploadcare API
-gem "uploadcare-rails", git: "https://github.com/uploadcare/uploadcare-rails.git", branch: "main"
-gem "uploadcare-ruby", git: "https://github.com/uploadcare/uploadcare-ruby.git", branch: "main"
+gem "uploadcare-rails", git: "https://github.com/uploadcare/uploadcare-rails.git", branch: "gem-rewrite"
+gem "uploadcare-ruby", git: "https://github.com/uploadcare/uploadcare-ruby.git", branch: "v2-rewrite-2"
 
 # Use MongoDB for the database, with Mongoid as the ODM
 gem "mongoid", "< 10"

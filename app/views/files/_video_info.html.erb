@@ -1,48 +1,53 @@
 <h4>Video / audio info</h4>
+<% duration = video_info.respond_to?(:duration) ? video_info.duration : (video_info["duration"] || video_info[:duration]) %>
+<% format = video_info.respond_to?(:format) ? video_info.format : (video_info["format"] || video_info[:format]) %>
+<% bitrate = video_info.respond_to?(:bitrate) ? video_info.bitrate : (video_info["bitrate"] || video_info[:bitrate]) %>
+<% video_data = video_info.respond_to?(:video) ? video_info.video : (video_info["video"] || video_info[:video] || {}) %>
+<% audio_data = video_info.respond_to?(:audio) ? video_info.audio : (video_info["audio"] || video_info[:audio] || {}) %>
 <div class="table-responsive">
   <table class="table table-condensed table-bordered table-hover mt-2">
     <tr>
       <th>Duration</th>
-      <td><%= video_info.duration %></td>
+      <td><%= duration %></td>
     </tr>
     <tr>
       <th>Format</th>
-      <td><%= video_info.format %></td>
+      <td><%= format %></td>
     </tr>
     <tr>
       <th>Bitrate</th>
-      <td><%= video_info.bitrate %></td>
+      <td><%= bitrate %></td>
     </tr>
     <tr>
       <th>Dimensions</th>
-      <td><%= "#{video_info.video.width} x #{video_info.video.height}" %></td>
+      <td><%= "#{video_data['width'] || video_data[:width]} x #{video_data['height'] || video_data[:height]}" %></td>
     </tr>
     <tr>
       <th>Frame rate</th>
-      <td><%= video_info.video.framerate %></td>
+      <td><%= video_data['framerate'] || video_data[:framerate] %></td>
     </tr>
     <tr>
       <th>Codec</th>
-      <td><%= video_info.video.codec %></td>
+      <td><%= video_data['codec'] || video_data[:codec] %></td>
     </tr>
     <tr>
       <th colspan="2">Audio</th>
     </tr>
     <tr>
       <th>Bitrate</th>
-      <td><%= video_info.audio.bitrate || '-' %></td>
+      <td><%= (audio_data['bitrate'] || audio_data[:bitrate]) || '-' %></td>
     </tr>
     <tr>
       <th>Codec</th>
-      <td><%= video_info.audio.codec || '-' %></td>
+      <td><%= (audio_data['codec'] || audio_data[:codec]) || '-' %></td>
     </tr>
     <tr>
       <th>Sample Rate</th>
-      <td><%= video_info.audio.sample_rate || '-' %></td>
+      <td><%= (audio_data['sample_rate'] || audio_data[:sample_rate]) || '-' %></td>
     </tr>
     <tr>
       <th>Channels</th>
-      <td><%= video_info.audio.channels || '-' %></td>
+      <td><%= (audio_data['channels'] || audio_data[:channels]) || '-' %></td>
     </tr>
   </table>
 </div>

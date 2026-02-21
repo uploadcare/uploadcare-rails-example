@@ -1,32 +1,40 @@
 <h4>Image info</h4>
+<% color_mode = image_info.respond_to?(:color_mode) ? image_info.color_mode : (image_info["color_mode"] || image_info[:color_mode]) %>
+<% orientation = image_info.respond_to?(:orientation) ? image_info.orientation : (image_info["orientation"] || image_info[:orientation]) %>
+<% format = image_info.respond_to?(:format) ? image_info.format : (image_info["format"] || image_info[:format]) %>
+<% sequence = image_info.respond_to?(:sequence) ? image_info.sequence : (image_info["sequence"] || image_info[:sequence]) %>
+<% width = image_info.respond_to?(:width) ? image_info.width : (image_info["width"] || image_info[:width]) %>
+<% height = image_info.respond_to?(:height) ? image_info.height : (image_info["height"] || image_info[:height]) %>
+<% geo_location = image_info.respond_to?(:geo_location) ? image_info.geo_location : (image_info["geo_location"] || image_info[:geo_location]) %>
+<% dpi = image_info.respond_to?(:dpi) ? image_info.dpi : (image_info["dpi"] || image_info[:dpi]) %>
 
 <div class="table-responsive">
   <table class="table image table-condensed table-bordered table-hover mt-2">
     <tr>
       <th>Color Mode</th>
-      <td><%= image_info.color_mode %></td>
+      <td><%= color_mode %></td>
     </tr>
     <tr>
       <th>Orientation</th>
-      <td><%= image_info.orientation %></td>
+      <td><%= orientation %></td>
     </tr>
     <tr>
       <th>Format</th>
-      <td><%= image_info.format %></td>
+      <td><%= format %></td>
     </tr>
     <tr>
       <th>Is image a sequence</th>
-      <td><%= image_info.sequence.present? ? 'Yes' : 'No' %></td>
+      <td><%= sequence.present? ? 'Yes' : 'No' %></td>
     </tr>
     <tr>
       <th>Dimensions</th>
-      <td><%= "#{image_info.width} × #{image_info.height}" %></td>
+      <td><%= "#{width} × #{height}" %></td>
     </tr>
     <tr>
       <th>Geo location</th>
       <td>
-        <% if image_info.geo_location.present? %>
-          <%= "#{image_info.geoLocation.latitude}, #{image_info.geoLocation.longitude}" %>
+        <% if geo_location.present? %>
+          <%= "#{geo_location['latitude'] || geo_location[:latitude]}, #{geo_location['longitude'] || geo_location[:longitude]}" %>
         <% else %>
           No data
         <% end %>
@@ -35,8 +43,8 @@
     <tr>
       <th>DPI</th>
       <td>
-        <% if image_info.dpi.present? && image_info.dpi.is_a?(Array) %>
-          <%= "#{image_info.dpi[0]}, #{image_info.dpi[1]}" %>
+        <% if dpi.present? && dpi.is_a?(Array) %>
+          <%= "#{dpi[0]}, #{dpi[1]}" %>
         <% else %>
           No data
         <% end %>

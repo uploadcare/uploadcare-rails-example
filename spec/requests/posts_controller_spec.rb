@@ -4,40 +4,39 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :request do
   let(:post_object) { create :post }
+  let(:upload_file) { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/test.txt'), 'text/plain') }
   let(:file_group) do
-    Uploadcare::Group.new(
-      {
-        'id' => 'd476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20',
-        'datetime_created' => '2021-07-16T11:03:01.182939Z',
-        'files_count' => 20,
-        'cdn_url' => 'https://ucarecdn.com/d476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20/',
-        'url' => 'https://api.uploadcare.com/groups/d476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20/',
-        'files' => [ {
-          'size' => 21_813,
-          'total' => 21_813,
-          'done' => 21_813,
-          'uuid' => '3ae6a420-9de3-4088-9fad-301de9932251',
-          'file_id' => '3ae6a420-9de3-4088-9fad-301de9932251',
-          'original_filename' => 'thumbnail_0.jpg',
-          'is_image' => true,
-          'is_stored' => false,
-          'image_info' => {
-            'width' => 600, 'height' => 400, 'format' => 'JPEG', 'color_mode' => 'RGB', 'geo_location' => nil,
-            'orientation' => nil, 'dpi' => nil, 'datetime_original' => nil, 'sequence' => false
-          },
-          'video_info' => nil,
-          'is_ready' => true,
-          'filename' => 'thumbnail_0.jpg',
-          'mime_type' => 'image/jpeg',
-          'default_effects' => ''
-        } ]
-      }
-    )
+    {
+      'id' => 'd476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20',
+      'datetime_created' => '2021-07-16T11:03:01.182939Z',
+      'files_count' => 20,
+      'cdn_url' => 'https://ucarecdn.com/d476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20/',
+      'url' => 'https://api.uploadcare.com/groups/d476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20/',
+      'files' => [ {
+        'size' => 21_813,
+        'total' => 21_813,
+        'done' => 21_813,
+        'uuid' => '3ae6a420-9de3-4088-9fad-301de9932251',
+        'file_id' => '3ae6a420-9de3-4088-9fad-301de9932251',
+        'original_filename' => 'thumbnail_0.jpg',
+        'is_image' => true,
+        'is_stored' => false,
+        'image_info' => {
+          'width' => 600, 'height' => 400, 'format' => 'JPEG', 'color_mode' => 'RGB', 'geo_location' => nil,
+          'orientation' => nil, 'dpi' => nil, 'datetime_original' => nil, 'sequence' => false
+        },
+        'video_info' => nil,
+        'is_ready' => true,
+        'filename' => 'thumbnail_0.jpg',
+        'mime_type' => 'image/jpeg',
+        'default_effects' => ''
+      } ]
+    }
   end
 
   before do
     %i[get_group store_group].each do |stub_method|
-      allow(Uploadcare::GroupApi).to receive(stub_method).and_return(results: file_group)
+      allow(Uploadcare::GroupApi).to receive(stub_method).and_return(file_group)
     end
     %i[store_file delete_file].each do |stub_method|
       allow(Uploadcare::FileApi).to receive(stub_method).and_return(results: file_group)
@@ -91,9 +90,17 @@ RSpec.describe PostsController, type: :request do
       it 'creates a post' do
         expect do
           post '/posts', params: {
-            post: { title: 'Title', logo: 'https://logourl.com', attachments: 'https://attachmentsurl.com' }
+            post: {
+              title: 'Title',
+              logo: 'https://logourl.com',
+              attachments: 'https://attachmentsurl.com',
+              asset: upload_file
+            }
           }
         end.to change(Post, :count).by(1)
+
+        expect(Post.last.asset).to be_attached
+        expect(Post.last.asset.filename.to_s).to eq('test.txt')
       end
     end
 
@@ -112,18 +119,24 @@ RSpec.describe PostsController, type: :request do
   describe 'PATCH update' do
     context 'when a post is updated' do
       it 'updates a post' do
+        old_blob_id = post_object.asset.blob_id
+
         expect do
           patch "/posts/#{post_object.id}", params: {
             post: {
               title: post_object.title.reverse,
               logo: "#{post_object.logo}/new",
-              attachments: "#{post_object.attachments}/new"
+              attachments: "#{post_object.attachments}/new",
+              asset: upload_file
             }
           }
         end.to(
           change { post_object.reload.title }.and(change { post_object.title })
                                              .and(change { post_object.attachments })
         )
+
+        expect(post_object.asset).to be_attached
+        expect(post_object.asset.blob_id).not_to eq(old_blob_id)
       end
     end
 
