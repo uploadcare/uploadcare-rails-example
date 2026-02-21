@@ -1,0 +1,58 @@
+<h1><%= @active_storage_file.title %></h1>
+
+<p>
+  <%= link_to 'Back', active_storage_files_path, class: 'btn btn-sm btn-secondary' %>
+  <%= link_to 'Edit', edit_active_storage_file_path(@active_storage_file), class: 'btn btn-sm btn-secondary' %>
+  <%= link_to 'Delete', active_storage_file_path(@active_storage_file), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+</p>
+
+<% if @active_storage_file.description? %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <%= simple_format(@active_storage_file.description) %>
+    </div>
+  </div>
+<% end %>
+
+<h4>Uploaded files</h4>
+
+<% if @active_storage_file.files.blank? %>
+  <p>No files attached.</p>
+<% else %>
+  <ul class="list-group">
+    <% @active_storage_file.files.each do |attachment| %>
+      <li class="list-group-item">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div>
+            <%= link_to attachment.filename.to_s, url_for(attachment), target: '_blank', rel: 'noopener' %>
+          </div>
+          <div>
+            <span class="badge badge-secondary"><%= attachment.content_type %></span>
+            <span class="badge badge-secondary"><%= number_to_human_size(attachment.byte_size) %></span>
+          </div>
+        </div>
+
+        <% if attachment.content_type&.start_with?('image/') %>
+          <div>
+            <%= image_tag(
+              attachment.variant(resize_to_limit: [320, 320], quality: 'smart'),
+              style: 'max-width: 320px; height: auto;'
+            ) %>
+          </div>
+        <% elsif attachment.content_type == 'application/pdf' && attachment.blob.previewable? %>
+          <div>
+            <%= image_tag url_for(attachment.preview(resize_to_limit: [320, 320])), style: 'max-width: 320px; height: auto;' %>
+          </div>
+        <% elsif attachment.content_type&.start_with?('video/') %>
+          <div>
+            <%= video_tag url_for(attachment), controls: true, style: 'max-width: 320px; height: auto;' %>
+          </div>
+        <% elsif attachment.content_type&.start_with?('audio/') %>
+          <div>
+            <%= audio_tag url_for(attachment), controls: true %>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

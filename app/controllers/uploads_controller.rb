@@ -7,21 +7,22 @@ class UploadsController < ApplicationController
 
   def upload_local
     file = local_file_with_custom_params
-    uploaded_file = Uploadcare::UploadApi.upload_file(file, store: file_params[:store])
-    flash[:success] = "File '#{uploaded_file.original_filename}' has been successfully uploaded!"
+    uploaded_file = Uploadcare::UploadApi.upload_file(file, { store: file_params[:store] })
+    filename = Array(uploaded_file).first&.original_filename || uploaded_file&.original_filename
+    flash[:success] = "File '#{filename}' has been successfully uploaded!"
     redirect_to upload_new_local_file_path
   end
 
   def upload_from_url
     url = file_params[:url]
-    files = Uploadcare::UploadApi.upload_file(
+    uploaded = Uploadcare::UploadApi.upload_file(
       url,
-      **{
+      {
         filename: file_params[:filename].presence,
         store: file_params[:store]
       }.compact
     )
-    flash[:success] = "File '#{files[0].original_filename}' has been successfully uploaded!"
+    flash[:success] = "File '#{Array(uploaded).first&.original_filename}' has been successfully uploaded!"
     redirect_to upload_new_file_from_url_path
   end
 

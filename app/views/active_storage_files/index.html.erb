@@ -1,0 +1,29 @@
+<h1>Using with Active Storage</h1>
+
+<div class="mb-4">
+  <%= render 'form', active_storage_file: @active_storage_file, submit_label: 'Upload with Active Storage' %>
+</div>
+
+<% if @active_storage_files.blank? %>
+    <div class="card">
+      <div class="card-body">
+      No ActiveStorage uploads yet. Use the form above to create one.
+      </div>
+    </div>
+<% else %>
+  <ul class="list-group">
+    <% @active_storage_files.each do |item| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="flex-grow-1">
+          <%= link_to item.title, active_storage_file_path(item) %>
+          <div class="small text-muted"><%= item.files.count %> file(s)</div>
+        </div>
+        <div class="btn-group" role="group" aria-label="Actions">
+          <%= link_to 'Show', active_storage_file_path(item), class: 'btn btn-sm btn-secondary' %>
+          <%= link_to 'Edit', edit_active_storage_file_path(item), class: 'btn btn-sm btn-secondary' %>
+          <%= link_to 'Delete', active_storage_file_path(item), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

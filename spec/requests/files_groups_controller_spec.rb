@@ -35,6 +35,8 @@ RSpec.describe FileGroupsController, type: :request do
   end
 
   describe 'GET new' do
+    before { allow(Uploadcare::FileApi).to receive(:get_files).and_return(results: []) }
+
     it 'renders a template' do
       get '/file_groups/new'
       expect(response).to render_template(:new)

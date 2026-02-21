@@ -5,7 +5,8 @@ The project is based on Ruby 3.4.8, Rails, PostgreSQL and MongoDB.
 
 ---
 **NOTE**
-The project points to the `main` branch of the `uploadcare-rails` and `uploadcare-ruby` gems. If you want to use the latest release, please specify the version in the `Gemfile` file.
+The project points to the `gem-rewrite` branch of `uploadcare-rails` and the `v2-rewrite-2` branch of `uploadcare-ruby`.
+If you want to use the latest release, specify versions in the `Gemfile` file.
 
 ---
 
@@ -14,6 +15,7 @@ The project points to the `main` branch of the `uploadcare-rails` and `uploadcar
   * [Without docker](#without-docker)
 * [Usage](#usage)
   * [Configuration](#configuration)
+  * [ActiveStorage With Uploadcare](#activestorage-with-uploadcare)
   * [Project section](#project-section)
   * [Files section](#files-section)
   * [File Groups section](#file-groups-section)
@@ -119,6 +121,17 @@ config.manual_start = false
 
 Then you can configure all global variables such as files storing/caching, deleting files, etc.
 Full list of available options is listed in the file itself. Just uncomment an option and set the value.
+
+### ActiveStorage With Uploadcare
+
+The example app is configured to use Uploadcare as the ActiveStorage backend in development and production.
+See `config/storage.yml` for:
+
+- `uploadcare` service (private delivery)
+- `uploadcare_public` service (public delivery)
+
+The `Post` model demonstrates this with `has_one_attached :asset`.
+In the post form, use the "ActiveStorage file (Uploadcare service)" input to upload a file via ActiveStorage.
 
 
 ### Project section

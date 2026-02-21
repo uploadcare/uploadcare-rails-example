@@ -74,6 +74,9 @@
   <li class="nav-item">
     <%= link_to 'Create a post', new_post_path, class: "nav-link #{controller_name == 'posts' && action_name == 'new' ? 'active' : ''}" %>
   </li>
+  <li class="nav-item">
+    <%= link_to 'Using with Active Storage', active_storage_files_path, class: "nav-link #{controller_name == 'active_storage_files' && %w[index show].include?(action_name) ? 'active' : ''}" %>
+  </li>
 
   <li class="dropdown-divider"></li>
   Mongoid example:
