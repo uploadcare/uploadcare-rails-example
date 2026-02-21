@@ -69,7 +69,7 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[windows mswin jruby]
+gem "tzinfo-data", platforms: %i[windows jruby]
 
 # Uploadcare-rails provides unified API interface to Uploadcare API
 gem "uploadcare-rails", git: "https://github.com/uploadcare/uploadcare-rails.git", branch: "gem-rewrite"
