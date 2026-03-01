@@ -62,7 +62,9 @@ jobs:
           RAILS_ENV: test
 
       - name: Install Playwright browser
-        run: bundle exec playwright install chromium
+        run: |
+          PLAYWRIGHT_VERSION=$(bundle exec ruby -e 'require "playwright"; puts Playwright::COMPATIBLE_PLAYWRIGHT_VERSION.strip')
+          npx --yes playwright@${PLAYWRIGHT_VERSION} install --with-deps chromium
 
       - name: Run tests
         run: |
