@@ -19,7 +19,7 @@ RSpec.describe UploadsController, type: :request do
 
   describe 'POST upload_local' do
     let(:file) do
-      Rack::Test::UploadedFile.new('../uploadcare-rails/spec/fixtures/kitten.jpeg', 'image/jpeg')
+      Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/kitten.jpeg'), 'image/jpeg')
     end
 
     context 'when a response status is 200' do
