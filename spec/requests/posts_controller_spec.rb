@@ -59,6 +59,14 @@ RSpec.describe PostsController, type: :request do
       get '/posts/new'
       expect(response).to render_template(:new)
     end
+
+    it 'renders uploader elements' do
+      get '/posts/new'
+      expect(response.body).to include("uc-file-uploader-regular")
+      expect(response.body).to include("uc-form-input")
+      expect(response.body).to include('post[logo]')
+      expect(response.body).to include('post[attachments]')
+    end
   end
 
   describe 'GET edit' do

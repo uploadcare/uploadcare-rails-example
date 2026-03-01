@@ -1,11 +1,11 @@
 # Uploadcare Rails Example app
 
 This example project demonstrates the uploadcare-rails capabilities.
-The project is based on Ruby 3.4.8, Rails, PostgreSQL and MongoDB.
+The project is based on Ruby 4.0+, Rails, PostgreSQL and MongoDB.
 
 ---
 **NOTE**
-The project points to the `main` branch of the `uploadcare-rails` and `uploadcare-ruby` gems. If you want to use the latest release, please specify the version in the `Gemfile` file.
+The project points to a local checkout of the `uploadcare-rails` gem and to the `main` branch of `uploadcare-ruby`. If you want to use released gem versions, specify them in the `Gemfile` file.
 
 ---
 
