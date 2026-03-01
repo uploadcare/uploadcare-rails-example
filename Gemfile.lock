@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/uploadcare/uploadcare-rails.git
+  revision: 0f61fa16e2477a901f3843ffbb09a65a51489638
+  branch: file-uploader-v1
+  specs:
+    uploadcare-rails (3.4.4)
+      rails (>= 7.2)
+      uploadcare-ruby (>= 4.4.2)
+
+GIT
   remote: https://github.com/uploadcare/uploadcare-ruby.git
   revision: ca841a7fa76458d03ea6723101f4a7ad306b50bb
   branch: main
@@ -8,13 +17,6 @@ GIT
       parallel (~> 1.22)
       retries (~> 0.0)
       uploadcare-api_struct (>= 1.1, < 2)
-
-PATH
-  remote: ../uploadcare-rails
-  specs:
-    uploadcare-rails (3.4.4)
-      rails (>= 7.2)
-      uploadcare-ruby (>= 4.4.2)
 
 GEM
   remote: https://rubygems.org/
