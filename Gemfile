@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.4.8"
+ruby ">= 4.0.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem "rails", "~> 8.1"
@@ -59,12 +59,9 @@ group :development do
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
   gem "capybara"
-  gem "selenium-webdriver"
-  # Easy installation and use of web drivers to run system tests with browsers
+  gem "capybara-playwright-driver"
   gem "rspec-rails"
-  gem "webdrivers"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -76,3 +73,4 @@ gem "uploadcare-ruby", git: "https://github.com/uploadcare/uploadcare-ruby.git",
 
 # Use MongoDB for the database, with Mongoid as the ODM
 gem "mongoid", "< 10"
+gem "ostruct"

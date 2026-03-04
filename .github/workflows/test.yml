@@ -11,7 +11,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.4.8
+          ruby-version: 4.0.1
           bundler-cache: true
 
       - name: Run linters
@@ -44,7 +44,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.4.8
+          ruby-version: 4.0.1
           bundler-cache: true
 
       - name: Install library for postgres
@@ -60,6 +60,11 @@ jobs:
           UPLOADCARE_PUBLIC_KEY: demopublickey
           UPLOADCARE_SECRET_KEY: demoprivatekey
           RAILS_ENV: test
+
+      - name: Install Playwright browser
+        run: |
+          PLAYWRIGHT_VERSION=$(bundle exec ruby -e 'require "playwright"; puts Playwright::COMPATIBLE_PLAYWRIGHT_VERSION.strip')
+          npx --yes playwright@${PLAYWRIGHT_VERSION} install --with-deps chromium
 
       - name: Run tests
         run: |

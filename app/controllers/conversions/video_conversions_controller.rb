@@ -28,11 +28,6 @@ module Conversions
 
     private
 
-    def handle_error(exception)
-      flash[:alert] = exception.message.presence || "Something went wrong"
-      redirect_to video_conversion_path(problem: exception.message)
-    end
-
     def request_conversion
       Uploadcare::ConversionApi.convert_video(
         conversion_params,
