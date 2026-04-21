@@ -83,11 +83,6 @@ jobs:
           MONGODB_HOST: localhost:27017
           RAILS_ENV: test
 
-      - name: Install Playwright browser
-        run: |
-          PLAYWRIGHT_VERSION=$(bundle exec ruby -e 'require "playwright"; puts Playwright::COMPATIBLE_PLAYWRIGHT_VERSION.strip')
-          npx --yes playwright@${PLAYWRIGHT_VERSION} install --with-deps chromium
-
       - name: Run tests
         run: |
           bundle exec rspec
@@ -99,4 +94,3 @@ jobs:
           UPLOADCARE_SECRET_KEY: demoprivatekey
           MONGODB_HOST: localhost:27017
           RAILS_ENV: test
-          NODE_OPTIONS: "--openssl-legacy-provider"

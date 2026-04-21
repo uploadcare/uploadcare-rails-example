@@ -3,15 +3,16 @@
 require "rails_helper"
 
 RSpec.describe "Comments uploader", type: :system do
-  it "renders uploader components", :js do
+  it "renders uploader components" do
     visit "/comments/new"
 
     expect(page).to have_css("uc-file-uploader-regular", count: 2)
     expect(page).to have_css("uc-form-input", count: 2)
-    expect(page).to have_button("Upload files", count: 2)
+    expect(page).to have_css("uc-config", count: 2)
+    expect(page).to have_css("uc-upload-ctx-provider", count: 2)
   end
 
-  it "preloads uploader values on edit", :js do
+  it "preloads uploader values on edit" do
     comment_record = create(:comment)
 
     visit "/comments/#{comment_record.id}/edit"
