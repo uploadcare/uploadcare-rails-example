@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -36,16 +36,37 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
         ports:
           - 5432:5432
+      mongo:
+        image: mongo:8
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.runCommand({ ping: 1 })'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 27017:27017
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 4.0.1
           bundler-cache: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install and build JS assets
+        run: |
+          corepack enable
+          pnpm install --frozen-lockfile
+          pnpm build
 
       - name: Install library for postgres
         run: sudo apt-get install libpq-dev
@@ -59,6 +80,7 @@ jobs:
           POSTGRES_PORT: 5432
           UPLOADCARE_PUBLIC_KEY: demopublickey
           UPLOADCARE_SECRET_KEY: demoprivatekey
+          MONGODB_HOST: localhost:27017
           RAILS_ENV: test
 
       - name: Install Playwright browser
@@ -75,5 +97,6 @@ jobs:
           POSTGRES_PORT: 5432
           UPLOADCARE_PUBLIC_KEY: demopublickey
           UPLOADCARE_SECRET_KEY: demoprivatekey
+          MONGODB_HOST: localhost:27017
           RAILS_ENV: test
           NODE_OPTIONS: "--openssl-legacy-provider"
