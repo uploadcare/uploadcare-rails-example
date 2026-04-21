@@ -10,4 +10,13 @@ RSpec.describe "Posts uploader", type: :system do
     expect(page).to have_css("uc-form-input", count: 2)
     expect(page).to have_button("Upload files", count: 2)
   end
+
+  it "preloads uploader values on edit", :js do
+    post_record = create(:post)
+
+    visit "/posts/#{post_record.id}/edit"
+
+    expect(page).to have_css(%(uc-form-input[name="post[logo]"][value="#{post_record.logo}"]))
+    expect(page).to have_css(%(uc-form-input[name="post[attachments]"][value="#{post_record.attachments}"]))
+  end
 end

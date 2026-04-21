@@ -45,6 +45,9 @@ Rails.application.routes.draw do
   # Posts
   resources :posts
 
+  # Active Storage Posts
+  resources :active_storage_posts
+
   # Comments
   resources :comments
 

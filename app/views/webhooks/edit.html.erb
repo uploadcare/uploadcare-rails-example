@@ -1,4 +1,4 @@
-<h1>Edit webhook</h1
+<h1>Edit webhook</h1>
 
 <div class="card">
   <div class="card-body border">
@@ -10,7 +10,7 @@
 
     <div class="mb-3">
       <label class="mb-0" for="event">Event</label>
-      <%= select_tag(:event, options_for_select(webhook_events, @webhook.event), class: 'form-control') %>
+      <%= select_tag(:event, options_for_select(webhook_events, @webhook.event), name: 'webhook[event]', class: 'form-control') %>
     </div>
 
     <div class="mb-3">

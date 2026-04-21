@@ -2,6 +2,6 @@
 
 <div class="card">
   <div class="card-body border">
-    <%= render 'comments/form', path: comment_path(@comment), method: :patch, comment_content: @comment.content %>
+    <%= render 'comments/form', path: comment_path(@comment), method: :patch, comment_content: @comment.content, comment_image: @comment.image, comment_attachments: @comment.attachments %>
   </div>
 </div>

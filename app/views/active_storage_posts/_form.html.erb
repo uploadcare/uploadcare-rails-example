@@ -1,0 +1,28 @@
+<%= form_with model: active_storage_post do |form| %>
+  <div class="mb-3">
+    <%= form.label :title, class: "mb-0" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :cover_image, "Cover image", class: "mb-0" %><br>
+    <%= form.file_field :cover_image, class: "form-control-file" %>
+    <% if active_storage_post.cover_image.attached? %>
+      <div class="mt-2"><%= active_storage_post.cover_image.filename.to_s %></div>
+    <% end %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :attachments, class: "mb-0" %><br>
+    <%= form.file_field :attachments, multiple: true, class: "form-control-file" %>
+    <% if active_storage_post.attachments.attached? %>
+      <% active_storage_post.attachments.each do |attachment| %>
+        <div class="mt-2"><%= attachment.filename.to_s %></div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>

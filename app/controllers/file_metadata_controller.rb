@@ -2,32 +2,29 @@
 
 class FileMetadataController < ApplicationController
   before_action :set_uuid, except: :index
-  before_action :set_key_and_value, only: %i[metadata_show metadata_update]
+  before_action :set_key_and_value, only: %i[metadata_show metadata_update metadata_delete]
 
   def index
-    @files_data = Uploadcare::FileApi.get_files(ordering: "-datetime_uploaded")
-    @files = @files_data[:results]
+    @files_data = uploadcare_client.files.list(ordering: "-datetime_uploaded")
+    @files = @files_data.resources
   end
 
   def all_metadata_show
-    @metadata = Uploadcare::FileMetadataApi.file_metadata(@uuid)
-  rescue JSON::ParserError
-    Uploadcare::FileMetadataApi.update_file_metadata(@uuid, "test-key", "test-value")
-    @metadata = Uploadcare::FileMetadataApi.file_metadata(@uuid)
+    @metadata = uploadcare_client.file_metadata.index(uuid: @uuid)
   end
 
   def metadata_show
-    @value = Uploadcare::FileMetadataApi.file_metadata_value(@uuid, @key)
+    @value = uploadcare_client.file_metadata.show(uuid: @uuid, key: @key)
   end
 
   def metadata_update
-    Uploadcare::FileMetadataApi.update_file_metadata(@uuid, @key, @value)
+    uploadcare_client.file_metadata.update(uuid: @uuid, key: @key, value: @value)
 
     redirect_to all_metadata_show_file_metadata_path(uuid: @uuid)
   end
 
   def metadata_delete
-    Uploadcare::FileMetadataApi.delete_file_metadata(@uuid, @key)
+    uploadcare_client.file_metadata.delete(uuid: @uuid, key: @key)
     redirect_to all_metadata_show_file_metadata_path(uuid: @uuid)
   end
 

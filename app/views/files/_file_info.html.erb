@@ -39,9 +39,9 @@
   <tr>
     <th>File variations</th>
     <td>
-      <% if file[:variations].present? %>
+      <% if file.variations.present? %>
         <table>
-          <% file[:variations].each do |key, value| %>
+          <% file.variations.each do |key, value| %>
             <tr>
               <td><%= key %></td>
               <td><%= value %></td>
@@ -54,11 +54,11 @@
     </td>
   </tr>
   <tr>
-    <th>Recognition info</th>
+    <th>Metadata</th>
     <td>
-      <% if file[:rekognition_info].present? %>
+      <% if file.metadata.present? %>
         <table>
-          <% file[:rekognition_info].each do |key, value| %>
+          <% file.metadata.each do |key, value| %>
             <tr>
               <td><%= key %></td>
               <td><%= value %></td>
@@ -66,8 +66,12 @@
             <% end %>
         </table>
       <% else %>
-        Recognition info is empty
+        Metadata is empty
       <% end %>
     </td>
+  </tr>
+  <tr>
+    <th>Appdata</th>
+    <td><%= file.appdata.presence || "Appdata is empty" %></td>
   </tr>
 </table>

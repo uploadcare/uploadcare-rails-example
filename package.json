@@ -1,0 +1,16 @@
+{
+  "name": "uploadcare-rails-example",
+  "private": true,
+  "packageManager": "pnpm@10.26.2",
+  "scripts": {
+    "build": "esbuild app/javascript/application.js --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets",
+    "build:watch": "pnpm build --watch"
+  },
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.20"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.9"
+  }
+}

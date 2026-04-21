@@ -1,0 +1,2 @@
+web: mise exec -- ruby bin/rails server
+js: mise exec -- pnpm build --watch

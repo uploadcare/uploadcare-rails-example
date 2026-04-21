@@ -1,121 +1,106 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Conversions::VideoConversionsController, type: :request do
-  let(:original_source) do
-    '10878f4e-f02e-4f26-8b23-6f0395fa812f/video/-/size/600x400/change_ratio/' \
-    '-/quality/best/-/format/ogg/-/cut/0:0:0.0/0:0:1.0/-/thumbs~2/1/'
-  end
-  let(:conversion_result_body) do
+  let(:files_accessor) { double("UploadcareFilesAccessor") }
+  let(:videos_accessor) { double("UploadcareVideoConversionsAccessor") }
+  let(:conversions_accessor) { double("UploadcareConversionsAccessor", videos: videos_accessor) }
+  let(:video_conversions_api) { double("UploadcareVideoConversionsApi") }
+  let(:rest_api) { double("UploadcareRestApi", video_conversions: video_conversions_api) }
+  let(:api) { double("UploadcareApi", rest: rest_api) }
+  let(:client) { double("UploadcareClient", files: files_accessor, conversions: conversions_accessor, api: api) }
+  let(:params) do
     {
-      result: [
-        {
-          original_source: original_source,
-          token: '21396005',
-          uuid: 'e62d7506-0d40-4029-b7a6-41327e1554f6',
-          thumbnails_group_uuid: '3cb7a928-9fa9-4d78-8db2-751eac3367e4~2'
-        }
-      ],
-      problems: problems
+      file: "b232bc66-e8e9-4d94-a723-e72dc5264a0f",
+      target_format: "ogg",
+      quality: "best",
+      size: { resize_mode: "change_ratio", width: "200", height: "400" },
+      cut: { start_time: "0:0:0.1", length: "end" },
+      thumbs: { n: 1, number: 2 },
+      throw_error: false,
+      store: false
     }
   end
-  let(:problems) { {} }
-  let(:conversion_result) { OpenStruct.new(success: conversion_result_body) }
 
-  describe 'GET new' do
-    before { allow(Uploadcare::FileApi).to receive(:get_files).and_return(results: []) }
+  before do
+    stub_uploadcare_client(client)
+  end
 
-    it 'renders a template' do
-      get '/video_conversions/new'
+  describe "GET new" do
+    it "renders a template" do
+      allow(files_accessor).to receive(:list).and_return(uploadcare_paginated)
+
+      get "/video_conversions/new"
+
       expect(response).to render_template(:new)
     end
   end
 
-  describe 'GET show' do
-    let(:status_result) { OpenStruct.new(success: body) }
-    let(:body) do
-      {
-        status: 'finished',
-        error: nil,
-        result: { uuid: 'e62d7506-0d40-4029-b7a6-41327e1554f6',
-                  thumbnails_group_uuid: '3cb7a928-9fa9-4d78-8db2-751eac3367e4~2' }
-      }
+  describe "GET show" do
+    it "renders a template for a successful conversion" do
+      status_result = double("VideoConversionStatus", status: "finished", error: nil, result: [ { "uuid" => "converted-uuid" } ])
+      allow(videos_accessor).to receive(:status).with(token: "21396005").and_return(status_result)
+
+      get video_conversion_path(token: "21396005", original_source: "path", thumbnails_group_uuid: "group-uuid")
+
+      expect(response).to render_template(:show)
     end
 
-    shared_examples 'renders the :show template' do
-      before { allow(Uploadcare::ConversionApi).to receive(:get_video_conversion_status).and_return(status_result) }
+    it "renders a template for a failed conversion" do
+      get video_conversion_path(problem_source: "path", problem_reason: "Conversion service error.")
 
-      it 'renders a template' do
-        get video_conversion_path(result: conversion_result.success)
-        expect(response).to render_template(:show)
-      end
-    end
-
-    it_behaves_like 'renders the :show template'
-
-    it_behaves_like 'renders the :show template' do
-      let(:problems) { [ 'problem' ] }
+      expect(response).to render_template(:show)
     end
   end
 
-  describe 'POST create' do
-    let(:params) do
-      {
-        file: 'b232bc66-e8e9-4d94-a723-e72dc5264a0f',
-        target_format: 'doc',
-        size: { resize_mode: 'change_ratio', width: '200', height: '400' },
-        cut: { start_time: '0:0:0.1', length: 'end' },
-        thumbs: { n: 1, number: 2 },
-        throw_error: false,
-        store: false
-      }
+  describe "POST create" do
+    it "starts a conversion" do
+      allow(video_conversions_api).to receive(:convert).and_return(
+        Uploadcare::Result.success(
+          "result" => [
+            {
+              "original_source" => "path",
+              "token" => "21396005",
+              "uuid" => "converted-uuid",
+              "thumbnails_group_uuid" => "group-uuid"
+            }
+          ],
+          "problems" => {}
+        )
+      )
+
+      post "/video_conversions", params: params
+
+      expect(flash[:notice]).to match("File conversion has been successfully started!")
     end
 
-    context 'when a response status is 200' do
-      before { allow(Uploadcare::ConversionApi).to receive(:convert_video).and_return(conversion_result) }
+    it "returns an error on request failure" do
+      allow(video_conversions_api).to receive(:convert).and_raise(Uploadcare::Exception::RequestError, "")
 
-      it 'returns a 200' do
-        post '/video_conversions', params: params
-        expect(flash[:notice]).to match('File conversion has been successfully started!')
-      end
+      post "/video_conversions", params: params
+
+      expect(flash[:alert]).to match("Something went wrong")
     end
 
-    context 'when a RequestError occurred' do
-      before do
-        allow(Uploadcare::ConversionApi).to receive(:convert_video).and_raise(Uploadcare::Exception::RequestError,
-                                                                              '')
-      end
+    it "raises when throw_error is enabled and problems are returned" do
+      allow(video_conversions_api).to receive(:convert).and_return(
+        Uploadcare::Result.success("result" => [], "problems" => { "path" => "Conversion service error." })
+      )
 
-      it 'returns an error' do
-        post '/video_conversions', params: params
-        expect(flash[:alert]).to match('Something went wrong')
-      end
+      expect do
+        post "/video_conversions", params: params.merge(throw_error: true)
+      end.to raise_error(Uploadcare::Exception::ConversionError)
     end
 
-    context 'when a ConversionError occurred' do
-      let(:problem) do
-        '{:"982fe2fe-6eb1-4130-8963-29406f274c05/video/-/size/200x/change_ratio/\"=>\"Conversion service error.\"}'
-      end
-      before do
-        allow(Uploadcare::ConversionApi).to receive(:convert_video)
-          .and_raise(Uploadcare::Exception::ConversionError, problem)
-      end
+    it "redirects to show when problems are returned" do
+      allow(video_conversions_api).to receive(:convert).and_return(
+        Uploadcare::Result.success("result" => [], "problems" => { "path" => "Conversion service error." })
+      )
 
-      context 'when the option "throw_error" is enabled' do
-        it 'raises an error' do
-          expect do
-            post '/video_conversions', params: params.merge(throw_error: true)
-          end.to raise_error(Uploadcare::Exception::ConversionError)
-        end
-      end
+      post "/video_conversions", params: params.except(:throw_error)
 
-      context 'when the option "throw_error" is disabled' do
-        it 'redirects to :show' do
-          post '/video_conversions', params: params.except(:throw_error)
-          expect(response).to redirect_to(video_conversion_path(problem: problem))
-        end
-      end
+      expect(response).to redirect_to(video_conversion_path(problem_source: "path", problem_reason: "Conversion service error."))
     end
   end
 end

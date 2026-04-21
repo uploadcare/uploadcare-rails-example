@@ -6,27 +6,27 @@ class RemoveBgController < ApplicationController
   end
 
   def new
-    @files_data = Uploadcare::FileApi.get_files(ordering: "-datetime_uploaded")
-    @files = @files_data[:results]
+    @files_data = uploadcare_client.files.list(ordering: "-datetime_uploaded")
+    @files = @files_data.resources
   end
 
   def create
-    result = Uploadcare::AddonsApi.remove_bg(params[:file], **options_params.compact)
-    redirect_to remove_bg_index_path(uuid: result["request_id"])
+    result = uploadcare_client.addons.remove_bg(uuid: params[:file], params: options_params.compact.to_h)
+    redirect_to remove_bg_index_path(uuid: result.request_id)
   end
 
   def show_status
-    @result = params[:result]
+    @status = params[:status]
   end
 
   def check_status
-    result = Uploadcare::AddonsApi.remove_bg_status(params[:uuid])
-    redirect_to show_status_remove_bg_index_path(result: result)
+    result = uploadcare_client.addons.remove_bg_status(request_id: params[:uuid])
+    redirect_to show_status_remove_bg_index_path(status: result.status)
   end
 
   private
 
   def options_params
-    params.require(:options).permit(:crop, :crop_margin, :scale, :type_level)
+    params.fetch(:options, {}).permit(:crop, :crop_margin, :scale, :type_level)
   end
 end
