@@ -1,0 +1,29 @@
+<h1>
+  Active Storage posts
+  <%= link_to "Create Active Storage post", new_active_storage_post_path, class: "btn btn-primary" %>
+</h1>
+
+<% if @active_storage_posts.present? %>
+  <ul class="list-group">
+    <% @active_storage_posts.each do |active_storage_post| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="text-place flex-grow-1 text-truncate">
+          <%= link_to active_storage_post.title, active_storage_post_path(active_storage_post) %>
+          <br>
+          <div class="badge badge-secondary">
+            <%= active_storage_post.cover_image.attached? ? active_storage_post.cover_image.filename.to_s : "No cover image" %>
+          </div>
+          <div class="badge badge-secondary">
+            <%= pluralize(active_storage_post.attachments.count, "attachment") %>
+          </div>
+        </div>
+        <div class="btn-group" role="group" aria-label="Actions">
+          <%= link_to "Edit", edit_active_storage_post_path(active_storage_post), class: "btn btn-secondary btn-sm" %>
+          <%= link_to "Delete", active_storage_post_path(active_storage_post), method: :delete, class: "btn btn-danger btn-sm" %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No Active Storage posts yet.</p>
+<% end %>

@@ -4,11 +4,9 @@ module Conversions
   class BaseConversionsController < ApplicationController
     private
 
-    def parse_problem
-      parsed_problem = JSON.parse(params[:problem].tr(":", "").gsub("=>", ":")).to_a.flatten
-      form_problem_result(parsed_problem[0], parsed_problem[1])
-    rescue JSON::ParserError, TypeError, NoMethodError
-      form_problem_result(nil, params[:problem])
+    def problem_result_from(problems)
+      source, reason = Array(problems).first
+      form_problem_result(source, reason)
     end
 
     def form_problem_result(source, reason)
@@ -19,9 +17,25 @@ module Conversions
       params[:throw_error].present?
     end
 
+    def conversion_result_entry(payload)
+      Array(payload["result"] || payload[:result]).first&.with_indifferent_access
+    end
+
+    def conversion_problems(payload)
+      (payload["problems"] || payload[:problems] || {}).to_h
+    end
+
+    def status_payload(status_result)
+      {
+        status: status_result.status,
+        error: status_result.error,
+        result: Array(status_result.result).first&.with_indifferent_access
+      }.with_indifferent_access
+    end
+
     def obtain_remote_files
-      @files_data = Uploadcare::FileApi.get_files(ordering: "-datetime_uploaded")
-      @files = @files_data[:results]
+      @files_data = uploadcare_client.files.list(ordering: "-datetime_uploaded")
+      @files = @files_data.resources
     end
   end
 end

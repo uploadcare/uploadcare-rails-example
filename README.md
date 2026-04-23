@@ -1,19 +1,14 @@
 # Uploadcare Rails Example app
 
 This example project demonstrates the uploadcare-rails capabilities.
-The project is based on Ruby 4.0+, Rails, PostgreSQL and MongoDB.
-
----
-**NOTE**
-The project points to a local checkout of the `uploadcare-rails` gem and to the `main` branch of `uploadcare-ruby`. If you want to use released gem versions, specify them in the `Gemfile` file.
-
----
+The app is pinned to the `5-0-stable` branches of `uploadcare/uploadcare-rails` and `uploadcare/uploadcare-ruby`, targets Ruby `>= 4.0.0`, runs Rails `8.1.x`, and uses pnpm-managed Hotwire assets.
 
 * [Installation](#installation)
-  * [Using docker](#using-docker)
-  * [Without docker](#without-docker)
+  * [Requirements](#requirements)
+  * [Local setup](#local-setup)
 * [Usage](#usage)
   * [Configuration](#configuration)
+  * [Examples coverage](#examples-coverage)
   * [Project section](#project-section)
   * [Files section](#files-section)
   * [File Groups section](#file-groups-section)
@@ -28,35 +23,52 @@ The project points to a local checkout of the `uploadcare-rails` gem and to the 
   * [Add-Ons section](#add-ons-section)
     * [Virus scan](#virus-scan)
     * [Rekognition Labels](#rekognition-labels)
+    * [Rekognition Moderation Labels](#rekognition-moderation-labels)
     * [Remove BG](#remove-bg)
   * [Posts section](#posts-section)
+  * [Active Storage section](#active-storage-section)
+  * [Comments section](#comments-section-mongoid-orm)
 * [Useful links](#useful-links)
 
 ## Installation
 
-First, clone the repository:
+### Requirements
+
+- `mise`
+- Ruby `>= 4.0.0`
+- Node.js `22.x`
+- pnpm `10.x`
+- PostgreSQL
+- MongoDB
+
+### Local setup
+
+Clone the repository and install dependencies:
+
 ```console
 $ git clone git@github.com:uploadcare/uploadcare-rails-example.git
+$ cd uploadcare-rails-example
+$ mise exec -- bundle install
+$ mise exec -- pnpm install
+$ mise exec -- pnpm build
+$ mise exec -- ruby bin/rails db:prepare
+$ mise exec -- ruby bin/rails db:migrate
 ```
 
-After that, create the `docker-compose.yml` file, and copy the content from the `docker-compose.yml.sample` file there.
-
-To install the example application you need to [install Docker Compose package](https://docs.docker.com/compose/install/).
-When Docker Compose is installed, build a Docker image by using the `build` command:
+Set your Uploadcare credentials before booting the app:
 
 ```console
-$ docker-compose build
+$ export UPLOADCARE_PUBLIC_KEY=demopublickey
+$ export UPLOADCARE_SECRET_KEY=demoprivatekey
 ```
 
-This command will build an image for the application.
-
-When the image is ready — up the containers with the following command.
+Start the server and the pnpm watcher together:
 
 ```console
-$ docker-compose up
+$ ./bin/dev
 ```
 
-Now, the application must be available in your web-browser, on `http://localhost:3000`
+`bin/dev` runs Rails plus `pnpm build --watch`, so Hotwire assets stay current while you work.
 
 ![Application is available](./references/application-up-in-browser.png)
 
@@ -65,22 +77,14 @@ Now, the application must be available in your web-browser, on `http://localhost
 
 ### Configuration
 
-To start using tha application you need to set your API keys (public key and secret key).
+To start using the application you need to set your API keys (public key and secret key).
 These keys can be set as ENV variables using the `export` directive:
 
 ```console
 $ export UPLOADCARE_PUBLIC_KEY=demopublickey
 $ export UPLOADCARE_SECRET_KEY=demoprivatekey
 ```
-Or you can use popular gems like `dotenv-rails` for setting ENV variables.
-
-Run the config generator command to generate a configuration file:
-
-```console
-$ rails g uploadcare_config
-```
-
-The generator will create a new file in `config/initializers/uploadcare.rb`.
+Or you can use `dotenv-rails` for setting ENV variables.
 
 The public key must be specified in `config/initializers/uploadcare.rb` to use Uploadcare file upload.
 This step is done automatically in the initializer if you set the ENV variable `UPLOADCARE_PUBLIC_KEY` earlier.
@@ -107,18 +111,22 @@ config.cache_files = true
 # Available locales currently are:
 # ar az ca cs da de el en es et fr he it ja ko lv nb nl pl pt ro ru sk sr sv tr uk vi zhTW zh
 config.locale = 'en'
-
-# If true, inputs on your page are initialized automatically, see the article for details -
-# https://uploadcare.com/docs/file-uploader-api/widget-initialization/
-config.live = true
-
-# If true, input initialization is invoked manually.
-# See https://uploadcare.com/docs/file-uploader-api/widget-initialization/).
-config.manual_start = false
 ```
 
 Then you can configure all global variables such as files storing/caching, deleting files, etc.
 Full list of available options is listed in the file itself. Just uncomment an option and set the value.
+
+### Examples coverage
+
+The app keeps examples grouped by real workflows under `/examples` and in the left navigation:
+
+- **Core API operations**: project info, file listing/show/store/copy/delete, group listing/show/create/store/delete, local upload, URL upload.
+- **Conversions and add-ons**: document conversion + format info, video conversion, virus scan, Rekognition labels, Rekognition moderation labels, remove background.
+- **Metadata and webhooks**: metadata index/show/update/delete, webhook CRUD.
+- **Model and storage integrations**: ActiveRecord `has_uploadcare_file`/`has_uploadcare_files` (`Post`), Mongoid `has_uploadcare_file`/`has_uploadcare_files` (`Comment`), and Rails Active Storage integration (`ActiveStoragePost`).
+- **Uploader helper APIs**: `uploadcare_file_field`, `uploadcare_files_field`, `uploadcare_file_field_tag`, and `uploadcare_files_field_tag` in `/examples/uploader_fields`.
+
+The example set intentionally avoids CDN-only demos and focuses on features that work reliably in this app setup.
 
 
 ### Project section
@@ -164,14 +172,12 @@ To create a new group, click on the `Create file group` button in the menu. The 
 
 ### Files uploading
 
-Example up can upload files in three ways: it uploads local files via API interface (along with a view form), local files via Widget (see [Posts section](#posts-section)) and uploading remote files from URL.
+The example app uploads files in three ways: local file upload via the Upload API, URL upload via the Upload API, and model-backed form uploads via the Uploadcare File Uploader Web Components used in the Posts and Comments sections.
 
 ---
 **NOTE**
 
-The locales from the widget can be customized by the `config.locale_translations` option in the [initializer](./config/initializers/uploadcare.rb). The widget localizations can be found [here](https://github.com/uploadcare/uploadcare-widget/tree/master/src/locales). The default locale is `en`.
-Here's an example of how to override some translations: [config/initializers/uploadcare.rb](./config/initializers/uploadcare.rb#L82).
-Don't forget to specify the path to translation files in the initializer here: [config/initializers/uploadcare.rb](./config/initializers/uploadcare.rb#L4).
+The app now uses the current `5-0-stable` branch APIs. The Post and Comment forms render the v1 Uploadcare File Uploader Web Components directly with `<uc-form-input>`, `<uc-config>`, `<uc-file-uploader-regular>`, and `<uc-upload-ctx-provider>`. Group uploads submit a single Uploadcare group URL that matches `has_uploadcare_files`. Manual API actions in controllers use `Uploadcare::Rails.client`, and the conversion examples use the raw REST parity layer where exact path control is needed.
 
 ---
 
@@ -193,7 +199,7 @@ All you need is input file's URL and filename, check (or not) the `Store` check-
 
 ### Conversion
 
-The application can manage documents and video conversions sending request to [Uploadcare REST API Conversion endpoints](https://uploadcare.com/api-refs/rest-api/v0.5.0/#tag/Conversion).
+The application manages document and video conversions through the current Uploadcare REST API. The document and video forms build explicit conversion paths and submit them through the raw parity layer exposed under `Uploadcare::Rails.client.api.rest`.
 
 ---
 **NOTE**
@@ -281,6 +287,12 @@ Execute file rekognition labels:
 2. check operation status
 ![Rekognition labels check status](./references/rekognition-labels-check-status.png)
 
+#### Rekognition Moderation Labels
+
+Execute file rekognition moderation labels:
+1. select file and run checking
+2. check operation status
+
 #### Remove BG
 
 Execute file removing background:
@@ -291,36 +303,80 @@ Execute file removing background:
 
 ### Posts section
 
-This section of the application made to demonstrate view helpers that allow to place Uploadcare File Uploader widget to a Rails view.
-The app has a model called Post and having fields `title:String`, `logo:String` and `attachments:String`. Logo and attachments represent `Uploadcare::File` and `Uploadcare::Group` respectively.
+This section demonstrates the rewrite-era model API together with direct Uploadcare File Uploader Web Components in the view layer.
+The app has a model called `Post` with fields `title:String`, `logo:String`, and `attachments:String`.
+The model uses `has_uploadcare_file :logo` and `has_uploadcare_files :attachments`, so the stored values are Uploadcare CDN URLs wrapped by `Uploadcare::Rails::AttachedFile` and `Uploadcare::Rails::AttachedFiles`.
 
 Index page for posts shows a list of posts. Each list item has `edit/delete` actions.
 
 ![Posts list](./references/posts-list.png)
 
-Clicking on title will direct you to the `show` page of a post.
+Clicking on a title opens the `show` page for a post.
 
 ![Show post](./references/show-post.png)
 
-To create a new post, click on the `Create a post` button. The post form will be opened. The form contains a text field for post title, one File Uploaders — for post's logo and one — for post's attachments. These File Uploaders differ from each other by the `multiple` option. For logo it is `false`, and for attachments — `true`.
+To create a new post, click on the `Create a post` button. The form contains a text field for the title plus two direct Uploadcare component sets: one for the single logo and one for grouped attachments. The attachments uploader uses `multiple="true"` and `group-output="true"` so it submits a single Uploadcare group URL. The edit form preloads both existing Uploadcare values back into the components.
 
 ![Create a post](./references/create-post.png)
 
+### Active Storage section
+
+This section demonstrates the standard Rails attachment APIs with a dedicated `ActiveStoragePost` model. It uses `has_one_attached :cover_image` and `has_many_attached :attachments`, so the controller and views look like normal Rails code while remaining compatible with Uploadcare's Active Storage service.
+
+The app ships with an `uploadcare` entry in `config/storage.yml`:
+
+```yml
+uploadcare:
+  service: Uploadcare
+  public_key: <%= ENV.fetch("UPLOADCARE_PUBLIC_KEY", "demopublickey") %>
+  secret_key: <%= ENV.fetch("UPLOADCARE_SECRET_KEY", "demoprivatekey") %>
+  public: true
+```
+
+To run the Active Storage example through Uploadcare, set `config.active_storage.service = :uploadcare` in the environment you want to exercise. The request and system specs keep using the Rails `test` service so they stay deterministic and do not require network calls.
+
+The `Active Storage posts` pages show:
+
+- one attached cover image via `has_one_attached`
+- many attached files via `has_many_attached`
+- standard blob metadata such as filename, content type, byte size, and service name
+
 ### Comments section (Mongoid ORM)
 
-This section of the application made to demonstrate view helpers that allow to place Uploadcare File Uploader widget to a Rails view. The app has a model called Comment and having fields `title:String`, `logo:String` and `attachments:String`. Logo and attachments represent `Uploadcare::File` and `Uploadcare::Group` respectively. The model uses Mongoid ORM.
+This section demonstrates the same rewrite model API with Mongoid. The app has a `Comment` model with fields `content:String`, `image:String`, and `attachments:String`. The model uses `has_uploadcare_file :image` and `has_uploadcare_files :attachments`, while the form renders direct Uploadcare web components and preloads stored values on edit.
 
 Index page for comments shows a list of comments. Each list item has `edit/delete` actions.
 ![Comments list](./references/comments-list.png)
 
-Clicking on title will direct you to the `show` page of a comment.
+Clicking on content opens the `show` page for a comment.
 ![Show comment](./references/show-comment.png)
 
-To create a new comment, click on the `Create a comment` button. The comment form will be opened. The form contains a text field for comment title, one File Uploaders — for comment's logo and one — for comment's attachments. These File Uploaders differ from each other by the `multiple` option. For logo it is `false`, and for attachments — `true`.
+To create a new comment, click on the `Create a comment` button. The form contains a text field for the content plus Uploadcare fields for the single image and grouped attachments.
 ![Create a comment](./references/create-comment.png)
 
-Edit a comment: click on the `Edit` button on the `show` page of a comment. The form will be opened. You can change the title, logo and attachments of the comment.
+Edit a comment by clicking the `Edit` button on the `show` page. You can change the content, image, and attachments.
 ![Edit a comment](./references/edit-comment.png)
+
+## Verification
+
+The current app state was verified with:
+
+```console
+$ mise exec -- bundle install
+$ mise exec -- pnpm install
+$ mise exec -- pnpm build
+$ mise exec -- ruby -e 'require "./config/environment"; puts Rails.version'
+$ mise exec -- bundle exec rspec
+$ mise exec -- bundle exec rspec spec/system
+$ mise exec -- bundle exec rubocop
+```
+
+CI installs Chromium via Playwright runtime tooling so browser-capable system specs remain supported in GitHub Actions. If you add or run JS-enabled system specs locally, install matching browsers with:
+
+```console
+$ PLAYWRIGHT_VERSION=$(mise exec -- ruby -e 'require "playwright"; puts Playwright::COMPATIBLE_PLAYWRIGHT_VERSION')
+$ npx "playwright@$PLAYWRIGHT_VERSION" install --with-deps chromium
+```
 
 ## Useful links
 * [Uploadcare documentation](https://uploadcare.com/docs/?utm_source=github&utm_medium=referral&utm_campaign=uploadcare-rails)

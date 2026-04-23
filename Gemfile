@@ -5,8 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby ">= 4.0.0"
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem "rails", "~> 8.1"
+gem "rails", "~> 8.1.2"
 # Use pg as the database for Active Record
 gem "pg"
 # Use Puma as the app server
@@ -15,11 +14,8 @@ gem "puma"
 # The asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 
-# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
-
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
+gem "jsbundling-rails"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder"
@@ -49,6 +45,7 @@ end
 group :development do
   # Env variables setter
   gem "dotenv-rails", require: "dotenv/load"
+  gem "foreman"
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "web-console"
   # Display performance information such as SQL time and flame graphs for each request in your browser.
@@ -68,8 +65,8 @@ end
 gem "tzinfo-data", platforms: %i[windows mswin jruby]
 
 # Uploadcare-rails provides unified API interface to Uploadcare API
-gem "uploadcare-rails", git: "https://github.com/uploadcare/uploadcare-rails.git", branch: "main"
-gem "uploadcare-ruby", git: "https://github.com/uploadcare/uploadcare-ruby.git", branch: "main"
+gem "uploadcare-rails", github: "uploadcare/uploadcare-rails", branch: "5-0-stable"
+gem "uploadcare-ruby", github: "uploadcare/uploadcare-ruby", branch: "5-0-stable"
 
 # Use MongoDB for the database, with Mongoid as the ODM
 gem "mongoid", "< 10"

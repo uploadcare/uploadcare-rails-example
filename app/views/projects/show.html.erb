@@ -15,9 +15,10 @@
         <div class="flex-grow-1">
           <% if @project.collaborators.present? %>
             <% @project.collaborators.each do |collaborator| %>
+            <% collaborator = collaborator.to_h.with_indifferent_access if collaborator.respond_to?(:to_h) %>
             <p>
-              Name: <%= collaborator.name %><br>
-              Email: <%= collaborator.email %>
+              Name: <%= collaborator.is_a?(Hash) ? collaborator[:name] : collaborator.name %><br>
+              Email: <%= collaborator.is_a?(Hash) ? collaborator[:email] : collaborator.email %>
             </p>
             <% end %>
           <% else %>

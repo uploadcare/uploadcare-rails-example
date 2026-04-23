@@ -6,21 +6,21 @@ class RekognitionLabelsController < ApplicationController
   end
 
   def new
-    @files_data = Uploadcare::FileApi.get_files(ordering: "-datetime_uploaded")
-    @files = @files_data[:results]
+    @files_data = uploadcare_client.files.list(ordering: "-datetime_uploaded")
+    @files = @files_data.resources
   end
 
   def create
-    result = Uploadcare::AddonsApi.rekognition_detect_labels(params[:file])
-    redirect_to rekognition_labels_path(uuid: result["request_id"])
+    result = uploadcare_client.addons.aws_rekognition_detect_labels(uuid: params[:file])
+    redirect_to rekognition_labels_path(uuid: result.request_id)
   end
 
   def show_status
-    @result = params[:result]
+    @status = params[:status]
   end
 
   def check_status
-    result = Uploadcare::AddonsApi.rekognition_detect_labels_status(params[:uuid])
-    redirect_to show_status_rekognition_labels_path(result: result)
+    result = uploadcare_client.addons.aws_rekognition_detect_labels_status(request_id: params[:uuid])
+    redirect_to show_status_rekognition_labels_path(status: result.status)
   end
 end

@@ -12,11 +12,11 @@
     <%= render 'files/file_info', file: @file, date_format: '%B %d, %Y %H:%M' %>
   </div>
 
-  <% if @file[:image_info].present? %>
-    <%= render 'files/image_info', image_info: @file.image_info %>
+  <% if @file.content_info&.dig("image").present? || @file.content_info&.dig(:image).present? %>
+    <%= render 'files/image_info', image_info: (@file.content_info["image"] || @file.content_info[:image]) %>
   <% end %>
 
-  <% if @file[:video_info].present? %>
-    <%= render 'files/video_info', video_info: @file.video_info %>
+  <% if @file.content_info&.dig("video").present? || @file.content_info&.dig(:video).present? %>
+    <%= render 'files/video_info', video_info: (@file.content_info["video"] || @file.content_info[:video]) %>
   <% end %>
   <%= link_to 'Delete file', file_path(@file.uuid), method: :delete, class: "btn btn-danger" %>

@@ -1,4 +1,6 @@
 <%= form_tag(path, method: method) do %>
+  <% logo_ctx = SecureRandom.uuid %>
+  <% attachments_ctx = SecureRandom.uuid %>
 
   <div class="mb-3">
     <label class="mb-0">Title</label>
@@ -7,12 +9,18 @@
 
   <div class="mb-3">
     <label class="mb-0">File logo</label><br>
-    <%= uploadcare_uploader_field :post, :logo, class: 'mb-3' %>
+    <%= content_tag("uc-form-input", "", "ctx-name": logo_ctx, name: "post[logo]", value: local_assigns[:post_logo]) %>
+    <%= uploadcare_component_config_tag(ctx_name: logo_ctx) %>
+    <%= content_tag("uc-file-uploader-regular", "", "ctx-name": logo_ctx) %>
+    <%= content_tag("uc-upload-ctx-provider", "", "ctx-name": logo_ctx) %>
   </div>
 
   <div class="mb-4">
     <label class="mb-0">File attachments</label><br>
-    <%= uploadcare_uploader_field :post, :attachments %>
+    <%= content_tag("uc-form-input", "", "ctx-name": attachments_ctx, name: "post[attachments]", value: local_assigns[:post_attachments]) %>
+    <%= uploadcare_component_config_tag(ctx_name: attachments_ctx, multiple: true, group_output: true) %>
+    <%= content_tag("uc-file-uploader-regular", "", "ctx-name": attachments_ctx) %>
+    <%= content_tag("uc-upload-ctx-provider", "", "ctx-name": attachments_ctx) %>
   </div>
 
   <div>

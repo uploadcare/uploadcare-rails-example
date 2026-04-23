@@ -24,7 +24,7 @@
       <strong>Project</strong>: <%= @webhook.project %>
     </li>
     <li class="list-group-item">
-      <% if @webhook.is_active? %>
+      <% if @webhook.is_active %>
         <div class="badge badge-info">Active</div>
       <% else %>
         <div class="badge badge-secondary">Not active</div>

@@ -1,37 +1,41 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ProjectsController, type: :request do
-  describe 'GET show' do
-    let(:uuid) { SecureRandom.uuid }
-    let(:project) do
-      Uploadcare::Project.new(
-        "collaborators": [ { name: 'Mike', email: 'mike@mail.com' } ],
-        "name": 'Hello, World!',
-        "pub_key": 'demopublickey',
-        "autostore_enabled": true
-      )
+  let(:project_accessor) { double("UploadcareProjectAccessor") }
+  let(:client) { double("UploadcareClient", project: project_accessor) }
+  let(:project) do
+    Uploadcare::Project.new(
+      {
+        "collaborators" => [ { "name" => "Mike", "email" => "mike@mail.com" } ],
+        "name" => "Hello, World!",
+        "pub_key" => "demopublickey",
+        "autostore_enabled" => true
+      },
+      Uploadcare.client
+    )
+  end
+
+  before do
+    stub_uploadcare_client(client)
+  end
+
+  describe "GET show" do
+    it "returns a 200" do
+      allow(project_accessor).to receive(:current).and_return(project)
+
+      get "/project"
+
+      expect(response).to have_http_status(:ok)
     end
 
-    context 'when a response status is 200' do
-      before { allow(Uploadcare::ProjectApi).to receive(:get_project).and_return(project) }
+    it "returns an error on request failure" do
+      allow(project_accessor).to receive(:current).and_raise(Uploadcare::Exception::RequestError, "")
 
-      it 'returns a 200' do
-        get '/project'
-        expect(response).to have_http_status(:ok)
-      end
-    end
+      get "/project"
 
-    context 'when a response status is 4xx' do
-      before do
-        allow(Uploadcare::ProjectApi).to receive(:get_project).and_raise(Uploadcare::Exception::RequestError, '')
-      end
-
-      it 'returns an error' do
-        get '/project'
-        expect(flash[:alert]).to match('Something went wrong')
-      end
+      expect(flash[:alert]).to match("Something went wrong")
     end
   end
 end

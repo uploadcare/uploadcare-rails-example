@@ -5,4 +5,4 @@
   <%= link_to 'Batch delete files', new_delete_file_batch_path, class: 'small' %>
 </p>
 
-<%= render 'files/file_list_table', files_count: @files_data[:total], files: @files %>
+<%= render 'files/file_list_table', files_count: @files_data.total, files: @files %>

@@ -38,12 +38,22 @@ Rails.application.routes.draw do
   # Projects
   get "/project", to: "projects#show", as: "project"
 
+  # Examples overview
+  resources :examples, only: :index do
+    collection do
+      match :uploader_fields, via: %i[get post]
+    end
+  end
+
   # Webhooks
   resources :webhooks, except: %i[destroy]
   delete "/webhook", to: "webhooks#destroy", as: "delete_webhook"
 
   # Posts
   resources :posts
+
+  # Active Storage Posts
+  resources :active_storage_posts
 
   # Comments
   resources :comments

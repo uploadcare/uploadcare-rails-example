@@ -1,0 +1,19 @@
+<h1>Examples</h1>
+<p class="text-body-secondary">Feature coverage grouped by practical Uploadcare workflows.</p>
+
+<div class="row row-cols-1 row-cols-lg-2 g-3">
+  <% @example_groups.each do |group| %>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h2 class="h5 card-title"><%= group[:title] %></h2>
+          <ul class="mb-0">
+            <% group[:links].each do |label, path| %>
+              <li><%= link_to label, path %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
