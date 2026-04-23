@@ -5,10 +5,10 @@ jobs:
     name: Linters
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
+      - name: Checkout code (linters)
+        uses: actions/checkout@v4
 
-      - name: Setup Ruby
+      - name: Setup Ruby (linters)
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 4.0.1
@@ -47,10 +47,10 @@ jobs:
           - 27017:27017
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
+      - name: Checkout code (tests)
+        uses: actions/checkout@v4
 
-      - name: Setup Ruby
+      - name: Setup Ruby (tests)
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 4.0.1
@@ -60,7 +60,8 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: 22
-          package-manager-cache: false
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install and build JS assets
         run: |
@@ -68,27 +69,20 @@ jobs:
           pnpm install --frozen-lockfile
           pnpm build
 
-      - name: Verify browser-dependent specs are not enabled
+      - name: Ensure gems are available for Playwright compatibility check
+        run: bundle check || bundle install
+
+      - name: Install Playwright browsers
         run: |
-          if grep -R --line-number --include '*_spec.rb' 'js: true' spec; then
-            echo "Found js: true specs. Add browser setup to CI before enabling JS system specs." >&2
-            exit 1
-          fi
+          PLAYWRIGHT_VERSION=$(bundle exec ruby -e "require 'playwright'; puts Playwright::COMPATIBLE_PLAYWRIGHT_VERSION")
+          npx "playwright@$PLAYWRIGHT_VERSION" install --with-deps chromium
 
       - name: Install library for postgres
         run: sudo apt-get install libpq-dev
 
       - name: Wait for MongoDB service
         run: |
-          for i in {1..30}; do
-            if (echo > /dev/tcp/localhost/27017) >/dev/null 2>&1; then
-              echo "MongoDB is ready"
-              exit 0
-            fi
-            sleep 1
-          done
-          echo "MongoDB did not become ready in time" >&2
-          exit 1
+          ruby -e 'require "socket"; 30.times { begin; TCPSocket.new("localhost", 27017).close; exit 0; rescue StandardError; sleep 1; end }; abort "MongoDB did not become ready in time"'
 
       - name: Setup Database
         run: |

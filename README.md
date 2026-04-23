@@ -1,7 +1,7 @@
 # Uploadcare Rails Example app
 
 This example project demonstrates the uploadcare-rails capabilities.
-The app is pinned to the `5-0-stable` branches of `uploadcare/uploadcare-rails` and `uploadcare/uploadcare-ruby`, runs on Ruby `4.0.1` and Rails `8.1.x`, and uses pnpm-managed Hotwire assets.
+The app is pinned to the `5-0-stable` branches of `uploadcare/uploadcare-rails` and `uploadcare/uploadcare-ruby`, targets Ruby `>= 4.0.0`, runs Rails `8.1.x`, and uses pnpm-managed Hotwire assets.
 
 * [Installation](#installation)
   * [Requirements](#requirements)
@@ -35,7 +35,7 @@ The app is pinned to the `5-0-stable` branches of `uploadcare/uploadcare-rails` 
 ### Requirements
 
 - `mise`
-- Ruby `4.0.1`
+- Ruby `>= 4.0.0`
 - Node.js `22.x`
 - pnpm `10.x`
 - PostgreSQL
@@ -369,6 +369,13 @@ $ mise exec -- ruby -e 'require "./config/environment"; puts Rails.version'
 $ mise exec -- bundle exec rspec
 $ mise exec -- bundle exec rspec spec/system
 $ mise exec -- bundle exec rubocop
+```
+
+CI installs Chromium via Playwright runtime tooling so browser-capable system specs remain supported in GitHub Actions. If you add or run JS-enabled system specs locally, install matching browsers with:
+
+```console
+$ PLAYWRIGHT_VERSION=$(mise exec -- ruby -e 'require "playwright"; puts Playwright::COMPATIBLE_PLAYWRIGHT_VERSION')
+$ npx "playwright@$PLAYWRIGHT_VERSION" install --with-deps chromium
 ```
 
 ## Useful links
