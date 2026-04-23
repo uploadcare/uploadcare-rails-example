@@ -1,13 +1,14 @@
 # Uploadcare Rails Example app
 
 This example project demonstrates the uploadcare-rails capabilities.
-The app is pinned to the `5-0-stable` branches of `uploadcare/uploadcare-rails` and `uploadcare/uploadcare-ruby`, runs on Ruby `4.0.1` and Rails `8.1.2.1`, and uses pnpm-managed Hotwire assets.
+The app is pinned to the `5-0-stable` branches of `uploadcare/uploadcare-rails` and `uploadcare/uploadcare-ruby`, runs on Ruby `4.0.1` and Rails `8.1.x`, and uses pnpm-managed Hotwire assets.
 
 * [Installation](#installation)
   * [Requirements](#requirements)
   * [Local setup](#local-setup)
 * [Usage](#usage)
   * [Configuration](#configuration)
+  * [Examples coverage](#examples-coverage)
   * [Project section](#project-section)
   * [Files section](#files-section)
   * [File Groups section](#file-groups-section)
@@ -114,6 +115,18 @@ config.locale = 'en'
 
 Then you can configure all global variables such as files storing/caching, deleting files, etc.
 Full list of available options is listed in the file itself. Just uncomment an option and set the value.
+
+### Examples coverage
+
+The app keeps examples grouped by real workflows under `/examples` and in the left navigation:
+
+- **Core API operations**: project info, file listing/show/store/copy/delete, group listing/show/create/store/delete, local upload, URL upload.
+- **Conversions and add-ons**: document conversion + format info, video conversion, virus scan, Rekognition labels, Rekognition moderation labels, remove background.
+- **Metadata and webhooks**: metadata index/show/update/delete, webhook CRUD.
+- **Model and storage integrations**: ActiveRecord `has_uploadcare_file`/`has_uploadcare_files` (`Post`), Mongoid `has_uploadcare_file`/`has_uploadcare_files` (`Comment`), and Rails Active Storage integration (`ActiveStoragePost`).
+- **Uploader helper APIs**: `uploadcare_file_field`, `uploadcare_files_field`, `uploadcare_file_field_tag`, and `uploadcare_files_field_tag` in `/examples/uploader_fields`.
+
+The example set intentionally avoids CDN-only demos and focuses on features that work reliably in this app setup.
 
 
 ### Project section

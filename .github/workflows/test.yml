@@ -68,8 +68,27 @@ jobs:
           pnpm install --frozen-lockfile
           pnpm build
 
+      - name: Verify browser-dependent specs are not enabled
+        run: |
+          if grep -R --line-number --include '*_spec.rb' 'js: true' spec; then
+            echo "Found js: true specs. Add browser setup to CI before enabling JS system specs." >&2
+            exit 1
+          fi
+
       - name: Install library for postgres
         run: sudo apt-get install libpq-dev
+
+      - name: Wait for MongoDB service
+        run: |
+          for i in {1..30}; do
+            if (echo > /dev/tcp/localhost/27017) >/dev/null 2>&1; then
+              echo "MongoDB is ready"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "MongoDB did not become ready in time" >&2
+          exit 1
 
       - name: Setup Database
         run: |
