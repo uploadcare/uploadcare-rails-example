@@ -1,19 +1,32 @@
-<h1>Examples</h1>
-<p class="text-body-secondary">Feature coverage grouped by practical Uploadcare workflows.</p>
+<div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+  <div>
+    <h1>Examples</h1>
+    <p class="page-lede">Feature coverage grouped by practical Uploadcare workflows. Each page stays close to standard Rails controllers, views, forms, Turbo navigation, and request specs.</p>
+  </div>
 
-<div class="row row-cols-1 row-cols-lg-2 g-3">
+  <%= link_to "Uploader helpers", uploader_fields_examples_path, class: "btn btn-primary" %>
+</div>
+
+<div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
   <% @example_groups.each do |group| %>
-    <div class="col">
-      <div class="card h-100">
-        <div class="card-body">
-          <h2 class="h5 card-title"><%= group[:title] %></h2>
-          <ul class="mb-0">
-            <% group[:links].each do |label, path| %>
-              <li><%= link_to label, path %></li>
-            <% end %>
-          </ul>
+    <article class="card h-full">
+      <div class="card-body flex h-full flex-col">
+        <div class="mb-4">
+          <h2 class="text-base font-semibold text-slate-950"><%= group[:title] %></h2>
+          <p class="mt-1 text-sm leading-6 text-slate-600"><%= group[:description] %></p>
         </div>
+
+        <ul class="mt-auto divide-y divide-slate-100">
+          <% group[:links].each do |label, path| %>
+            <li>
+              <%= link_to path, class: "flex items-center justify-between gap-3 py-2 text-sm font-medium text-slate-700 no-underline hover:text-slate-950" do %>
+                <span><%= label %></span>
+                <span aria-hidden="true" class="text-slate-400">-&gt;</span>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
       </div>
-    </div>
+    </article>
   <% end %>
 </div>

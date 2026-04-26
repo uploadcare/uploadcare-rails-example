@@ -5,6 +5,7 @@ class ExamplesController < ApplicationController
     @example_groups = [
       {
         title: "Core API operations",
+        description: "Inspect project data, manage files, create groups, and exercise upload flows.",
         links: [
           [ "Project info", project_path ],
           [ "Files", files_path ],
@@ -15,6 +16,7 @@ class ExamplesController < ApplicationController
       },
       {
         title: "Conversions and add-ons",
+        description: "Run the optional Uploadcare processing APIs from small, focused forms.",
         links: [
           [ "Document conversion formats info", new_document_conversion_information_path ],
           [ "Convert document", new_document_conversion_path ],
@@ -27,6 +29,7 @@ class ExamplesController < ApplicationController
       },
       {
         title: "Metadata and webhooks",
+        description: "Manage file metadata and webhook configuration through request-backed pages.",
         links: [
           [ "Metadata", file_metadata_path ],
           [ "Webhooks", webhooks_path ],
@@ -35,6 +38,7 @@ class ExamplesController < ApplicationController
       },
       {
         title: "Model and storage integrations",
+        description: "Try Active Record, Mongoid, and Active Storage examples that use Uploadcare-backed files.",
         links: [
           [ "Posts (ActiveRecord)", posts_path ],
           [ "Comments (Mongoid)", comments_path ],
@@ -43,6 +47,7 @@ class ExamplesController < ApplicationController
       },
       {
         title: "Uploader field helper APIs",
+        description: "Compare model-backed helpers with standalone tag helpers for uploader fields.",
         links: [
           [ "Uploader helper examples", uploader_fields_examples_path ]
         ]

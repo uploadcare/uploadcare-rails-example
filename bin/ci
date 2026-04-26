@@ -15,6 +15,7 @@ chdir APP_ROOT do
   system! 'mise exec -- bundle install'
   system! 'mise exec -- pnpm install'
   system! 'mise exec -- pnpm build'
+  system! 'mise exec -- ruby bin/rails tailwindcss:build'
   system! 'mise exec -- bundle exec rubocop'
   system! 'mise exec -- bundle exec rails_best_practices'
   system! 'mise exec -- brakeman'

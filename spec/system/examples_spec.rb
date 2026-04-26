@@ -7,6 +7,7 @@ RSpec.describe "Examples", type: :system do
     visit "/examples"
 
     expect(page).to have_text("Examples")
+    expect(page).to have_text("Navigation")
     expect(page).to have_text("Core API operations")
     expect(page).to have_text("Conversions and add-ons")
     expect(page).to have_text("Uploader field helper APIs")

@@ -8,7 +8,7 @@
         </div>
         <div class="btn-group" role="group" aria-label="Actions">
           <%= link_to 'Edit', edit_post_path(post), class: "btn btn-secondary btn-sm" %>
-          <%= link_to 'Delete', post_path(post), method: :delete, class: "btn btn-danger btn-sm" %>
+          <%= button_to 'Delete', post_path(post), method: :delete, class: "btn btn-danger btn-sm" %>
         </div>
       </li>
     <% end %>

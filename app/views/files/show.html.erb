@@ -3,9 +3,9 @@
   <hr>
   <h4 class="d-flex justify-content-between align-items-center">
     Remote file
-    <div>
-      <%= link_to 'Copy', copy_file_path(@file.uuid), method: :post, class: "btn btn-secondary" %>
-      <%= link_to 'Store', store_file_path(@file.uuid), method: :post, class: "btn btn-secondary" %>
+    <div class="btn-group">
+      <%= button_to 'Copy', copy_file_path(@file.uuid), method: :post, class: "btn btn-secondary" %>
+      <%= button_to 'Store', store_file_path(@file.uuid), method: :post, class: "btn btn-secondary" %>
     </div>
   </h4>
   <div class="table-responsive">
@@ -19,4 +19,4 @@
   <% if @file.content_info&.dig("video").present? || @file.content_info&.dig(:video).present? %>
     <%= render 'files/video_info', video_info: (@file.content_info["video"] || @file.content_info[:video]) %>
   <% end %>
-  <%= link_to 'Delete file', file_path(@file.uuid), method: :delete, class: "btn btn-danger" %>
+  <%= button_to 'Delete file', file_path(@file.uuid), method: :delete, class: "btn btn-danger" %>

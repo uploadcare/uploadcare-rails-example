@@ -1,2 +1,3 @@
 web: mise exec -- ruby bin/rails server
 js: mise exec -- pnpm build --watch
+css: mise exec -- ruby bin/rails tailwindcss:watch

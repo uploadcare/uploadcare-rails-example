@@ -16,6 +16,7 @@ gem "propshaft"
 
 gem "turbo-rails"
 gem "jsbundling-rails"
+gem "tailwindcss-rails", "~> 4.4"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder"
@@ -65,8 +66,8 @@ end
 gem "tzinfo-data", platforms: %i[windows mswin jruby]
 
 # Uploadcare-rails provides unified API interface to Uploadcare API
-gem "uploadcare-rails", github: "uploadcare/uploadcare-rails", branch: "5-0-stable"
-gem "uploadcare-ruby", github: "uploadcare/uploadcare-ruby", branch: "5-0-stable"
+gem "uploadcare-rails", "5.0.0.rc1"
+gem "uploadcare-ruby", "5.0.0.rc1"
 
 # Use MongoDB for the database, with Mongoid as the ODM
 gem "mongoid", "< 10"
