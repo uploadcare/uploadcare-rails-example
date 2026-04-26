@@ -62,11 +62,12 @@ jobs:
           node-version: 22
           package-manager-cache: false
 
-      - name: Install and build JS assets
+      - name: Install and build assets
         run: |
           corepack enable
           pnpm install --frozen-lockfile
           pnpm build
+          bundle exec rails tailwindcss:build
 
       - name: Ensure gems are available for Playwright compatibility check
         run: bundle check || bundle install
