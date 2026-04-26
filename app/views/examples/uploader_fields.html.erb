@@ -1,51 +1,47 @@
 <h1>Uploader Helper Examples</h1>
 
-<p class="text-body-secondary">
+<p class="page-lede">
   This page demonstrates the helper APIs from <code>uploadcare-rails</code> without adding CDN-only flows.
 </p>
 
-<div class="row row-cols-1 row-cols-lg-2 g-3">
-  <div class="col">
-    <div class="card h-100">
-      <div class="card-body">
-        <h2 class="h5 card-title">Model-backed helpers</h2>
+<div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+  <div class="card h-full">
+    <div class="card-body">
+      <h2 class="h5 card-title">Model-backed helpers</h2>
 
-        <%= form_with model: @post, url: uploader_fields_examples_path, method: :post do |f| %>
-          <div class="mb-3">
-            <%= f.label :logo, "Single file (uploadcare_file_field)" %>
-            <%= f.uploadcare_file_field :logo, solution: "regular", img_only: true %>
-          </div>
+      <%= form_with model: @post, url: uploader_fields_examples_path, method: :post do |f| %>
+        <div class="mb-3">
+          <%= f.label :logo, "Single file (uploadcare_file_field)" %>
+          <%= f.uploadcare_file_field :logo, solution: "regular", img_only: true %>
+        </div>
 
-          <div class="mb-3">
-            <%= f.label :attachments, "Grouped files (uploadcare_files_field)" %>
-            <%= f.uploadcare_files_field :attachments, solution: "regular" %>
-          </div>
+        <div class="mb-3">
+          <%= f.label :attachments, "Grouped files (uploadcare_files_field)" %>
+          <%= f.uploadcare_files_field :attachments, solution: "regular" %>
+        </div>
 
-          <%= f.submit "Submit model-backed values", class: "btn btn-primary" %>
-        <% end %>
-      </div>
+        <%= f.submit "Submit model-backed values", class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
 
-  <div class="col">
-    <div class="card h-100">
-      <div class="card-body">
-        <h2 class="h5 card-title">Standalone tag helpers</h2>
+  <div class="card h-full">
+    <div class="card-body">
+      <h2 class="h5 card-title">Standalone tag helpers</h2>
 
-        <%= form_with url: uploader_fields_examples_path, method: :post do %>
-          <div class="mb-3">
-            <%= label_tag :standalone_logo, "Single file (uploadcare_file_field_tag)" %>
-            <%= uploadcare_file_field_tag :standalone_logo, solution: "regular", img_only: true %>
-          </div>
+      <%= form_with url: uploader_fields_examples_path, method: :post do %>
+        <div class="mb-3">
+          <%= label_tag :standalone_logo, "Single file (uploadcare_file_field_tag)" %>
+          <%= uploadcare_file_field_tag :standalone_logo, solution: "regular", img_only: true %>
+        </div>
 
-          <div class="mb-3">
-            <%= label_tag :standalone_attachments, "Grouped files (uploadcare_files_field_tag)" %>
-            <%= uploadcare_files_field_tag :standalone_attachments, solution: "regular" %>
-          </div>
+        <div class="mb-3">
+          <%= label_tag :standalone_attachments, "Grouped files (uploadcare_files_field_tag)" %>
+          <%= uploadcare_files_field_tag :standalone_attachments, solution: "regular" %>
+        </div>
 
-          <%= submit_tag "Submit standalone values", class: "btn btn-outline-primary" %>
-        <% end %>
-      </div>
+        <%= submit_tag "Submit standalone values", class: "btn btn-outline-primary" %>
+      <% end %>
     </div>
   </div>
 </div>

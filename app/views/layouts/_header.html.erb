@@ -1,0 +1,16 @@
+<header class="border-b border-slate-200 bg-white">
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+    <%= link_to root_path, class: "flex items-center gap-3 text-slate-950" do %>
+      <span class="flex h-9 w-9 items-center justify-center rounded-md bg-slate-950 text-sm font-semibold text-white">UC</span>
+      <span>
+        <span class="block text-sm font-semibold leading-5">Uploadcare Rails</span>
+        <span class="block text-xs text-slate-500">Examples for Rails, Turbo, and Active Storage</span>
+      </span>
+    <% end %>
+
+    <div class="flex items-center gap-3">
+      <%= link_to "Examples", examples_path, class: "hidden rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-950 sm:inline-flex" %>
+      <%= link_to "Docs", "https://uploadcare.com/docs/", class: "rounded-md bg-slate-950 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800", target: "_blank", rel: "noopener" %>
+    </div>
+  </div>
+</header>

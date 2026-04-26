@@ -19,7 +19,7 @@
         </div>
         <div class="btn-group" role="group" aria-label="Actions">
           <%= link_to "Edit", edit_active_storage_post_path(active_storage_post), class: "btn btn-secondary btn-sm" %>
-          <%= link_to "Delete", active_storage_post_path(active_storage_post), method: :delete, class: "btn btn-danger btn-sm" %>
+          <%= button_to "Delete", active_storage_post_path(active_storage_post), method: :delete, class: "btn btn-danger btn-sm" %>
         </div>
       </li>
     <% end %>

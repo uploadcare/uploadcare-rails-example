@@ -1,7 +1,7 @@
 # Uploadcare Rails Example app
 
 This example project demonstrates the uploadcare-rails capabilities.
-The app is pinned to the `5-0-stable` branches of `uploadcare/uploadcare-rails` and `uploadcare/uploadcare-ruby`, targets Ruby `>= 4.0.0`, runs Rails `8.1.x`, and uses pnpm-managed Hotwire assets.
+The app uses the `5.0.0.rc1` prerelease gems for `uploadcare-rails` and `uploadcare-ruby`, targets Ruby `>= 4.0.0`, runs Rails `8.1.x`, and uses Hotwire with Tailwind CSS.
 
 * [Installation](#installation)
   * [Requirements](#requirements)
@@ -51,6 +51,7 @@ $ cd uploadcare-rails-example
 $ mise exec -- bundle install
 $ mise exec -- pnpm install
 $ mise exec -- pnpm build
+$ mise exec -- ruby bin/rails tailwindcss:build
 $ mise exec -- ruby bin/rails db:prepare
 $ mise exec -- ruby bin/rails db:migrate
 ```
@@ -68,7 +69,7 @@ Start the server and the pnpm watcher together:
 $ ./bin/dev
 ```
 
-`bin/dev` runs Rails plus `pnpm build --watch`, so Hotwire assets stay current while you work.
+`bin/dev` runs Rails plus `pnpm build --watch` and `tailwindcss:watch`, so Hotwire and Tailwind assets stay current while you work.
 
 ![Application is available](./references/application-up-in-browser.png)
 
@@ -177,7 +178,7 @@ The example app uploads files in three ways: local file upload via the Upload AP
 ---
 **NOTE**
 
-The app now uses the current `5-0-stable` branch APIs. The Post and Comment forms render the v1 Uploadcare File Uploader Web Components directly with `<uc-form-input>`, `<uc-config>`, `<uc-file-uploader-regular>`, and `<uc-upload-ctx-provider>`. Group uploads submit a single Uploadcare group URL that matches `has_uploadcare_files`. Manual API actions in controllers use `Uploadcare::Rails.client`, and the conversion examples use the raw REST parity layer where exact path control is needed.
+The app now uses the current `5.0.0.rc1` prerelease APIs. The Post and Comment forms render the v1 Uploadcare File Uploader Web Components directly with `<uc-form-input>`, `<uc-config>`, `<uc-file-uploader-regular>`, and `<uc-upload-ctx-provider>`. Group uploads submit a single Uploadcare group URL that matches `has_uploadcare_files`. Manual API actions in controllers use `Uploadcare::Rails.client`, and the conversion examples use the raw REST parity layer where exact path control is needed.
 
 ---
 

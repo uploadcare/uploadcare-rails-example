@@ -8,8 +8,11 @@ RSpec.describe ExamplesController, type: :request do
       get "/examples"
 
       expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Uploadcare Rails")
+      expect(response.body).to include("tailwind")
       expect(response.body).to include("Core API operations")
       expect(response.body).to include("Uploader field helper APIs")
+      expect(response.body).not_to include("stackpath.bootstrapcdn.com/bootstrap")
     end
   end
 
