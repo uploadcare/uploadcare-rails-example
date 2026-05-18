@@ -11,7 +11,7 @@
     <li class="list-group-item">Is auto-store enabled: <code><%= @project.autostore_enabled.to_s.titleize %></code></li>
     <li class="list-group-item">
       <div class="d-flex">
-        <div class="flex-shrink-0 mr-2">Collaborators:</div>
+        <div class="flex-shrink-0 me-2">Collaborators:</div>
         <div class="flex-grow-1">
           <% if @project.collaborators.present? %>
             <% @project.collaborators.each do |collaborator| %>

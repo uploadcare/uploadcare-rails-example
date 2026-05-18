@@ -10,16 +10,16 @@
         <div class="text-place flex-grow-1 text-truncate">
           <%= link_to active_storage_post.title, active_storage_post_path(active_storage_post) %>
           <br>
-          <div class="badge badge-secondary">
+          <div class="badge text-bg-secondary">
             <%= active_storage_post.cover_image.attached? ? active_storage_post.cover_image.filename.to_s : "No cover image" %>
           </div>
-          <div class="badge badge-secondary">
+          <div class="badge text-bg-secondary">
             <%= pluralize(active_storage_post.attachments.count, "attachment") %>
           </div>
         </div>
-        <div class="btn-group" role="group" aria-label="Actions">
+        <div class="d-flex flex-wrap gap-1" role="group" aria-label="Actions">
           <%= link_to "Edit", edit_active_storage_post_path(active_storage_post), class: "btn btn-secondary btn-sm" %>
-          <%= link_to "Delete", active_storage_post_path(active_storage_post), method: :delete, class: "btn btn-danger btn-sm" %>
+          <%= button_to "Delete", active_storage_post_path(active_storage_post), method: :delete, class: "btn btn-danger btn-sm", form_class: "d-inline" %>
         </div>
       </li>
     <% end %>

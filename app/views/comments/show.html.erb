@@ -1,10 +1,10 @@
-<h1>
-  Comment "<%= @comment.content %>"
-  <div class="d-inline mr-0">
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
+  <h1>Comment "<%= @comment.content %>"</h1>
+  <div class="d-flex gap-1">
     <%= link_to 'Edit', edit_comment_path(@comment), class: "btn btn-secondary" %>
-    <%= link_to 'Delete', comment_path(@comment), method: :delete, class: "btn btn-danger" %>
+    <%= button_to 'Delete', comment_path(@comment), method: :delete, class: "btn btn-danger", form_class: "d-inline" %>
   </div>
-</h1>
+</div>
 
 <h4 class="d-flex justify-content-between align-items-center mt-5">
   Image
@@ -14,13 +14,13 @@
     <div class="text-place flex-grow-1 text-truncate">
       <%= link_to @comment.image.load.original_filename, file_path(@comment.image.uuid) %>
       <br>
-      <div class="badge badge-secondary"><%= @comment.image.uuid %></div>
-      <div class="badge badge-secondary"><%= @comment.image.mime_type %></div>
+      <div class="badge text-bg-secondary"><%= @comment.image.uuid %></div>
+      <div class="badge text-bg-secondary"><%= @comment.image.mime_type %></div>
     </div>
-    <div class="btn-group" role="group" aria-label="Actions">
-      <%= link_to 'Copy', copy_file_path(@comment.image.uuid), method: :post, class: "btn btn-secondary btn-sm" %>
-      <%= link_to 'Store', store_file_path(@comment.image.uuid), method: :post, class: "btn btn-secondary btn-sm" %>
-      <%= link_to 'Delete', file_path(@comment.image.uuid), method: :delete, class: "btn btn-danger btn-sm" %>
+    <div class="d-flex flex-wrap gap-1" role="group" aria-label="Actions">
+      <%= button_to 'Copy', copy_file_path(@comment.image.uuid), method: :post, class: "btn btn-secondary btn-sm", form_class: "d-inline" %>
+      <%= button_to 'Store', store_file_path(@comment.image.uuid), method: :post, class: "btn btn-secondary btn-sm", form_class: "d-inline" %>
+      <%= button_to 'Delete', file_path(@comment.image.uuid), method: :delete, class: "btn btn-danger btn-sm", form_class: "d-inline" %>
     </div>
   </li>
 <% else %>
@@ -36,13 +36,13 @@
       <div class="text-place flex-grow-1 text-truncate">
         <%= link_to file.original_filename, file_path(file.uuid) %>
         <br>
-        <div class="badge badge-secondary"><%= file.uuid %></div>
-        <div class="badge badge-secondary"><%= file.mime_type %></div>
+        <div class="badge text-bg-secondary"><%= file.uuid %></div>
+        <div class="badge text-bg-secondary"><%= file.mime_type %></div>
       </div>
-      <div class="btn-group" role="group" aria-label="Actions">
-        <%= link_to 'Copy', copy_file_path(file.uuid), method: :post, class: "btn btn-secondary btn-sm" %>
-        <%= link_to 'Store', store_file_path(file.uuid), method: :post, class: "btn btn-secondary btn-sm" %>
-        <%= link_to 'Delete', file_path(file.uuid), method: :delete, class: "btn btn-danger btn-sm" %>
+      <div class="d-flex flex-wrap gap-1" role="group" aria-label="Actions">
+        <%= button_to 'Copy', copy_file_path(file.uuid), method: :post, class: "btn btn-secondary btn-sm", form_class: "d-inline" %>
+        <%= button_to 'Store', store_file_path(file.uuid), method: :post, class: "btn btn-secondary btn-sm", form_class: "d-inline" %>
+        <%= button_to 'Delete', file_path(file.uuid), method: :delete, class: "btn btn-danger btn-sm", form_class: "d-inline" %>
       </div>
     </li>
   <% end %>

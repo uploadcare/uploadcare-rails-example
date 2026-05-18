@@ -4,7 +4,7 @@ module ApplicationHelper
   FLASH = {
     "notice" => "alert alert-info",
     "success" => "alert alert-success",
-    "error" => "alert alert-error",
+    "error" => "alert alert-danger",
     "alert" => "alert alert-warning"
   }.freeze
 

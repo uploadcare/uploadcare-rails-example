@@ -4,10 +4,7 @@
   <div>
     <div class="upload-file">
       <label class="mb-0">File to upload</label>
-      <div class="input-group mb-3">
-        <input type="file" class="custom-file-input" id="uploadFileInput" name="file[file]">
-        <label class="custom-file-label" for="uploadFileInput"></label>
-      </div>
+      <input type="file" class="form-control mb-3" id="uploadFileInput" name="file[file]">
 
       <div class="mb-3">
         <label class="mb-0" for="fileMimeType">Mime type</label>
@@ -24,21 +21,18 @@
       <label class="mb-0" for="store">Store</label>
       <%= select_tag(:store, options_for_select(store_options), class: 'form-control', name: 'file[store]') %>
     </div>
+  </div>
 
   <%= submit_tag 'Upload file', class: 'btn btn-primary mt-4' %>
 <% end %>
 
 <script>
   (function() {
-    const fileInput = document.querySelector('.custom-file-input');
+    const fileInput = document.getElementById('uploadFileInput');
 
     fileInput.addEventListener('change', evt => {
       let file = evt.currentTarget.files[0];
-
-      let formElement = document.querySelector('form');
-
-      let uploadLabelElement = document.getElementsByClassName('custom-file-label')[0];
-      uploadLabelElement.innerText = file.name;
+      if (!file) return;
 
       let filenameInput = document.getElementById('filename');
       filenameInput.value = file.name;

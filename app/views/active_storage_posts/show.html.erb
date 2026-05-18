@@ -1,10 +1,10 @@
-<h1>
-  Active Storage post "<%= @active_storage_post.title %>"
-  <div class="d-inline mr-0">
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
+  <h1>Active Storage post "<%= @active_storage_post.title %>"</h1>
+  <div class="d-flex gap-1">
     <%= link_to "Edit", edit_active_storage_post_path(@active_storage_post), class: "btn btn-secondary" %>
-    <%= link_to "Delete", active_storage_post_path(@active_storage_post), method: :delete, class: "btn btn-danger" %>
+    <%= button_to "Delete", active_storage_post_path(@active_storage_post), method: :delete, class: "btn btn-danger", form_class: "d-inline" %>
   </div>
-</h1>
+</div>
 
 <h4 class="d-flex justify-content-between align-items-center mt-5">
   Cover image
@@ -15,9 +15,9 @@
     <div class="text-place flex-grow-1 text-truncate">
       <%= link_to attachment.filename.to_s, rails_blob_path(attachment, disposition: "attachment") %>
       <br>
-      <div class="badge badge-secondary"><%= attachment.content_type %></div>
-      <div class="badge badge-secondary"><%= number_to_human_size(attachment.byte_size) %></div>
-      <div class="badge badge-secondary"><%= attachment.blob.service_name %></div>
+      <div class="badge text-bg-secondary"><%= attachment.content_type %></div>
+      <div class="badge text-bg-secondary"><%= number_to_human_size(attachment.byte_size) %></div>
+      <div class="badge text-bg-secondary"><%= attachment.blob.service_name %></div>
     </div>
   </li>
 <% else %>
@@ -33,9 +33,9 @@
       <div class="text-place flex-grow-1 text-truncate">
         <%= link_to attachment.filename.to_s, rails_blob_path(attachment, disposition: "attachment") %>
         <br>
-        <div class="badge badge-secondary"><%= attachment.content_type %></div>
-        <div class="badge badge-secondary"><%= number_to_human_size(attachment.byte_size) %></div>
-        <div class="badge badge-secondary"><%= attachment.blob.service_name %></div>
+        <div class="badge text-bg-secondary"><%= attachment.content_type %></div>
+        <div class="badge text-bg-secondary"><%= number_to_human_size(attachment.byte_size) %></div>
+        <div class="badge text-bg-secondary"><%= attachment.blob.service_name %></div>
       </div>
     </li>
   <% end %>

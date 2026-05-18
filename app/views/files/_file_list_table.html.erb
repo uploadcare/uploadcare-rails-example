@@ -15,13 +15,13 @@
         <div class="text-place flex-grow-1 text-truncate">
           <%= link_to file.original_filename, file_path(file.uuid) %>
           <br>
-          <div class="badge badge-secondary"><%= file.uuid %></div>
-          <div class="badge badge-secondary"><%= file.mime_type %></div>
+          <div class="badge text-bg-secondary"><%= file.uuid %></div>
+          <div class="badge text-bg-secondary"><%= file.mime_type %></div>
         </div>
-        <div class="btn-group" role="group" aria-label="Actions">
-          <%= link_to 'Copy', copy_file_path(file.uuid), method: :post, class: "btn btn-secondary btn-sm" %>
-          <%= link_to 'Store', store_file_path(file.uuid), method: :post, class: "btn btn-secondary btn-sm" %>
-          <%= link_to 'Delete', file_path(file.uuid), method: :delete, class: "btn btn-danger btn-sm" %>
+        <div class="d-flex flex-wrap gap-1" role="group" aria-label="Actions">
+          <%= button_to 'Copy', copy_file_path(file.uuid), method: :post, class: "btn btn-secondary btn-sm", form_class: "d-inline" %>
+          <%= button_to 'Store', store_file_path(file.uuid), method: :post, class: "btn btn-secondary btn-sm", form_class: "d-inline" %>
+          <%= button_to 'Delete', file_path(file.uuid), method: :delete, class: "btn btn-danger btn-sm", form_class: "d-inline" %>
         </div>
       </li>
     <% end %>

@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby ">= 4.0.0"
+ruby ">= 4.0.1"
 
 gem "rails", "~> 8.1.2"
 # Use pg as the database for Active Record
@@ -64,9 +64,9 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[windows mswin jruby]
 
-# Uploadcare-rails provides unified API interface to Uploadcare API
-gem "uploadcare-rails", github: "uploadcare/uploadcare-rails", branch: "5-0-stable"
-gem "uploadcare-ruby", github: "uploadcare/uploadcare-ruby", branch: "5-0-stable"
+# Use released Uploadcare 5.x gems so installs are reproducible and semver-bounded.
+gem "uploadcare-rails", "~> 5.0"
+gem "uploadcare-ruby", "~> 5.0"
 
 # Use MongoDB for the database, with Mongoid as the ODM
 gem "mongoid", "< 10"

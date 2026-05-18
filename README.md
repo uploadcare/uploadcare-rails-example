@@ -1,7 +1,7 @@
 # Uploadcare Rails Example app
 
 This example project demonstrates the uploadcare-rails capabilities.
-The app is pinned to the `5-0-stable` branches of `uploadcare/uploadcare-rails` and `uploadcare/uploadcare-ruby`, targets Ruby `>= 4.0.0`, runs Rails `8.1.x`, and uses pnpm-managed Hotwire assets.
+The app uses the released `5.x` gems for `uploadcare-rails` and `uploadcare-ruby`, targets Ruby `>= 4.0.1` (tested on `4.0.1`), runs Rails `8.1.x`, and uses pnpm-managed Hotwire assets.
 
 * [Installation](#installation)
   * [Requirements](#requirements)
@@ -35,7 +35,7 @@ The app is pinned to the `5-0-stable` branches of `uploadcare/uploadcare-rails` 
 ### Requirements
 
 - `mise`
-- Ruby `>= 4.0.0`
+- Ruby `>= 4.0.1` (`.ruby-version` pins and CI tests `4.0.1`)
 - Node.js `22.x`
 - pnpm `10.x`
 - PostgreSQL
@@ -177,7 +177,7 @@ The example app uploads files in three ways: local file upload via the Upload AP
 ---
 **NOTE**
 
-The app now uses the current `5-0-stable` branch APIs. The Post and Comment forms render the v1 Uploadcare File Uploader Web Components directly with `<uc-form-input>`, `<uc-config>`, `<uc-file-uploader-regular>`, and `<uc-upload-ctx-provider>`. Group uploads submit a single Uploadcare group URL that matches `has_uploadcare_files`. Manual API actions in controllers use `Uploadcare::Rails.client`, and the conversion examples use the raw REST parity layer where exact path control is needed.
+The app now uses the released `5.x` gem APIs. The Post and Comment forms render the v1 Uploadcare File Uploader Web Components directly with `<uc-form-input>`, `<uc-config>`, `<uc-file-uploader-regular>`, and `<uc-upload-ctx-provider>`. Group uploads submit a single Uploadcare group URL that matches `has_uploadcare_files`. Manual API actions in controllers use `Uploadcare::Rails.client`, and the conversion examples use the raw REST parity layer where exact path control is needed.
 
 ---
 

@@ -4,12 +4,12 @@
   <% @webhooks.each do |webhook| %>
     <li class="list-group-item d-flex justify-content-between align-items-center">
       <div class="flex-grow-1">
-        <%= link_to webhook.id, webhook_path(webhook.id), class: 'badge badge-info' %>
+        <%= link_to webhook.id, webhook_path(webhook.id), class: 'badge text-bg-info' %>
         <code><%= webhook.target_url %></code> from <%= format_date(webhook.created, format: '%B, %e, %Y %H:%M') %> (<%= webhook.is_active ? 'Active' : 'Not active' %>)
       </div>
-      <div class="btn-group" role="group" aria-label="Actions">
+      <div class="d-flex flex-wrap gap-1" role="group" aria-label="Actions">
         <%= link_to 'Edit', edit_webhook_path(webhook.id), class: 'btn btn-sm btn-secondary' %>
-        <%= link_to 'Delete', delete_webhook_path(target_url: webhook.target_url), method: :delete, class: 'btn btn-sm btn-danger' %>
+        <%= button_to 'Delete', delete_webhook_path(target_url: webhook.target_url), method: :delete, class: 'btn btn-sm btn-danger', form_class: "d-inline" %>
       </div>
     </li>
   <% end %>
