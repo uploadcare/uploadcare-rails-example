@@ -1,0 +1,21 @@
+{
+  "name": "uploadcare-rails-example",
+  "private": true,
+  "packageManager": "pnpm@10.26.2",
+  "scripts": {
+    "build": "pnpm build:js && pnpm build:css",
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/tailwind.css --minify",
+    "build:css:watch": "pnpm build:css --watch",
+    "build:js": "esbuild app/javascript/application.js --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets",
+    "build:js:watch": "pnpm build:js --watch"
+  },
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.23"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "esbuild": "^0.28.0",
+    "tailwindcss": "^4.3.0"
+  }
+}

@@ -1,153 +1,142 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe WebhooksController, type: :request do
+  let(:webhooks_accessor) { double("UploadcareWebhooksAccessor") }
+  let(:client) { double("UploadcareClient", webhooks: webhooks_accessor) }
   let(:webhook) do
     Uploadcare::Webhook.new(
-      'id' => 816_965,
-      'created' => '2021-08-05T11:04:15.563004Z',
-      'updated' => '2021-08-05T11:04:15.563025Z',
-      'event' => 'file.uploaded',
-      'target_url' => 'https://newexample.com/listen/new/112222',
-      'project' => 123_681,
-      'is_active' => true
+      {
+        "id" => 816_965,
+        "created" => "2021-08-05T11:04:15.563004Z",
+        "updated" => "2021-08-05T11:04:15.563025Z",
+        "event" => "file.uploaded",
+        "target_url" => "https://newexample.com/listen/new/112222",
+        "project" => 123_681,
+        "is_active" => true
+      },
+      Uploadcare.client
     )
   end
 
-  describe 'GET index' do
-    context 'when a response status is 200' do
-      before { allow(Uploadcare::WebhookApi).to receive(:get_webhooks).and_return([]) }
+  before do
+    stub_uploadcare_client(client)
+  end
 
-      it 'returns a 200' do
-        get '/webhooks'
-        expect(response).to have_http_status(:ok)
-      end
+  describe "GET index" do
+    it "returns a 200" do
+      allow(webhooks_accessor).to receive(:list).and_return([])
+
+      get "/webhooks"
+
+      expect(response).to have_http_status(:ok)
     end
 
-    context 'when a response status is 4xx' do
-      before do
-        allow(Uploadcare::WebhookApi).to receive(:get_webhooks).and_raise(Uploadcare::Exception::RequestError, '')
-      end
+    it "returns an error on request failure" do
+      allow(webhooks_accessor).to receive(:list).and_raise(Uploadcare::Exception::RequestError, "")
 
-      it 'returns an error' do
-        get '/webhooks'
-        expect(flash[:alert]).to match('Something went wrong')
-      end
+      get "/webhooks"
+
+      expect(flash[:alert]).to match("Something went wrong")
     end
   end
 
-  describe 'GET new' do
-    it 'renders a template' do
-      get '/webhooks/new'
+  describe "GET new" do
+    it "renders a template" do
+      get "/webhooks/new"
+
       expect(response).to render_template(:new)
     end
   end
 
-  describe 'GET edit' do
-    before { allow(Uploadcare::WebhookApi).to receive(:get_webhooks).and_return([ webhook ]) }
+  describe "GET edit" do
+    it "renders a template" do
+      allow(webhooks_accessor).to receive(:list).and_return([ webhook ])
 
-    it 'renders a template' do
       get "/webhooks/#{webhook.id}/edit"
+
       expect(response).to render_template(:edit)
     end
   end
 
-  describe 'GET show' do
-    context 'when a response status is 200' do
-      before { allow(Uploadcare::WebhookApi).to receive(:get_webhooks).and_return([ webhook ]) }
+  describe "GET show" do
+    it "returns a 200" do
+      allow(webhooks_accessor).to receive(:list).and_return([ webhook ])
 
-      it 'returns a 200' do
-        get "/webhooks/#{webhook.id}"
-        expect(response).to render_template(:show)
-      end
+      get "/webhooks/#{webhook.id}"
+
+      expect(response).to render_template(:show)
     end
 
-    context 'when a response status is 4xx' do
-      before do
-        allow(Uploadcare::WebhookApi).to receive(:get_webhooks).and_raise(Uploadcare::Exception::RequestError, '')
-      end
+    it "returns an error on request failure" do
+      allow(webhooks_accessor).to receive(:list).and_raise(Uploadcare::Exception::RequestError, "")
 
-      it 'returns an error' do
-        get "/webhooks/#{webhook.id}"
-        expect(flash[:alert]).to match('Something went wrong')
-      end
+      get "/webhooks/#{webhook.id}"
+
+      expect(flash[:alert]).to match("Something went wrong")
     end
   end
 
-  describe 'POST create' do
+  describe "POST create" do
     let(:params) do
-      { webhook: { target_url: 'https://example.com', event: 'file.uploaded', is_active: true } }
+      { webhook: { target_url: "https://example.com", event: "file.uploaded", is_active: true } }
     end
 
-    context 'when a response status is 200' do
-      before { allow(Uploadcare::WebhookApi).to receive(:create_webhook).and_return(webhook) }
+    it "creates a webhook" do
+      allow(webhooks_accessor).to receive(:create).and_return(webhook)
 
-      it 'returns a 200' do
-        post '/webhooks', params: params
-        expect(flash[:success]).to match('has been successfully created!')
-      end
+      post "/webhooks", params: params
+
+      expect(flash[:success]).to match("has been successfully created!")
     end
 
-    context 'when a response status is 4xx' do
-      before do
-        allow(Uploadcare::WebhookApi).to receive(:create_webhook).and_raise(Uploadcare::Exception::RequestError, '')
-      end
+    it "returns an error on request failure" do
+      allow(webhooks_accessor).to receive(:create).and_raise(Uploadcare::Exception::RequestError, "")
 
-      it 'returns an error' do
-        post '/webhooks', params: params
-        expect(flash[:alert]).to match('Something went wrong')
-      end
+      post "/webhooks", params: params
+
+      expect(flash[:alert]).to match("Something went wrong")
     end
   end
 
-  describe 'PATCH update' do
+  describe "PATCH update" do
     let(:params) do
-      { webhook: { target_url: 'https://newexample.com', event: 'file.uploaded', is_active: true } }
+      { webhook: { target_url: "https://newexample.com", event: "file.uploaded", is_active: true } }
     end
 
-    context 'when a response status is 200' do
-      before { allow(Uploadcare::WebhookApi).to receive(:update_webhook).and_return(webhook) }
+    it "updates a webhook" do
+      allow(webhooks_accessor).to receive(:update).and_return(webhook)
 
-      it 'returns a 200' do
-        patch "/webhooks/#{webhook.id}", params: params
-        expect(flash[:success]).to match('has been successfully updated!')
-      end
+      patch "/webhooks/#{webhook.id}", params: params
+
+      expect(flash[:success]).to match("has been successfully updated!")
     end
 
-    context 'when a response status is 4xx' do
-      before do
-        allow(Uploadcare::WebhookApi).to receive(:update_webhook).and_raise(Uploadcare::Exception::RequestError, '')
-      end
+    it "returns an error on request failure" do
+      allow(webhooks_accessor).to receive(:update).and_raise(Uploadcare::Exception::RequestError, "")
 
-      it 'returns an error' do
-        patch "/webhooks/#{webhook.id}", params: params
-        expect(flash[:alert]).to match('Something went wrong')
-      end
+      patch "/webhooks/#{webhook.id}", params: params
+
+      expect(flash[:alert]).to match("Something went wrong")
     end
   end
 
-  describe 'DELETE delete' do
-    let(:target_url) { 'https://example.com' }
+  describe "DELETE destroy" do
+    it "deletes a webhook" do
+      allow(webhooks_accessor).to receive(:delete)
 
-    context 'when a response status is 200' do
-      before { allow(Uploadcare::WebhookApi).to receive(:delete_webhook) }
+      delete "/webhook", params: { target_url: webhook.target_url }
 
-      it 'returns a 200' do
-        delete '/webhook', params: { target_url: webhook.target_url }
-        expect(flash[:success]).to match('Webhook has been successfully deleted!')
-      end
+      expect(flash[:success]).to match("Webhook has been successfully deleted!")
     end
 
-    context 'when a response status is 4xx' do
-      before do
-        allow(Uploadcare::WebhookApi).to receive(:delete_webhook).and_raise(Uploadcare::Exception::RequestError, '')
-      end
+    it "returns an error on request failure" do
+      allow(webhooks_accessor).to receive(:delete).and_raise(Uploadcare::Exception::RequestError, "")
 
-      it 'returns an error' do
-        delete '/webhook', params: { target_url: webhook.target_url }
-        expect(flash[:alert]).to match('Something went wrong')
-      end
+      delete "/webhook", params: { target_url: webhook.target_url }
+
+      expect(flash[:alert]).to match("Something went wrong")
     end
   end
 end

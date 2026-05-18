@@ -1,44 +1,38 @@
 <h1>Upload a local file</h1>
 
-<%= form_tag(upload_local_file_path, method: :post, class: 'border p-4', multipart: true) do %>
+<%= form_tag(upload_local_file_path, method: :post, class: 'uc-form-panel', multipart: true) do %>
   <div>
     <div class="upload-file">
-      <label class="mb-0">File to upload</label>
-      <div class="input-group mb-3">
-        <input type="file" class="custom-file-input" id="uploadFileInput" name="file[file]">
-        <label class="custom-file-label" for="uploadFileInput"></label>
+      <label class="uc-label">File to upload</label>
+      <input type="file" class="uc-file-input mb-3" id="uploadFileInput" name="file[file]">
+
+      <div class="mb-3">
+        <label class="uc-label" for="fileMimeType">Mime type</label>
+        <input type="text" class="uc-input" id="fileMimeType" name="file[mime_type]">
       </div>
 
       <div class="mb-3">
-        <label class="mb-0" for="fileMimeType">Mime type</label>
-        <input type="text" class="form-control" id="fileMimeType" name="file[mime_type]">
-      </div>
-
-      <div class="mb-3">
-        <label class="mb-0" for="filename">Filename</label>
-        <input type="text" class="form-control" id="filename" name="file[filename]">
+        <label class="uc-label" for="filename">Filename</label>
+        <input type="text" class="uc-input" id="filename" name="file[filename]">
       </div>
     </div>
 
     <div>
-      <label class="mb-0" for="store">Store</label>
-      <%= select_tag(:store, options_for_select(store_options), class: 'form-control', name: 'file[store]') %>
+      <label class="uc-label" for="store">Store</label>
+      <%= select_tag(:store, options_for_select(store_options), class: 'uc-input', name: 'file[store]') %>
     </div>
+  </div>
 
-  <%= submit_tag 'Upload file', class: 'btn btn-primary mt-4' %>
+  <%= submit_tag 'Upload file', class: 'uc-button uc-button-primary mt-4' %>
 <% end %>
 
 <script>
   (function() {
-    const fileInput = document.querySelector('.custom-file-input');
+    const fileInput = document.getElementById('uploadFileInput');
 
     fileInput.addEventListener('change', evt => {
       let file = evt.currentTarget.files[0];
-
-      let formElement = document.querySelector('form');
-
-      let uploadLabelElement = document.getElementsByClassName('custom-file-label')[0];
-      uploadLabelElement.innerText = file.name;
+      if (!file) return;
 
       let filenameInput = document.getElementById('filename');
       filenameInput.value = file.name;

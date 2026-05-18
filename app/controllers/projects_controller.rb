@@ -2,6 +2,6 @@
 
 class ProjectsController < ApplicationController
   def show
-    @project = Uploadcare::ProjectApi.get_project
+    @project = uploadcare_client.project.current
   end
 end

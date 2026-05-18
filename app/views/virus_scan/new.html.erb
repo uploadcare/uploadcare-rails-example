@@ -1,19 +1,19 @@
 <h1>Check file on virus</h1>
 
-<div class="card">
-  <div class="card-body border">
+<div class="uc-card">
+  <div class="uc-card-body">
     <%= form_tag(virus_scan_index_path, method: :post, class: 'p-1') do %>
       <div class="mb-3">
-        <label class="mb-0" for="file">File</label>
-        <%= select_tag(:file, options_from_collection_for_select(@files, :uuid, :original_filename), class: 'form-control') %>
+        <label class="uc-label" for="file">File</label>
+        <%= select_tag(:file, options_from_collection_for_select(@files, :uuid, :original_filename), class: 'uc-input') %>
       </div>
 
       <div class="mb-3">
         <%= check_box_tag 'purge_infected', true, false %>
-        <label class="mb-0" for="purge_infected">Purge infected</label>
+        <label class="uc-label" for="purge_infected">Purge infected</label>
       </div>
 
-      <%= submit_tag 'Check', class: 'btn btn-primary' %>
+      <%= submit_tag 'Check', class: 'uc-button uc-button-primary' %>
     <% end %>
   </div>
 </div>

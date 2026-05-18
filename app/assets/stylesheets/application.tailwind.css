@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+/* Tailwind CSS v4 uses CSS-first configuration; @source keeps Rails templates in the scan set. */
+@source "../../helpers/**/*.rb";
+@source "../../views/**/*.erb";
+@source "../../javascript/**/*.js";
+
+@layer base {
+  body {
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  h1 {
+    @apply mb-4 text-2xl font-semibold tracking-normal text-zinc-950;
+  }
+
+  h2 {
+    @apply text-xl font-semibold tracking-normal text-zinc-950;
+  }
+
+  h3 {
+    @apply text-lg font-semibold tracking-normal text-zinc-950;
+  }
+
+  h4,
+  h5 {
+    @apply text-base font-semibold tracking-normal text-zinc-950;
+  }
+
+  a {
+    @apply text-emerald-700 underline-offset-4 hover:text-emerald-800;
+  }
+
+  code {
+    @apply rounded-md bg-zinc-100 px-1 py-0.5 text-sm text-zinc-700;
+  }
+}
+
+@layer components {
+  .uc-alert {
+    @apply rounded-md border px-4 py-3 text-sm;
+  }
+
+  .uc-alert-info {
+    @apply border-sky-200 bg-sky-50 text-sky-900;
+  }
+
+  .uc-alert-success {
+    @apply border-emerald-200 bg-emerald-50 text-emerald-900;
+  }
+
+  .uc-alert-danger {
+    @apply border-rose-200 bg-rose-50 text-rose-900;
+  }
+
+  .uc-alert-warning {
+    @apply border-amber-200 bg-amber-50 text-amber-900;
+  }
+
+  .uc-alert-neutral {
+    @apply border-zinc-200 bg-white text-zinc-700;
+  }
+
+  .uc-button {
+    @apply inline-flex h-9 items-center justify-center rounded-md border px-4 text-sm font-medium no-underline transition;
+  }
+
+  .uc-button-sm {
+    @apply h-8 px-3 text-xs;
+  }
+
+  .uc-button-primary {
+    @apply border-emerald-700 bg-emerald-700 text-white hover:bg-emerald-800 hover:text-white;
+  }
+
+  .uc-button-secondary {
+    @apply border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-100 hover:text-zinc-950;
+  }
+
+  .uc-button-danger {
+    @apply border-rose-600 bg-rose-600 text-white hover:bg-rose-700 hover:text-white;
+  }
+
+  .uc-action-group {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .uc-page-header {
+    @apply flex flex-wrap items-start justify-between gap-3;
+  }
+
+  .uc-card {
+    @apply rounded-md border border-zinc-200 bg-white shadow-sm;
+  }
+
+  .uc-card-body {
+    @apply p-5;
+  }
+
+  .uc-card-title {
+    @apply text-base font-semibold text-zinc-950;
+  }
+
+  .uc-list {
+    @apply divide-y divide-zinc-100 rounded-md border border-zinc-200 bg-white;
+  }
+
+  .uc-list-item {
+    @apply p-4;
+  }
+
+  .uc-list-item-actions {
+    @apply flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between;
+  }
+
+  .uc-list-main {
+    @apply min-w-0 flex-1 truncate;
+  }
+
+  .uc-badge {
+    @apply inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-medium;
+  }
+
+  .uc-badge-secondary {
+    @apply border-zinc-200 bg-zinc-100 text-zinc-700;
+  }
+
+  .uc-badge-info {
+    @apply border-sky-200 bg-sky-50 text-sky-900;
+  }
+
+  .uc-form-panel {
+    @apply rounded-md border border-zinc-200 bg-white p-5;
+  }
+
+  .uc-label {
+    @apply mb-1 block text-sm font-medium text-zinc-700;
+  }
+
+  .uc-input {
+    @apply block w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm;
+  }
+
+  .uc-file-input {
+    @apply block w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm file:mr-3 file:rounded-md file:border-0 file:bg-zinc-100 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-zinc-700 hover:file:bg-zinc-200;
+  }
+
+  .uc-table-wrapper {
+    @apply overflow-x-auto;
+  }
+
+  .uc-data-table {
+    @apply mt-2 min-w-full border-collapse text-sm;
+  }
+
+  .uc-data-table th {
+    @apply w-52 border border-zinc-200 bg-zinc-50 px-3 py-2 text-left align-top font-medium text-zinc-700;
+  }
+
+  .uc-data-table td {
+    @apply border border-zinc-200 px-3 py-2 align-top text-zinc-900;
+  }
+
+  .uc-data-table tr:hover td {
+    @apply bg-zinc-50;
+  }
+
+  .uc-menu {
+    @apply space-y-1;
+  }
+
+  .uc-menu-section {
+    @apply px-3 pt-5 pb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500;
+  }
+
+  .uc-menu-divider {
+    @apply my-3 border-t border-zinc-200;
+  }
+
+  .uc-menu-link {
+    @apply block rounded-md px-3 py-2 text-sm font-medium text-zinc-700 no-underline transition hover:bg-zinc-100 hover:text-zinc-950;
+  }
+
+  .uc-menu-link-active {
+    @apply bg-emerald-700 text-white hover:bg-emerald-800 hover:text-white;
+  }
+}

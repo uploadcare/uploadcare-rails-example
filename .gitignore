@@ -35,12 +35,18 @@
 /public/packs
 /public/packs-test
 /node_modules
+# jsbundling/esbuild output is generated at runtime; keep only the marker file tracked.
+/app/assets/builds/*
+!/app/assets/builds/.keep
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+pnpm-debug.log*
 
 .env
 .idea
 docker-compose.yml
+.playwright-cli/
+/output/playwright/
 
 project_files

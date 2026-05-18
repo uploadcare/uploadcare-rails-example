@@ -8,6 +8,8 @@ class Comment
   field :image, type: String
   field :attachments, type: String
 
-  mount_uploadcare_file :image
-  mount_uploadcare_file_group :attachments
+  validates :content, presence: true
+
+  has_uploadcare_file :image
+  has_uploadcare_files :attachments
 end

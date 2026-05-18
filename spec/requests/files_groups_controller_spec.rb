@@ -1,129 +1,130 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe FileGroupsController, type: :request do
+  let(:files_accessor) { double("UploadcareFilesAccessor") }
+  let(:groups_accessor) { double("UploadcareGroupsAccessor") }
+  let(:client) { Uploadcare::Client.new(public_key: "demopublickey", secret_key: "demoprivatekey") }
+  let(:group_id) { "d476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20" }
   let(:file_group) do
     Uploadcare::Group.new(
       {
-        'id' => 'd476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20',
-        'datetime_created' => '2021-07-16T11:03:01.182939Z',
-        'files_count' => 20,
-        'cdn_url' => 'https://ucarecdn.com/d476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20/',
-        'url' => 'https://api.uploadcare.com/groups/d476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20/',
-        'files' => [ {
-          'size' => 21_813,
-          'total' => 21_813,
-          'done' => 21_813,
-          'uuid' => '3ae6a420-9de3-4088-9fad-301de9932251',
-          'file_id' => '3ae6a420-9de3-4088-9fad-301de9932251',
-          'original_filename' => 'thumbnail_0.jpg',
-          'is_image' => true,
-          'is_stored' => false,
-          'image_info' => {
-            'width' => 600, 'height' => 400, 'format' => 'JPEG', 'color_mode' => 'RGB', 'geo_location' => nil,
-            'orientation' => nil, 'dpi' => nil, 'datetime_original' => nil, 'sequence' => false
-          },
-          'video_info' => nil,
-          'is_ready' => true,
-          'filename' => 'thumbnail_0.jpg',
-          'mime_type' => 'image/jpeg',
-          'default_effects' => ''
-        } ]
-      }
+        "id" => group_id,
+        "datetime_created" => "2021-07-16T11:03:01.182939Z",
+        "files_count" => 1,
+        "cdn_url" => "https://ucarecdn.com/#{group_id}/",
+        "url" => "https://api.uploadcare.com/groups/#{group_id}/",
+        "files" => [
+          {
+            "uuid" => "3ae6a420-9de3-4088-9fad-301de9932251",
+            "original_filename" => "thumbnail_0.jpg",
+            "mime_type" => "image/jpeg"
+          }
+        ]
+      },
+      Uploadcare.client
     )
   end
 
-  describe 'GET new' do
-    it 'renders a template' do
-      get '/file_groups/new'
+  before do
+    allow(client).to receive(:files).and_return(files_accessor)
+    allow(client).to receive(:groups).and_return(groups_accessor)
+    stub_uploadcare_client(client)
+  end
+
+  describe "GET new" do
+    it "renders a template" do
+      allow(files_accessor).to receive(:list).and_return(uploadcare_paginated)
+
+      get "/file_groups/new"
+
       expect(response).to render_template(:new)
     end
   end
 
-  describe 'GET index' do
-    context 'when a response status is 200' do
-      before { allow(Uploadcare::GroupApi).to receive(:get_groups).and_return(results: []) }
+  describe "GET index" do
+    it "returns a 200" do
+      allow(groups_accessor).to receive(:list).and_return(uploadcare_paginated)
 
-      it 'returns a 200' do
-        get '/file_groups'
-        expect(response).to have_http_status(:ok)
-      end
+      get "/file_groups"
+
+      expect(response).to have_http_status(:ok)
     end
 
-    context 'when a response status is 4xx' do
-      before { allow(Uploadcare::GroupApi).to receive(:get_groups).and_raise(Uploadcare::Exception::RequestError, '') }
+    it "returns an error on request failure" do
+      allow(groups_accessor).to receive(:list).and_raise(Uploadcare::Exception::RequestError, "")
 
-      it 'returns an error' do
-        get '/file_groups'
-        expect(flash[:alert]).to match('Something went wrong')
-      end
+      get "/file_groups"
+
+      expect(flash[:alert]).to match("Something went wrong")
     end
   end
 
-  describe 'GET show' do
-    let(:id) { 'd476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20' }
+  describe "GET show" do
+    it "returns a 200" do
+      allow(groups_accessor).to receive(:find).with(group_id: group_id).and_return(file_group)
 
-    context 'when a response status is 200' do
-      before { allow(Uploadcare::GroupApi).to receive(:get_group).and_return(file_group) }
+      get "/file_groups/#{group_id}"
 
-      it 'returns a 200' do
-        get "/file_groups/#{id}"
-        expect(response).to have_http_status(:ok)
-      end
+      expect(response).to have_http_status(:ok)
     end
 
-    context 'when a response status is 4xx' do
-      before { allow(Uploadcare::GroupApi).to receive(:get_group).and_raise(Uploadcare::Exception::RequestError, '') }
+    it "wraps group file payloads with the current client" do
+      allow(groups_accessor).to receive(:find).with(group_id: group_id).and_return(file_group)
+      allow(Uploadcare::File).to receive(:new).and_call_original
 
-      it 'returns an error' do
-        get "/file_groups/#{id}"
-        expect(flash[:alert]).to match('Something went wrong')
-      end
-    end
-  end
+      get "/file_groups/#{group_id}"
 
-  describe 'POST store' do
-    let(:id) { 'd476f4c9-44a9-4670-88a5-c3cf5d26b6c2~20' }
-
-    context 'when a response status is 200' do
-      before { allow(Uploadcare::GroupApi).to receive(:store_group) }
-
-      it 'returns a 200' do
-        post "/store_file_group/#{id}"
-        expect(flash[:success]).to match('File group has been successfully stored!')
-      end
+      expect(Uploadcare::File).to have_received(:new).with(kind_of(Hash), client)
     end
 
-    context 'when a response status is 4xx' do
-      before { allow(Uploadcare::GroupApi).to receive(:store_group).and_raise(Uploadcare::Exception::RequestError, '') }
+    it "returns an error on request failure" do
+      allow(groups_accessor).to receive(:find).with(group_id: group_id).and_raise(Uploadcare::Exception::RequestError, "")
 
-      it 'returns an error' do
-        post "/store_file_group/#{id}"
-        expect(flash[:alert]).to match('Something went wrong')
-      end
+      get "/file_groups/#{group_id}"
+
+      expect(flash[:alert]).to match("Something went wrong")
     end
   end
 
-  describe 'POST create' do
-    context 'when a response status is 200' do
-      before { allow(Uploadcare::GroupApi).to receive(:create_group).and_return(file_group) }
+  describe "POST store" do
+    it "stores a group" do
+      allow(groups_accessor).to receive(:find).with(group_id: group_id).and_return(file_group)
+      allow(files_accessor).to receive(:batch_store).with(uuids: [ "3ae6a420-9de3-4088-9fad-301de9932251" ])
 
-      it 'returns a 200' do
-        post '/file_groups', params: { files: { file: '3ae6a420-9de3-4088-9fad-301de9932251' } }
-        expect(flash[:success]).to match('File group has been successfully created!')
-      end
+      post "/store_file_group/#{group_id}"
+
+      expect(flash[:success]).to match("File group has been successfully stored!")
+    end
+  end
+
+  describe "POST create" do
+    it "creates a group" do
+      allow(groups_accessor).to receive(:create).with(uuids: [ "3ae6a420-9de3-4088-9fad-301de9932251" ]).and_return(file_group)
+
+      post "/file_groups", params: { files: { file: "3ae6a420-9de3-4088-9fad-301de9932251" } }
+
+      expect(flash[:success]).to match("File group has been successfully created!")
     end
 
-    context 'when a response status is 4xx' do
-      before do
-        allow(Uploadcare::GroupApi).to receive(:create_group).and_raise(Uploadcare::Exception::RequestError, '')
-      end
+    it "returns an error on request failure" do
+      allow(groups_accessor).to receive(:create).with(uuids: [ "3ae6a420-9de3-4088-9fad-301de9932251" ]).and_raise(Uploadcare::Exception::RequestError, "")
 
-      it 'returns an error' do
-        post '/file_groups', params: { files: { file: '3ae6a420-9de3-4088-9fad-301de9932251' } }
-        expect(flash[:alert]).to match('Something went wrong')
-      end
+      post "/file_groups", params: { files: { file: "3ae6a420-9de3-4088-9fad-301de9932251" } }
+
+      expect(flash[:alert]).to match("Something went wrong")
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "deletes a group" do
+      allow(groups_accessor).to receive(:find).with(group_id: group_id).and_return(file_group)
+      allow(file_group).to receive(:delete)
+
+      delete "/file_groups/#{group_id}"
+
+      expect(response).to redirect_to(file_groups_path)
     end
   end
 end

@@ -1,10 +1,10 @@
 <h3>uuid: <%= @uuid %></h3>
 
-<div class="card">
-  <div class="card-body border">
-    <%= form_tag(check_status_rekognition_moderation_labels_path, method: :get, class: 'border p-4') do %>
+<div class="uc-card">
+  <div class="uc-card-body">
+    <%= form_tag(check_status_rekognition_moderation_labels_path, method: :get, class: 'uc-form-panel') do %>
       <%= hidden_field_tag :uuid, @uuid %>
-      <%= submit_tag 'Check status', class: 'btn btn-primary' %>
+      <%= submit_tag 'Check status', class: 'uc-button uc-button-primary' %>
     <% end %>
   </div>
 </div>

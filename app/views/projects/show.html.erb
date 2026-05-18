@@ -1,23 +1,24 @@
 <h1>Project Info</h1>
 
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title"><a
+<div class="uc-card">
+  <div class="uc-card-body">
+    <h5 class="uc-card-title"><a
       href="https://uploadcare.com/accounts/settings/projects/<%= ENV.fetch('UPLOADCARE_PUBLIC_KEY') %>/usage/"><%= @project.name %></a>
     </h5>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Public key: <code><%= @project.pub_key %></code></li>
-    <li class="list-group-item">Is auto-store enabled: <code><%= @project.autostore_enabled.to_s.titleize %></code></li>
-    <li class="list-group-item">
-      <div class="d-flex">
-        <div class="flex-shrink-0 mr-2">Collaborators:</div>
-        <div class="flex-grow-1">
+  <ul class="uc-list">
+    <li class="uc-list-item">Public key: <code><%= @project.pub_key %></code></li>
+    <li class="uc-list-item">Is auto-store enabled: <code><%= @project.autostore_enabled.to_s.titleize %></code></li>
+    <li class="uc-list-item">
+      <div class="flex gap-2">
+        <div class="shrink-0">Collaborators:</div>
+        <div class="flex-1">
           <% if @project.collaborators.present? %>
             <% @project.collaborators.each do |collaborator| %>
+            <% collaborator = collaborator.to_h.with_indifferent_access if collaborator.respond_to?(:to_h) %>
             <p>
-              Name: <%= collaborator.name %><br>
-              Email: <%= collaborator.email %>
+              Name: <%= collaborator.is_a?(Hash) ? collaborator[:name] : collaborator.name %><br>
+              Email: <%= collaborator.is_a?(Hash) ? collaborator[:email] : collaborator.email %>
             </p>
             <% end %>
           <% else %>

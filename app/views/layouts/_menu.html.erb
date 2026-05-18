@@ -1,88 +1,91 @@
-<ul class="nav nav-pills flex-column">
-  <li class="nav-item">
-    <%= link_to 'Project info', project_path, class: "nav-link #{controller_name == 'projects' ? 'active' : ''}" %>
+<ul class="uc-menu">
+  <li class="uc-menu-section">Examples</li>
+  <li>
+    <%= link_to "Examples overview", examples_path, class: menu_link_class(controller_name == "examples" && action_name == "index") %>
+  </li>
+  <li>
+    <%= link_to "Uploader helper examples", uploader_fields_examples_path, class: menu_link_class(controller_name == "examples" && action_name == "uploader_fields") %>
   </li>
 
-  <li class="nav-item">
-    <%= link_to 'Files', files_path, class: "nav-link #{controller_name == 'files' ? 'active' : ''}" %>
+  <li class="uc-menu-divider"></li>
+  <li class="uc-menu-section">Core API operations</li>
+
+  <li>
+    <%= link_to "Project info", project_path, class: menu_link_class(controller_name == "projects") %>
+  </li>
+  <li>
+    <%= link_to "Files", files_path, class: menu_link_class(controller_name == "files") %>
+  </li>
+  <li>
+    <%= link_to "File groups", file_groups_path, class: menu_link_class(controller_name == "file_groups" && %w[index show].include?(action_name)) %>
+  </li>
+  <li>
+    <%= link_to "Create file group", new_file_group_path, class: menu_link_class(controller_name == "file_groups" && action_name == "new") %>
+  </li>
+  <li>
+    <%= link_to "Upload local file", upload_new_local_file_path, class: menu_link_class(controller_name == "uploads" && action_name == "new_local") %>
+  </li>
+  <li>
+    <%= link_to "Upload file from URL", upload_new_file_from_url_path, class: menu_link_class(controller_name == "uploads" && action_name == "new_from_url") %>
   </li>
 
-  <li class="dropdown-divider"></li>
+  <li class="uc-menu-divider"></li>
+  <li class="uc-menu-section">Conversions and add-ons</li>
 
-  <li class="nav-item">
-    <%= link_to 'File groups', file_groups_path, class: "nav-link #{controller_name == 'file_groups' && %w[index show].include?(action_name) ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Document conversion formats info", new_document_conversion_information_path, class: menu_link_class(controller_name == "document_conversion_information") %>
   </li>
-  <li class="nav-item">
-    <%= link_to 'Create file group', new_file_group_path, class: "nav-link #{controller_name == 'file_groups' && action_name == 'new' ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Convert document", new_document_conversion_path, class: menu_link_class(controller_name == "document_conversions") %>
   </li>
-
-  <li class="dropdown-divider"></li>
-
-  <li class="nav-item">
-    <%= link_to 'Upload local file', upload_new_local_file_path, class: "nav-link #{controller_name == 'uploads' && action_name == 'new_local' ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Convert video", new_video_conversion_path, class: menu_link_class(controller_name == "video_conversions") %>
   </li>
-  <li class="nav-item">
-    <%= link_to 'Upload file from URL', upload_new_file_from_url_path, class: "nav-link #{controller_name == 'uploads' && action_name == 'new_from_url' ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Virus scan", new_virus_scan_path, class: menu_link_class(controller_name == "virus_scan") %>
   </li>
-
-  <li class="dropdown-divider"></li>
-  <li class="nav-item">
-    <%= link_to 'Document conversion formats info', new_document_conversion_information_path, class: "nav-link #{controller_name == 'document_conversion_information' ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Rekognition labels", new_rekognition_label_path, class: menu_link_class(controller_name == "rekognition_labels") %>
   </li>
-  <li class="nav-item">
-    <%= link_to 'Convert document', new_document_conversion_path, class: "nav-link #{controller_name == 'document_conversions' ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Remove bg", new_remove_bg_path, class: menu_link_class(controller_name == "remove_bg") %>
   </li>
-  <li class="nav-item">
-    <%= link_to 'Convert video', new_video_conversion_path, class: "nav-link #{controller_name == 'video_conversions' ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Rekognition moderation labels", new_rekognition_moderation_label_path, class: menu_link_class(controller_name == "rekognition_moderation_labels") %>
   </li>
 
-  <li class="dropdown-divider"></li>
+  <li class="uc-menu-divider"></li>
+  <li class="uc-menu-section">Metadata and webhooks</li>
 
-  <li class="nav-item">
-    <%= link_to 'Webhooks', webhooks_path, class: "nav-link #{controller_name == 'webhooks' && %w[index show].include?(action_name) ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Metadata", file_metadata_path, class: menu_link_class(controller_name == "file_metadata") %>
   </li>
-  <li class="nav-item">
-    <%= link_to 'Create a webhook', new_webhook_path, class: "nav-link #{controller_name == 'webhooks' && action_name == 'new' ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Webhooks", webhooks_path, class: menu_link_class(controller_name == "webhooks" && %w[index show].include?(action_name)) %>
   </li>
-
-  <li class="dropdown-divider"></li>
-
-  <li class="nav-item">
-    <%= link_to 'Metadata', file_metadata_path, class: "nav-link #{controller_name == 'file_metadata' ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Create webhook", new_webhook_path, class: menu_link_class(controller_name == "webhooks" && action_name == "new") %>
   </li>
 
-  <li class="dropdown-divider"></li>
+  <li class="uc-menu-divider"></li>
+  <li class="uc-menu-section">Model and storage integrations</li>
 
-  <li class="nav-item">
-    <%= link_to 'Virus scan', new_virus_scan_path, class: "nav-link #{controller_name == 'virus_scan' ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Posts", posts_path, class: menu_link_class(controller_name == "posts" && %w[index show].include?(action_name)) %>
   </li>
-  <li class="nav-item">
-    <%= link_to 'Rekognition labels', new_rekognition_label_path, class: "nav-link #{controller_name == 'rekognition_labels' ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Create post", new_post_path, class: menu_link_class(controller_name == "posts" && action_name == "new") %>
   </li>
-  <li class="nav-item">
-    <%= link_to 'Remove bg', new_remove_bg_path, class: "nav-link #{controller_name == 'remove_bg' ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Active Storage posts", active_storage_posts_path, class: menu_link_class(controller_name == "active_storage_posts" && %w[index show].include?(action_name)) %>
   </li>
-  <li class="nav-item">
-    <%= link_to 'Rekognition Moderation labels', new_rekognition_moderation_label_path, class: "nav-link #{controller_name == 'rekognition_moderation_labels' ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Create Active Storage post", new_active_storage_post_path, class: menu_link_class(controller_name == "active_storage_posts" && action_name == "new") %>
   </li>
-
-  <li class="dropdown-divider"></li>
-
-  <li class="nav-item">
-    <%= link_to 'Posts', posts_path, class: "nav-link #{controller_name == 'posts' && %w[index show].include?(action_name) ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Comments (Mongoid)", comments_path, class: menu_link_class(controller_name == "comments" && %w[index show].include?(action_name)) %>
   </li>
-  <li class="nav-item">
-    <%= link_to 'Create a post', new_post_path, class: "nav-link #{controller_name == 'posts' && action_name == 'new' ? 'active' : ''}" %>
-  </li>
-
-  <li class="dropdown-divider"></li>
-  Mongoid example:
-  <li class="dropdown-divider"></li>
-
-  <li class="nav-item">
-    <%= link_to 'Comments', comments_path, class: "nav-link #{controller_name == 'comments' && %w[index show].include?(action_name) ? 'active' : ''}" %>
-  </li>
-  <li class="nav-item">
-    <%= link_to 'Create a comment', new_comment_path, class: "nav-link #{controller_name == 'comments' && action_name == 'new' ? 'active' : ''}" %>
+  <li>
+    <%= link_to "Create comment", new_comment_path, class: menu_link_class(controller_name == "comments" && action_name == "new") %>
   </li>
 </ul>

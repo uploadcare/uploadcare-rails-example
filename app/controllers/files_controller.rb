@@ -5,18 +5,24 @@ class FilesController < ApplicationController
     obtain_remote_files
   end
 
+  def copy
+    file = uploadcare_client.files.copy_to_local(source: file_params[:id])
+    flash[:success] = "File '#{file.original_filename}' has been successfully copied!"
+    redirect_back_or_to files_path
+  end
+
   def store
-    Uploadcare::FileApi.store_file(file_params[:id])
+    uploadcare_client.files.find(uuid: file_params[:id]).store
     flash[:success] = "File has been successfully stored!"
     redirect_back_or_to files_path
   end
 
   def show
-    @file = Uploadcare::FileApi.get_file(file_params[:id])
+    @file = uploadcare_client.files.find(uuid: file_params[:id])
   end
 
   def destroy
-    Uploadcare::FileApi.delete_file(file_params[:id])
+    uploadcare_client.files.find(uuid: file_params[:id]).delete
     flash[:success] = "File has been successfully deleted!"
     redirect_back_or_to files_path
   end
@@ -33,7 +39,7 @@ class FilesController < ApplicationController
     files = file_params[:files].to_h.symbolize_keys
     keys = files.keys
     values = files.values
-    Uploadcare::FileApi.store_files(values)
+    uploadcare_client.files.batch_store(uuids: values)
     flash[:success] = "File(s) #{keys.join(', ')} has been successfully stored!"
     redirect_back_or_to files_path
   end
@@ -42,7 +48,7 @@ class FilesController < ApplicationController
     files = file_params[:files].to_h.symbolize_keys
     keys = files.keys
     values = files.values
-    Uploadcare::FileApi.delete_files(values)
+    uploadcare_client.files.batch_delete(uuids: values)
     flash[:success] = "File(s) #{keys.join(', ')} has been successfully deleted!"
     redirect_back_or_to files_path
   end
@@ -54,7 +60,7 @@ class FilesController < ApplicationController
   end
 
   def obtain_remote_files
-    @files_data = Uploadcare::FileApi.get_files(ordering: "-datetime_uploaded")
-    @files = @files_data[:results]
+    @files_data = uploadcare_client.files.list(ordering: "-datetime_uploaded")
+    @files = @files_data.resources
   end
 end

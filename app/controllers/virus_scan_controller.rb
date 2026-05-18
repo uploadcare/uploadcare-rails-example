@@ -6,21 +6,24 @@ class VirusScanController < ApplicationController
   end
 
   def new
-    @files_data = Uploadcare::FileApi.get_files(ordering: "-datetime_uploaded")
-    @files = @files_data[:results]
+    @files_data = uploadcare_client.files.list(ordering: "-datetime_uploaded")
+    @files = @files_data.resources
   end
 
   def create
-    result = Uploadcare::AddonsApi.virus_scan(params[:file], purge_infected: params[:purge_infected])
-    redirect_to virus_scan_index_path(uuid: result["request_id"])
+    result = uploadcare_client.addons.uc_clamav_virus_scan(
+      uuid: params[:file],
+      params: { purge_infected: uploadcare_bool(params[:purge_infected]) }.compact
+    )
+    redirect_to virus_scan_index_path(uuid: result.request_id)
   end
 
   def show_status
-    @result = params[:result]
+    @status = params[:status]
   end
 
   def check_status
-    result = Uploadcare::AddonsApi.virus_scan_status(params[:uuid])
-    redirect_to show_status_virus_scan_index_path(result: result)
+    result = uploadcare_client.addons.uc_clamav_virus_scan_status(request_id: params[:uuid])
+    redirect_to show_status_virus_scan_index_path(status: result.status)
   end
 end

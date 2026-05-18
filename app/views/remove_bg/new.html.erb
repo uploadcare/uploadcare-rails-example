@@ -1,39 +1,39 @@
 <h1>Remove file background</h1>
 
-<div class="card">
-  <div class="card-body border">
+<div class="uc-card">
+  <div class="uc-card-body">
     <%= form_tag(remove_bg_index_path, method: :post, class: 'p-1') do %>
       <div class="mb-3">
-        <label class="mb-0" for="file">File</label>
-        <%= select_tag(:file, options_from_collection_for_select(@files, :uuid, :original_filename), class: 'form-control') %>
+        <label class="uc-label" for="file">File</label>
+        <%= select_tag(:file, options_from_collection_for_select(@files, :uuid, :original_filename), class: 'uc-input') %>
       </div>
 
       <div class="mb-3">
-        <label class="mb-3" for="page">Options</label>
-        <div class="row">
-          <div class="col-1">
-            <div class="mb-0">
+        <label class="uc-label" for="page">Options</label>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <div class="flex items-center gap-2 pt-7">
               <%= check_box_tag :crop, true, false, name: 'options[crop]' %>
-              <label class="mb-0" for="crop">crop</label>
+              <label class="text-sm font-medium text-zinc-700" for="crop">crop</label>
             </div>
           </div>
-          <div class="col-3">
-            <label class="mb-0" for="crop_margin">crop margin</label>
-            <%= text_field_tag :crop_margin, nil, name: 'options[crop_margin]', class: 'form-control', placeholder: '30px or 30%' %>
+          <div>
+            <label class="uc-label" for="crop_margin">crop margin</label>
+            <%= text_field_tag :crop_margin, nil, name: 'options[crop_margin]', class: 'uc-input', placeholder: '30px or 30%' %>
           </div>
-          <div class="col-3">
-            <label class="mb-0" for="height">scale</label>
-            <%= text_field_tag :scale, nil, name: 'options[scale]', class: 'form-control', placeholder: '50%' %>
+          <div>
+            <label class="uc-label" for="height">scale</label>
+            <%= text_field_tag :scale, nil, name: 'options[scale]', class: 'uc-input', placeholder: '50%' %>
           </div>
-          <div class="col-3">
-            <label class="mb-0" for="height">type level</label>
-            <%= text_field_tag :type_level, nil, name: 'options[type_level]', class: 'form-control' %>
-            <hint class="text-muted font-size">allowed values: none, 1, 2, latest</hint>
+          <div>
+            <label class="uc-label" for="height">type level</label>
+            <%= text_field_tag :type_level, nil, name: 'options[type_level]', class: 'uc-input' %>
+            <p class="mt-1 text-xs text-zinc-500">allowed values: none, 1, 2, latest</p>
           </div>
         </div>
       </div>
 
-      <%= submit_tag 'Check', class: 'btn btn-primary' %>
+      <%= submit_tag 'Check', class: 'uc-button uc-button-primary' %>
     <% end %>
   </div>
 </div>

@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
 
   def show
     find_comment
-    @attachments = Uploadcare::GroupApi.get_group(@comment.attachments.load.id)["files"] if @comment.attachments
+    @attachments = load_group_files(@comment.attachments)
   end
 
   def create

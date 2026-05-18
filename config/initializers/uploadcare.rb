@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+require "uploadcare-rails"
+require "uploadcare"
+require "uploadcare/rails/action_view/form_builder"
+
+module Uploadcare
+  module Rails
+    module ActionView
+      Base = ::ActionView::Base unless const_defined?(:Base, false)
+    end
+  end
+end
+
 # Uncomment this string in case of using locales for locale_translations parameter
 I18n.load_path += Dir[Rails.root.join("config", "locales", "*.{rb,yml}").to_s]
 
@@ -78,9 +90,6 @@ Uploadcare::Rails.configure do |config|
   # ar az ca cs da de el en es et fr he it ja ko lv nb nl pl pt ro ru sk sr sv tr uk vi zhTW zh
   config.locale = "en"
 
-  # Sets custom localization options. See https://uploadcare.com/docs/uploads/file-uploader/#localization
-  config.locale_translations = I18n.t("uploadcare_widget_translations")
-
   # Defines pluralization options. See https://uploadcare.com/docs/uploads/file-uploader/#pluralization
   # config.locale_pluralize = {}
 
@@ -103,14 +112,6 @@ Uploadcare::Rails.configure do |config|
   # Function signature is (originalUrl, fileInfo) => previewUrl.
   # If this option is specified, option previewProxy will be ignored.
   # config.preview_url_callback = {}
-
-  # If true, inputs on your page are initialized automatically, see the article for details -
-  # https://uploadcare.com/docs/file-uploader-api/widget-initialization/
-  config.live = true
-
-  # If true, input initialization is invoked manually.
-  # See https://uploadcare.com/docs/file-uploader-api/widget-initialization/).
-  config.manual_start = false
 
   # Defines your schema and CDN domain.
   # Can be changed to one of the predefined values (https://uploadcare.com/docs/delivery/cdn/) or your custom CNAME.
@@ -140,3 +141,5 @@ Uploadcare::Rails.configure do |config|
   # Allows you to set the default state of image/video mirorring in the camera tab.
   # config.camera_mirror_default = true
 end
+
+Uploadcare::Rails.configuration.delete_files_after_destroy = false if Rails.env.test?

@@ -1,22 +1,22 @@
-<span class="h1 text-truncate d-block mb-2">File <%= @file.original_filename %> info</span>
+<h1 class="truncate">File <%= @file.original_filename %> info</h1>
   <%= link_to 'Back', request.referer == request.url ? files_path : request.referer %>
   <hr>
-  <h4 class="d-flex justify-content-between align-items-center">
-    Remote file
-    <div>
-      <%= link_to 'Copy', copy_file_path(@file.uuid), method: :post, class: "btn btn-secondary" %>
-      <%= link_to 'Store', store_file_path(@file.uuid), method: :post, class: "btn btn-secondary" %>
+  <div class="uc-page-header">
+    <h4>Remote file</h4>
+    <div class="uc-action-group">
+      <%= button_to 'Copy', copy_file_path(@file.uuid), method: :post, class: "uc-button uc-button-secondary", form_class: "inline-block" %>
+      <%= button_to 'Store', store_file_path(@file.uuid), method: :post, class: "uc-button uc-button-secondary", form_class: "inline-block" %>
     </div>
-  </h4>
-  <div class="table-responsive">
+  </div>
+  <div class="uc-table-wrapper">
     <%= render 'files/file_info', file: @file, date_format: '%B %d, %Y %H:%M' %>
   </div>
 
-  <% if @file[:image_info].present? %>
-    <%= render 'files/image_info', image_info: @file.image_info %>
+  <% if @file.content_info&.dig("image").present? || @file.content_info&.dig(:image).present? %>
+    <%= render 'files/image_info', image_info: (@file.content_info["image"] || @file.content_info[:image]) %>
   <% end %>
 
-  <% if @file[:video_info].present? %>
-    <%= render 'files/video_info', video_info: @file.video_info %>
+  <% if @file.content_info&.dig("video").present? || @file.content_info&.dig(:video).present? %>
+    <%= render 'files/video_info', video_info: (@file.content_info["video"] || @file.content_info[:video]) %>
   <% end %>
-  <%= link_to 'Delete file', file_path(@file.uuid), method: :delete, class: "btn btn-danger" %>
+  <%= button_to 'Delete file', file_path(@file.uuid), method: :delete, class: "uc-button uc-button-danger", form_class: "inline-block" %>

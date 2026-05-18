@@ -15,7 +15,7 @@ class PostsController < ApplicationController
 
   def show
     find_post
-    @attachments = Uploadcare::GroupApi.get_group(@post.attachments.load.id)["files"] if @post.attachments
+    @attachments = load_group_files(@post.attachments)
   end
 
   def create

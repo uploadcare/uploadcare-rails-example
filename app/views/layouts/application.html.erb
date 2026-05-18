@@ -6,41 +6,28 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= javascript_importmap_tags %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= uploadcare_include_tag min: true %>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
-        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-          crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-          integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-          crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"
-          integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J"
-          crossorigin="anonymous"></script>
-
   </head>
 
-  <body class="mb-5">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-      <a class="navbar-brand" href="https://uploadcare.com" target="_blank">Uploadcare</a>
+  <body class="min-h-screen bg-zinc-50 text-zinc-900 antialiased">
+    <nav class="border-b border-zinc-200 bg-white">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        <a class="text-base font-semibold text-zinc-950 no-underline hover:text-zinc-700" href="https://uploadcare.com" target="_blank" rel="noreferrer">Uploadcare</a>
+      </div>
     </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        <aside class="col-sm-3">
-          <%= render 'layouts/menu' %>
-        </aside>
-        <main class="col-sm-9">
-          <div class="container w-100">
-            <%= render 'layouts/flash', flash: flash, allowed_keys: ApplicationHelper::FLASH.keys %>
-            <%= yield %>
-          </div>
-        </main>
-      </div>
+    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[18rem_minmax(0,1fr)] lg:px-8">
+      <aside class="order-2 lg:order-1">
+        <%= render 'layouts/menu' %>
+      </aside>
+      <main class="order-1 min-w-0 lg:order-2">
+        <div class="space-y-5">
+          <%= render 'layouts/flash', flash: flash, allowed_keys: ApplicationHelper::FLASH.keys %>
+          <%= yield %>
+        </div>
+      </main>
     </div>
   </body>
 </html>
