@@ -2,8 +2,8 @@
 <% video_info = video_info.to_h.with_indifferent_access %>
 <% video = video_info[:video].to_h.with_indifferent_access if video_info[:video].respond_to?(:to_h) %>
 <% audio = video_info[:audio].to_h.with_indifferent_access if video_info[:audio].respond_to?(:to_h) %>
-<div class="table-responsive">
-  <table class="table table-condensed table-bordered table-hover mt-2">
+<div class="uc-table-wrapper">
+  <table class="uc-data-table">
     <tr>
       <th>Duration</th>
       <td><%= video_info[:duration] %></td>

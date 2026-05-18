@@ -1,4 +1,4 @@
-<table class="table table-condensed table-bordered table-hover mt-2">
+<table class="uc-data-table">
   <tr>
     <th>UUID</th>
     <td><%= file.uuid %></td>
@@ -40,7 +40,7 @@
     <th>File variations</th>
     <td>
       <% if file.variations.present? %>
-        <table>
+        <table class="uc-data-table">
           <% file.variations.each do |key, value| %>
             <tr>
               <td><%= key %></td>
@@ -57,7 +57,7 @@
     <th>Metadata</th>
     <td>
       <% if file.metadata.present? %>
-        <table>
+        <table class="uc-data-table">
           <% file.metadata.each do |key, value| %>
             <tr>
               <td><%= key %></td>

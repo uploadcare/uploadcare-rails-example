@@ -3,8 +3,8 @@
 <% image_info = image_info.to_h.with_indifferent_access %>
 <% geo_location = image_info[:geo_location].to_h.with_indifferent_access if image_info[:geo_location].respond_to?(:to_h) %>
 
-<div class="table-responsive">
-  <table class="table image table-condensed table-bordered table-hover mt-2">
+<div class="uc-table-wrapper">
+  <table class="uc-data-table">
     <tr>
       <th>Color Mode</th>
       <td><%= image_info[:color_mode] %></td>

@@ -1,22 +1,22 @@
 <h1>Video conversion result</h1>
 
-<div class="card">
+<div class="uc-card">
   <% if @result.present? %>
-    <ul class="list-group">
-      <li class="list-group-item">
+    <ul class="uc-list">
+      <li class="uc-list-item">
         <strong>Status:</strong> <%= "#{@status_result[:status]} #{'(Please, update the page to refresh the status)' if @status_result[:status] != 'finished'}" %>
       </li>
-      <li class="list-group-item">
+      <li class="uc-list-item">
         <strong>Path:</strong> <%= @result[:original_source] %>
       </li>
-      <li class="list-group-item">
+      <li class="uc-list-item">
         <strong>Error:</strong> <%= @status_result[:error] || '--' %>
       </li>
-      <li class="list-group-item">
+      <li class="uc-list-item">
       <strong>Result thumbnails group uuid:</strong>
         <%= @result[:thumbnails_group_uuid] %>
       </li>
-      <li class="list-group-item">
+      <li class="uc-list-item">
         <strong>Result uuid:</strong>
         <% if @status_result.dig(:result, :uuid) %>
           <%= link_to @status_result.dig(:result, :uuid), file_path(@status_result.dig(:result, :uuid)) %>
@@ -26,15 +26,15 @@
       </li>
     </ul>
   <% else %>
-    <div class="card">
-      <ul class="list-group">
-        <li class="list-group-item">
+    <div class="uc-card">
+      <ul class="uc-list">
+        <li class="uc-list-item">
           <strong>Status:</strong> <%= 'failed' %>
         </li>
-        <li class="list-group-item">
+        <li class="uc-list-item">
           <strong>ID:</strong> <%= @problem[:original_source] || '--' %>
         </li>
-        <li class="list-group-item">
+        <li class="uc-list-item">
           <strong>Reason:</strong> <%= @problem[:reason] %>
         </li>
       </ul>

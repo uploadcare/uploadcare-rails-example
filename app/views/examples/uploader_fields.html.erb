@@ -1,14 +1,14 @@
 <h1>Uploader Helper Examples</h1>
 
-<p class="text-body-secondary">
+<p class="text-sm text-zinc-500">
   This page demonstrates the helper APIs from <code>uploadcare-rails</code> without adding CDN-only flows.
 </p>
 
-<div class="row row-cols-1 row-cols-lg-2 g-3">
-  <div class="col">
-    <div class="card h-100">
-      <div class="card-body">
-        <h2 class="h5 card-title">Model-backed helpers</h2>
+<div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+  <div>
+    <div class="uc-card h-full">
+      <div class="uc-card-body">
+        <h2 class="uc-card-title">Model-backed helpers</h2>
 
         <%= form_with model: @post, url: uploader_fields_examples_path, method: :post do |f| %>
           <div class="mb-3">
@@ -21,16 +21,16 @@
             <%= f.uploadcare_files_field :attachments, solution: "regular" %>
           </div>
 
-          <%= f.submit "Submit model-backed values", class: "btn btn-primary" %>
+          <%= f.submit "Submit model-backed values", class: "uc-button uc-button-primary" %>
         <% end %>
       </div>
     </div>
   </div>
 
-  <div class="col">
-    <div class="card h-100">
-      <div class="card-body">
-        <h2 class="h5 card-title">Standalone tag helpers</h2>
+  <div>
+    <div class="uc-card h-full">
+      <div class="uc-card-body">
+        <h2 class="uc-card-title">Standalone tag helpers</h2>
 
         <%= form_with url: uploader_fields_examples_path, method: :post do %>
           <div class="mb-3">
@@ -43,7 +43,7 @@
             <%= uploadcare_files_field_tag :standalone_attachments, solution: "regular" %>
           </div>
 
-          <%= submit_tag "Submit standalone values", class: "btn btn-outline-primary" %>
+          <%= submit_tag "Submit standalone values", class: "uc-button uc-button-secondary" %>
         <% end %>
       </div>
     </div>
@@ -51,10 +51,10 @@
 </div>
 
 <% if @submitted %>
-  <div class="card mt-3">
-    <div class="card-body">
-      <h2 class="h5 card-title">Submitted values</h2>
-      <ul class="mb-0">
+  <div class="uc-card mt-3">
+    <div class="uc-card-body">
+      <h2 class="uc-card-title">Submitted values</h2>
+      <ul class="mt-3 space-y-2 text-sm">
         <li>post[logo]: <code><%= @post.logo.presence || "empty" %></code></li>
         <li>post[attachments]: <code><%= @post.attachments.presence || "empty" %></code></li>
         <li>standalone_logo: <code><%= @standalone_logo.presence || "empty" %></code></li>

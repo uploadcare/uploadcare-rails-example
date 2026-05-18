@@ -1,7 +1,7 @@
 # Uploadcare Rails Example app
 
 This example project demonstrates the uploadcare-rails capabilities.
-The app uses the released `5.x` gems for `uploadcare-rails` and `uploadcare-ruby`, targets Ruby `>= 4.0.1` (tested on `4.0.1`), runs Rails `8.1.x`, and uses pnpm-managed Hotwire assets.
+The app uses the released `5.x` gems for `uploadcare-rails` and `uploadcare-ruby`, targets Ruby `>= 4.0.1` (tested on `4.0.1`), runs Rails `8.1.x`, and uses pnpm-managed Hotwire and Tailwind CSS assets.
 
 * [Installation](#installation)
   * [Requirements](#requirements)
@@ -68,7 +68,8 @@ Start the server and the pnpm watcher together:
 $ ./bin/dev
 ```
 
-`bin/dev` runs Rails plus `pnpm build --watch`, so Hotwire assets stay current while you work.
+`bin/dev` runs Rails plus pnpm JS and Tailwind CSS watchers, so Hotwire and stylesheet assets stay current while you work.
+The same scripts are available directly as `pnpm build`, `pnpm build:js:watch`, and `pnpm build:css:watch`.
 
 ![Application is available](./references/application-up-in-browser.png)
 

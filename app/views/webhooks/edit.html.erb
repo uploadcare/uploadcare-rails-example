@@ -1,24 +1,24 @@
 <h1>Edit webhook</h1>
 
-<div class="card">
-  <div class="card-body border">
+<div class="uc-card">
+  <div class="uc-card-body">
   <%= form_tag(webhook_path(@webhook.id), method: :patch, class: 'p-1') do %>
     <div class="mb-3">
-      <label class="mb-0" for="file">Target URL</label>
-      <%= text_field_tag :target_url, @webhook.target_url, name: 'webhook[target_url]', class: 'form-control' %>
+      <label class="uc-label" for="file">Target URL</label>
+      <%= text_field_tag :target_url, @webhook.target_url, name: 'webhook[target_url]', class: 'uc-input' %>
     </div>
 
     <div class="mb-3">
-      <label class="mb-0" for="event">Event</label>
-      <%= select_tag(:event, options_for_select(webhook_events, @webhook.event), name: 'webhook[event]', class: 'form-control') %>
+      <label class="uc-label" for="event">Event</label>
+      <%= select_tag(:event, options_for_select(webhook_events, @webhook.event), name: 'webhook[event]', class: 'uc-input') %>
     </div>
 
     <div class="mb-3">
       <%= check_box_tag 'is_active', true, @webhook.is_active, name: 'webhook[is_active]' %>
-      <label class="mb-0" for="is_active">Enabled</label>
+      <label class="uc-label" for="is_active">Enabled</label>
     </div>
 
-    <%= submit_tag 'Update', class: 'btn btn-primary' %>
+    <%= submit_tag 'Update', class: 'uc-button uc-button-primary' %>
   <% end %>
   </div>
 </div>

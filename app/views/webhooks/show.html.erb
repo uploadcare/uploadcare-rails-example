@@ -1,36 +1,36 @@
-<div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
+<div class="uc-page-header">
   <h1>Webhook ID <%= @webhook.id %> info</h1>
-  <div class="d-flex gap-1">
-    <%= link_to 'Edit', edit_webhook_path(@webhook.id), class: 'btn btn-sm btn-secondary' %>
-    <%= button_to 'Delete', delete_webhook_path(target_url: @webhook.target_url), method: :delete, class: 'btn btn-sm btn-danger', form_class: "d-inline" %>
+  <div class="uc-action-group">
+    <%= link_to 'Edit', edit_webhook_path(@webhook.id), class: 'uc-button uc-button-sm uc-button-secondary' %>
+    <%= button_to 'Delete', delete_webhook_path(target_url: @webhook.target_url), method: :delete, class: 'uc-button uc-button-sm uc-button-danger', form_class: "inline-block" %>
   </div>
 </div>
 
-<div class="card">
-  <ul class="list-group">
-    <li class="list-group-item">
+<div class="uc-card">
+  <ul class="uc-list">
+    <li class="uc-list-item">
       <strong>ID</strong>: <%= @webhook.id %>
     </li>
-    <li class="list-group-item">
+    <li class="uc-list-item">
       <strong>Created at</strong>: <%= format_date(@webhook.created) %>
     </li>
-    <li class="list-group-item">
+    <li class="uc-list-item">
       <strong>Updated at</strong>: <%= format_date(@webhook.updated) %>
     </li>
-    <li class="list-group-item">
+    <li class="uc-list-item">
       <strong>Event</strong>: <%= @webhook.event %>
     </li>
-    <li class="list-group-item">
+    <li class="uc-list-item">
       <strong>Target Url</strong>: <%= @webhook.target_url %>
     </li>
-    <li class="list-group-item">
+    <li class="uc-list-item">
       <strong>Project</strong>: <%= @webhook.project %>
     </li>
-    <li class="list-group-item">
+    <li class="uc-list-item">
       <% if @webhook.is_active %>
-        <div class="badge text-bg-info">Active</div>
+        <div class="uc-badge uc-badge-info">Active</div>
       <% else %>
-        <div class="badge text-bg-secondary">Not active</div>
+        <div class="uc-badge uc-badge-secondary">Not active</div>
       <% end %>
     </li>
   </ul>

@@ -2,18 +2,36 @@
 
 module ApplicationHelper
   FLASH = {
-    "notice" => "alert alert-info",
-    "success" => "alert alert-success",
-    "error" => "alert alert-danger",
-    "alert" => "alert alert-warning"
+    notice: "uc-alert uc-alert-info",
+    success: "uc-alert uc-alert-success",
+    error: "uc-alert uc-alert-danger",
+    alert: "uc-alert uc-alert-warning"
   }.freeze
 
   def flash_class(level)
-    FLASH.with_indifferent_access[level]
+    # Rails flash keys can arrive as strings or symbols depending on caller.
+    FLASH[level&.to_sym]
+  end
+
+  def menu_link_class(active = false)
+    [ "uc-menu-link", ("uc-menu-link-active" if active) ].compact.join(" ")
   end
 
   def format_date(date, format: "%B %e, %Y %H:%M")
-    Time.zone.parse(date).strftime(format)
+    return if date.blank?
+
+    date = case date
+    when String
+      Time.zone.parse(date)
+    when Date, Time
+      date.in_time_zone
+    else
+      date.in_time_zone if date.respond_to?(:in_time_zone)
+    end
+
+    date&.strftime(format)
+  rescue ArgumentError
+    nil
   end
 
   def store_options

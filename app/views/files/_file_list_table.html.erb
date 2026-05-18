@@ -1,27 +1,27 @@
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">Total files: <%= files_count %></h5>
+<div class="uc-card">
+  <div class="uc-card-body">
+    <h5 class="uc-card-title">Total files: <%= files_count %></h5>
   </div>
   <% if files.blank? %>
-    <div class="card-body">
-      <h5 class="card-title">
+    <div class="uc-card-body">
+      <h5 class="uc-card-title">
         You have no files in your project. <%= link_to 'Upload a file', upload_new_local_file_path %>.
       </h5>
     </div>
   <% end %>
-  <ul class="list-group list-group-flush">
+  <ul class="uc-list">
     <% files.each do |file| %>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <div class="text-place flex-grow-1 text-truncate">
+      <li class="uc-list-item uc-list-item-actions">
+        <div class="uc-list-main">
           <%= link_to file.original_filename, file_path(file.uuid) %>
           <br>
-          <div class="badge text-bg-secondary"><%= file.uuid %></div>
-          <div class="badge text-bg-secondary"><%= file.mime_type %></div>
+          <div class="uc-badge uc-badge-secondary"><%= file.uuid %></div>
+          <div class="uc-badge uc-badge-secondary"><%= file.mime_type %></div>
         </div>
-        <div class="d-flex flex-wrap gap-1" role="group" aria-label="Actions">
-          <%= button_to 'Copy', copy_file_path(file.uuid), method: :post, class: "btn btn-secondary btn-sm", form_class: "d-inline" %>
-          <%= button_to 'Store', store_file_path(file.uuid), method: :post, class: "btn btn-secondary btn-sm", form_class: "d-inline" %>
-          <%= button_to 'Delete', file_path(file.uuid), method: :delete, class: "btn btn-danger btn-sm", form_class: "d-inline" %>
+        <div class="uc-action-group" role="group" aria-label="Actions">
+          <%= button_to 'Copy', copy_file_path(file.uuid), method: :post, class: "uc-button uc-button-sm uc-button-secondary", form_class: "inline-block" %>
+          <%= button_to 'Store', store_file_path(file.uuid), method: :post, class: "uc-button uc-button-sm uc-button-secondary", form_class: "inline-block" %>
+          <%= button_to 'Delete', file_path(file.uuid), method: :delete, class: "uc-button uc-button-sm uc-button-danger", form_class: "inline-block" %>
         </div>
       </li>
     <% end %>

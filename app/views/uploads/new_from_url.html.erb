@@ -1,23 +1,24 @@
 <h1>Upload a file from URL</h1>
 
-<%= form_tag(upload_file_from_url_path, method: :post, class: 'border p-4', multipart: true) do %>
+<%= form_tag(upload_file_from_url_path, method: :post, class: 'uc-form-panel', multipart: true) do %>
   <div>
     <div class="upload-file">
       <div class="mb-3">
-        <label class="mb-0" for="">File URL</label>
-        <input type="text" class="form-control" id="file_url" name="file[url]">
+        <label class="uc-label" for="">File URL</label>
+        <input type="text" class="uc-input" id="file_url" name="file[url]">
       </div>
 
       <div class="mb-3">
-        <label class="mb-0" for="filename">Filename</label>
-        <input type="text" class="form-control" id="filename" name="file[filename]">
+        <label class="uc-label" for="filename">Filename</label>
+        <input type="text" class="uc-input" id="filename" name="file[filename]">
       </div>
     </div>
 
     <div>
-      <label class="mb-0" for="store">Store</label>
-      <%= select_tag(:store, options_for_select(store_options), class: 'form-control', name: 'file[store]') %>
+      <label class="uc-label" for="store">Store</label>
+      <%= select_tag(:store, options_for_select(store_options), class: 'uc-input', name: 'file[store]') %>
     </div>
+  </div>
 
-  <%= submit_tag 'Upload file', class: 'btn btn-primary mt-4' %>
+  <%= submit_tag 'Upload file', class: 'uc-button uc-button-primary mt-4' %>
 <% end %>
