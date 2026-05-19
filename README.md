@@ -70,6 +70,14 @@ $ ./bin/dev
 
 `bin/dev` runs Rails plus pnpm JS and Tailwind CSS watchers, so Hotwire and stylesheet assets stay current while you work.
 The same scripts are available directly as `pnpm build`, `pnpm build:js:watch`, and `pnpm build:css:watch`.
+The Playwright visual smoke spec uses the browser version expected by `playwright-ruby-client`; CI installs it automatically.
+For local visual snapshots:
+
+```console
+$ PLAYWRIGHT_VERSION=$(mise exec -- ruby -e 'require "playwright"; puts Playwright::COMPATIBLE_PLAYWRIGHT_VERSION')
+$ mise exec -- npx "playwright@$PLAYWRIGHT_VERSION" install chromium
+$ VISUAL_SNAPSHOTS=1 mise exec -- bundle exec rspec spec/system/all_pages_visual_smoke_spec.rb
+```
 
 ![Application is available](./references/application-up-in-browser.png)
 

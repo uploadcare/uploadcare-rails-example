@@ -5,7 +5,7 @@
     <%= @metadata %>
   </div>
 
-  <div class="border">
+  <div class="mt-4 border-t border-zinc-200 pt-4">
     <%= form_tag(metadata_show_file_metadata_path, method: :get, class: 'uc-form-panel') do %>
       <%= hidden_field_tag :uuid, @uuid %>
       <div class="mb-2">
@@ -17,7 +17,7 @@
     <% end %>
   </div>
 
-  <div class="border">
+  <div class="mt-4 border-t border-zinc-200 pt-4">
     <%= form_tag(metadata_update_file_metadata_path, method: :patch, class: 'uc-form-panel') do %>
       <%= hidden_field_tag :uuid, @uuid %>
       <div class="mb-2">
@@ -32,7 +32,7 @@
     <% end %>
   </div>
 
-  <div class="border">
+  <div class="mt-4 border-t border-zinc-200 pt-4">
     <%= form_tag(metadata_update_file_metadata_path, method: :patch, class: 'uc-form-panel') do %>
       <%= hidden_field_tag :uuid, @uuid %>
       <div class="mb-2">
@@ -47,7 +47,7 @@
     <% end %>
   </div>
 
-  <div class="border">
+  <div class="mt-4 border-t border-zinc-200 pt-4">
     <%= form_tag(metadata_delete_file_metadata_path, method: :delete, class: 'uc-form-panel') do %>
       <%= hidden_field_tag :uuid, @uuid %>
       <div class="mb-2">
